@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Пэйнтлэнд Парк — Активный отдых в Подмосковье</title>
+<meta name="description" content="Пейнтбол, лазертаг, квадроциклы и тимбилдинг в Подмосковье. Два парка — Бухта Радости и Софрино. Скидка 50% именинникам. Звоните: +7 (925) 010-85-35">
+<meta name="keywords" content="пейнтбол Подмосковье, лазертаг дети, квадроциклы аренда, тимбилдинг корпоратив, активный отдых Мытищи, день рождения пейнтбол">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Пэйнтлэнд Парк — Активный отдых в Подмосковье">
+<meta property="og:description" content="Пейнтбол, лазертаг, квадроциклы и тимбилдинг. Два парка. Скидка 50% именинникам.">
+<meta property="og:image" content="photo_paintball.jpg">
+<meta property="og:locale" content="ru_RU">
+<meta name="theme-color" content="#2d5a3d">
+<link rel="canonical" href="https://paintballclub.ru/">
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@300;400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      #f7f4ef;
+  --bg2:     #efeae1;
+  --white:   #ffffff;
+  --forest:  #2d5a3d;
+  --forest2: #3d7a52;
+  --moss:    #5a8a6a;
+  --terra:   #d4622a;
+  --terra2:  #e8824a;
+  --sand:    #c8a882;
+  --dark:    #1a2e22;
+  --text:    #2c3a2e;
+  --muted:   #7a8c7e;
+  --border:  rgba(45,90,61,0.12);
+  --shadow:  0 4px 24px rgba(45,90,61,0.10);
+  --shadow2: 0 12px 48px rgba(45,90,61,0.15);
+  --r:       20px;
+  --r2:      28px;
+}
+
+* { margin:0; padding:0; box-sizing:border-box }
+html { scroll-behavior:smooth }
+html, body {
+  overflow-x:hidden; width:100%;
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Manrope', sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ── NAV ── */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:600;
+  height:60px;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 20px;
+  background:rgba(247,244,239,0.92);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.logo {
+  font-family:'Geologica', sans-serif;
+  font-size:1.15rem; font-weight:800;
+  color:var(--forest); text-decoration:none;
+  display:flex; align-items:center; gap:8px; line-height:1;
+}
+.logo-icon {
+  width:28px; height:28px;
+  background:var(--forest);
+  border-radius:8px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:.9rem; flex-shrink:0;
+}
+.burger {
+  width:40px; height:40px; display:flex; flex-direction:column;
+  justify-content:center; align-items:center; gap:5px;
+  cursor:pointer; background:none; border:none;
+  -webkit-tap-highlight-color:transparent;
+}
+.burger span {
+  display:block; width:20px; height:2px;
+  background:var(--forest); border-radius:2px; transition:.25s;
+}
+.burger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg) }
+.burger.open span:nth-child(2) { opacity:0 }
+.burger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg) }
+
+.drawer {
+  position:fixed; top:60px; left:0; right:0; z-index:590;
+  background:rgba(247,244,239,0.98);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  max-height:0; overflow:hidden; transition:max-height .35s ease;
+}
+.drawer.open { max-height:400px }
+.drawer a {
+  display:block; font-family:'Geologica', sans-serif;
+  font-size:.9rem; font-weight:600;
+  color:var(--text); text-decoration:none;
+  padding:15px 24px; border-bottom:1px solid var(--border);
+  transition:color .15s, background .15s;
+}
+.drawer a:hover { color:var(--forest); background:rgba(45,90,61,.05) }
+.drawer .d-cta {
+  margin:14px 20px 18px; padding:14px 24px;
+  background:var(--forest); color:#fff !important;
+  border-radius:var(--r); text-align:center; font-weight:700;
+  border:none;
+}
+
+.nav-links { display:none; align-items:center; gap:8px }
+.nav-links a {
+  font-family:'Geologica', sans-serif; font-size:.8rem; font-weight:600;
+  color:var(--muted); text-decoration:none; padding:6px 12px;
+  border-radius:10px; transition:color .2s, background .2s;
+}
+.nav-links a:hover { color:var(--forest); background:rgba(45,90,61,.08) }
+.nav-links .cta {
+  background:var(--forest); color:#fff !important;
+  padding:8px 18px; border-radius:var(--r);
+}
+.nav-links .cta:hover { background:var(--forest2) }
+@media(min-width:768px) { .burger{display:none} .nav-links{display:flex} }
+
+/* ── HERO ── */
+.hero {
+  min-height:100svh; position:relative;
+  display:flex; flex-direction:column;
+  padding-top:60px; overflow:hidden;
+}
+.hero-img {
+  position:absolute; inset:0;
+  background:url('photo_uaz.jpg') center 40%/cover;
+  filter:brightness(.55) saturate(.9);
+}
+.hero-overlay {
+  position:absolute; inset:0;
+  background:linear-gradient(
+    160deg,
+    rgba(247,244,239,0) 0%,
+    rgba(26,46,34,.2) 40%,
+    rgba(26,46,34,.75) 75%,
+    rgba(26,46,34,.95) 100%
+  );
+}
+.hero-content {
+  position:relative; z-index:2;
+  margin-top:auto; padding:32px 22px 40px;
+}
+.hero-badge {
+  display:inline-flex; align-items:center; gap:7px;
+  background:rgba(255,255,255,.15);
+  backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.25);
+  border-radius:100px;
+  padding:6px 14px;
+  font-size:.65rem; font-weight:700; letter-spacing:2px;
+  text-transform:uppercase; color:rgba(255,255,255,.9);
+  margin-bottom:16px;
+}
+.hero-badge::before { content:'🌿' }
+.hero-title {
+  font-family:'Geologica', sans-serif;
+  font-weight:800; line-height:1.0;
+  color:#fff;
+}
+.hero-title .big {
+  display:block;
+  font-size:clamp(2.4rem, 11vw, 6rem);
+}
+.hero-title .sub-line {
+  display:block;
+  font-size:clamp(1.4rem, 6.5vw, 3.2rem);
+  font-weight:500;
+  color:rgba(255,255,255,.75);
+  margin-top:4px;
+}
+.hero-title em {
+  font-style:normal;
+  color:#a8d8b0;
+}
+.hero-desc {
+  margin-top:16px;
+  font-size:.88rem; line-height:1.7;
+  color:rgba(255,255,255,.7); max-width:360px;
+}
+.hero-btns { display:flex; gap:10px; flex-wrap:wrap; margin-top:22px }
+.btn-main {
+  font-family:'Geologica', sans-serif; font-size:.85rem; font-weight:700;
+  background:#fff; color:var(--forest);
+  padding:13px 24px; border-radius:var(--r);
+  text-decoration:none; transition:transform .15s, box-shadow .15s;
+  display:inline-block;
+}
+.btn-main:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.2) }
+.btn-sec {
+  font-family:'Geologica', sans-serif; font-size:.85rem; font-weight:600;
+  border:1.5px solid rgba(255,255,255,.35); color:#fff;
+  padding:13px 24px; border-radius:var(--r);
+  text-decoration:none; transition:background .2s;
+  display:inline-block;
+}
+.btn-sec:hover { background:rgba(255,255,255,.1) }
+
+/* park switcher */
+.park-switch {
+  display:flex; gap:8px; margin-top:24px;
+}
+.park-btn {
+  flex:1; padding:10px 14px; border-radius:14px;
+  border:1.5px solid rgba(255,255,255,.25);
+  background:rgba(255,255,255,.1);
+  backdrop-filter:blur(6px);
+  color:#fff; font-family:'Geologica',sans-serif;
+  font-size:.75rem; font-weight:600;
+  cursor:pointer; text-align:center;
+  transition:background .2s, border-color .2s;
+}
+.park-btn.active {
+  background:rgba(255,255,255,.9);
+  color:var(--forest);
+  border-color:transparent;
+}
+
+.hero-stats {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:8px; margin-top:16px;
+}
+.hs {
+  background:rgba(255,255,255,.1);
+  backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:16px; padding:12px 8px; text-align:center;
+}
+.hs-n {
+  font-family:'Geologica', sans-serif;
+  font-size:1.7rem; font-weight:800;
+  color:#fff; line-height:1;
+}
+.hs-l {
+  font-size:.48rem; letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.6); margin-top:4px;
+}
+
+/* ── TICKER ── */
+.ticker {
+  background:var(--forest); overflow:hidden; padding:11px 0;
+}
+.ticker-t {
+  display:inline-block; white-space:nowrap;
+  font-family:'Geologica', sans-serif;
+  font-size:.72rem; font-weight:600; letter-spacing:4px;
+  color:rgba(255,255,255,.7);
+  animation:tick 28s linear infinite;
+}
+.ticker-t span { color:#a8d8b0; margin:0 12px }
+@keyframes tick { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ── SECTION ── */
+.s { padding:60px 22px }
+.s-eyebrow {
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:.65rem; font-weight:700; letter-spacing:2.5px;
+  text-transform:uppercase; color:var(--moss);
+  margin-bottom:10px;
+}
+.s-eyebrow::before { content:''; width:16px; height:2px; background:var(--forest); border-radius:2px }
+.s-h {
+  font-family:'Geologica', sans-serif;
+  font-size:clamp(1.9rem, 7vw, 3.6rem);
+  font-weight:800; line-height:1.05; color:var(--dark);
+}
+
+/* ── SERVICES ── */
+.svc-bg { background:var(--white) }
+.svc-g {
+  display:grid; grid-template-columns:1fr;
+  gap:14px; margin-top:24px;
+}
+.svc-c {
+  position:relative; height:200px;
+  overflow:hidden; border-radius:var(--r2);
+  cursor:pointer; box-shadow:var(--shadow);
+  transition:transform .3s, box-shadow .3s;
+}
+.svc-c:hover { transform:translateY(-4px); box-shadow:var(--shadow2) }
+.svc-photo {
+  position:absolute; inset:0;
+  background-size:cover; background-position:center;
+  transition:transform .6s; filter:brightness(.6) saturate(.95);
+}
+.svc-c:hover .svc-photo { transform:scale(1.05) }
+.svc-overlay {
+  position:absolute; inset:0;
+  background:linear-gradient(to top, rgba(26,46,34,.88) 0%, rgba(26,46,34,.1) 60%, transparent 100%);
+}
+.svc-badge {
+  position:absolute; top:14px; left:14px;
+  background:var(--terra); color:#fff;
+  font-family:'Geologica', sans-serif;
+  font-size:.6rem; font-weight:700; letter-spacing:1px;
+  padding:4px 10px; border-radius:100px;
+}
+.svc-bot {
+  position:absolute; bottom:0; left:0; right:0;
+  padding:18px 18px 16px;
+  display:flex; align-items:flex-end; justify-content:space-between;
+}
+.svc-n {
+  font-family:'Geologica', sans-serif;
+  font-size:1.3rem; font-weight:700; color:#fff; line-height:1.1;
+}
+.svc-p {
+  font-family:'Geologica', sans-serif;
+  font-size:.8rem; font-weight:700;
+  color:#a8d8b0; white-space:nowrap; padding-left:8px;
+}
+
+/* ── ABOUT ── */
+.about-bg { background:var(--bg2) }
+.about-i { display:flex; flex-direction:column; gap:24px }
+.about-vis {
+  position:relative; height:280px;
+  border-radius:var(--r2); overflow:hidden; box-shadow:var(--shadow2);
+}
+.about-photo {
+  width:100%; height:100%;
+  background:url('photo_couple.jpg') center/cover;
+  filter:saturate(.95);
+}
+.about-badge {
+  position:absolute; bottom:16px; right:16px;
+  background:var(--forest); color:#fff;
+  font-family:'Geologica', sans-serif;
+  font-size:.65rem; font-weight:700; letter-spacing:1px;
+  padding:8px 16px; border-radius:100px;
+}
+.about-tx p {
+  margin-top:14px; font-size:.88rem;
+  line-height:1.85; color:var(--muted);
+}
+.feat-g { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:20px }
+.feat {
+  background:var(--white); border-radius:16px;
+  padding:14px; box-shadow:var(--shadow);
+}
+.feat-icon { font-size:1.3rem; margin-bottom:6px }
+.feat-n {
+  font-family:'Geologica', sans-serif;
+  font-size:.75rem; font-weight:700; color:var(--dark);
+}
+.feat-v { font-size:.68rem; color:var(--muted); margin-top:2px }
+
+/* ── NUMBERS ── */
+.nums {
+  background:var(--forest);
+  display:grid; grid-template-columns:1fr 1fr; gap:1px;
+}
+.num { background:var(--forest); padding:26px 16px; text-align:center }
+.num-n {
+  font-family:'Geologica', sans-serif;
+  font-size:2.8rem; font-weight:800;
+  color:#fff; line-height:1;
+}
+.num-l {
+  font-size:.58rem; font-weight:600; letter-spacing:2px;
+  text-transform:uppercase; color:rgba(255,255,255,.5);
+  margin-top:4px;
+}
+
+/* ── PRICING ── */
+.price-bg { background:var(--white) }
+.price-g { display:flex; flex-direction:column; gap:14px; margin-top:24px }
+.pc {
+  border:2px solid var(--border);
+  border-radius:var(--r2); padding:24px 20px;
+  position:relative; overflow:hidden;
+  background:var(--white);
+  transition:border-color .3s, transform .25s, box-shadow .25s;
+  box-shadow:var(--shadow);
+}
+.pc:hover { border-color:var(--forest); transform:translateY(-3px); box-shadow:var(--shadow2) }
+.pc.hot { border-color:var(--forest); background:rgba(45,90,61,.04) }
+.pc-badge {
+  position:absolute; top:16px; right:16px;
+  background:var(--terra); color:#fff;
+  font-family:'Geologica', sans-serif;
+  font-size:.6rem; font-weight:700; letter-spacing:1px;
+  padding:4px 10px; border-radius:100px;
+}
+.pc-name {
+  font-family:'Geologica', sans-serif;
+  font-size:.85rem; font-weight:700;
+  letter-spacing:1px; text-transform:uppercase;
+  color:var(--forest);
+}
+.pc-price {
+  font-family:'Geologica', sans-serif;
+  font-size:2.8rem; font-weight:800;
+  line-height:1; margin:8px 0 4px; color:var(--dark);
+}
+.pc-price span {
+  font-size:.85rem; font-weight:400;
+  color:var(--muted);
+}
+.pc-ul {
+  list-style:none; margin:14px 0 20px;
+  display:flex; flex-direction:column; gap:7px;
+}
+.pc-ul li {
+  font-size:.82rem; color:var(--muted);
+  padding-left:20px; position:relative;
+}
+.pc-ul li::before {
+  content:'✓'; position:absolute; left:0;
+  color:var(--forest); font-weight:700; font-size:.75rem;
+}
+
+/* ── GALLERY ── */
+.gal-g { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:20px }
+.gal-c { position:relative; overflow:hidden; border-radius:var(--r); cursor:pointer }
+.gal-c.big { grid-column:span 2; height:220px }
+.gal-c:not(.big) { height:130px }
+.gal-photo {
+  width:100%; height:100%; background-size:cover; background-position:center;
+  transition:transform .5s, filter .4s;
+  filter:saturate(.9) brightness(.95);
+}
+.gal-c:hover .gal-photo { transform:scale(1.06); filter:saturate(1.1) brightness(1.02) }
+.gal-lbl {
+  position:absolute; bottom:8px; left:10px;
+  font-family:'Geologica', sans-serif;
+  font-size:.65rem; font-weight:700;
+  color:#fff; text-shadow:0 1px 6px rgba(0,0,0,.6);
+}
+
+/* ── REVIEWS ── */
+.rev-bg { background:var(--bg2) }
+.rev-g { display:flex; flex-direction:column; gap:12px; margin-top:22px }
+.rev {
+  background:var(--white); border-radius:var(--r2);
+  padding:20px; box-shadow:var(--shadow);
+  position:relative; overflow:hidden;
+}
+.rev-stars { font-size:.75rem; color:var(--terra); margin-bottom:9px; letter-spacing:2px }
+.rev-txt { font-size:.83rem; line-height:1.8; color:var(--text) }
+.rev-who {
+  margin-top:12px;
+  font-family:'Geologica', sans-serif;
+  font-size:.72rem; font-weight:700; color:var(--forest);
+}
+.rev-q {
+  position:absolute; top:-4px; right:14px;
+  font-family:'Geologica', sans-serif;
+  font-size:4rem; color:rgba(45,90,61,.07);
+  line-height:1; pointer-events:none;
+}
+
+/* ── BOOKING ── */
+.book-vis {
+  position:relative; height:180px;
+  border-radius:var(--r2); overflow:hidden;
+  margin-bottom:22px; box-shadow:var(--shadow2);
+}
+.book-photo {
+  width:100%; height:100%;
+  background:url('photo_atv.jpg') center/cover;
+  filter:brightness(.5) saturate(.9);
+}
+.book-deco {
+  position:absolute; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Geologica', sans-serif;
+  font-size:clamp(2rem, 10vw, 4rem);
+  font-weight:800; letter-spacing:4px;
+  color:rgba(255,255,255,.18);
+}
+.book-pill {
+  position:absolute; bottom:14px; left:50%; transform:translateX(-50%);
+  background:var(--terra); color:#fff; white-space:nowrap;
+  font-family:'Geologica', sans-serif;
+  font-size:.62rem; font-weight:700; letter-spacing:1px;
+  padding:6px 16px; border-radius:100px;
+}
+.form-g { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:20px }
+.fi { display:flex; flex-direction:column; gap:6px }
+.fi.full { grid-column:span 2 }
+.fi label {
+  font-family:'Geologica', sans-serif;
+  font-size:.65rem; font-weight:700;
+  letter-spacing:1px; text-transform:uppercase; color:var(--muted);
+}
+.fi input, .fi select {
+  background:var(--bg); border:1.5px solid var(--border);
+  padding:12px 14px; color:var(--text);
+  font-family:'Manrope', sans-serif; font-size:.85rem;
+  outline:none; transition:border-color .2s;
+  -webkit-appearance:none; border-radius:14px;
+}
+.fi input:focus, .fi select:focus { border-color:var(--forest) }
+.fi input::placeholder { color:var(--muted) }
+.fi select option { background:var(--white) }
+
+/* ── CHAT ── */
+.chat-bg { background:var(--bg2) }
+.chat-box {
+  margin-top:18px; border:2px solid var(--border);
+  border-radius:var(--r2); background:var(--white);
+  max-width:400px; box-shadow:var(--shadow);
+  overflow:hidden;
+}
+.chat-head {
+  display:flex; align-items:center; gap:10px;
+  padding:14px 16px; border-bottom:1px solid var(--border);
+  background:var(--forest);
+}
+.chat-dot {
+  width:8px; height:8px; background:#a8d8b0;
+  border-radius:50%; flex-shrink:0;
+  box-shadow:0 0 6px #a8d8b0;
+  animation:pulse 2s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+.chat-nm { font-family:'Geologica',sans-serif; font-size:.82rem; font-weight:700; color:#fff }
+.chat-st { font-size:.62rem; color:rgba(255,255,255,.6); margin-top:1px }
+.bubbles {
+  display:flex; flex-direction:column;
+  gap:10px; padding:14px;
+  max-height:220px; overflow-y:auto;
+}
+.bub {
+  padding:10px 14px; font-size:.8rem;
+  line-height:1.55; max-width:86%; border-radius:16px;
+}
+.bub.in {
+  background:var(--bg2); border-bottom-left-radius:4px;
+  align-self:flex-start; color:var(--text);
+}
+.bub.out {
+  background:var(--forest); color:#fff;
+  border-bottom-right-radius:4px; align-self:flex-end;
+}
+.chat-inp { display:flex; border-top:1px solid var(--border) }
+.chat-inp input {
+  flex:1; background:transparent; border:none;
+  padding:12px 14px; color:var(--text);
+  font-family:'Manrope', sans-serif; font-size:.8rem; outline:none;
+}
+.chat-inp input::placeholder { color:var(--muted) }
+.chat-send {
+  background:var(--forest); color:#fff;
+  border:none; padding:0 18px; cursor:pointer;
+  font-size:1rem; transition:background .2s;
+}
+.chat-send:hover { background:var(--forest2) }
+
+/* ── CTA ── */
+.cta-s {
+  padding:64px 22px; text-align:center;
+  position:relative; overflow:hidden;
+  background:var(--dark);
+}
+.cta-photo {
+  position:absolute; inset:0;
+  background:url('photo_paintball.jpg') center/cover;
+  filter:brightness(.18) saturate(.8);
+}
+.cta-in { position:relative; z-index:2 }
+.cta-badge {
+  display:inline-block;
+  background:rgba(168,216,176,.2);
+  border:1px solid rgba(168,216,176,.3);
+  color:#a8d8b0;
+  font-family:'Geologica', sans-serif;
+  font-size:.65rem; font-weight:700;
+  letter-spacing:2px; text-transform:uppercase;
+  padding:6px 16px; border-radius:100px;
+  margin-bottom:16px;
+}
+.cta-h {
+  font-family:'Geologica', sans-serif;
+  font-size:clamp(2rem, 10vw, 5rem);
+  font-weight:800; line-height:1.0; color:#fff;
+}
+.cta-h .hl { color:#a8d8b0 }
+.cta-h .dm { color:rgba(255,255,255,.3) }
+
+/* ── FAQ ── */
+details.fq { border-bottom:1px solid var(--border) }
+details.fq summary {
+  display:flex; justify-content:space-between; align-items:center;
+  gap:10px; padding:16px 0; cursor:pointer; list-style:none;
+  font-family:'Geologica', sans-serif;
+  font-size:.88rem; font-weight:600; color:var(--text);
+  transition:color .2s; -webkit-tap-highlight-color:transparent;
+}
+details.fq summary:hover { color:var(--forest) }
+details.fq summary::after {
+  content:'+'; flex-shrink:0;
+  font-family:'Geologica', sans-serif;
+  font-size:1.4rem; color:var(--forest);
+  transition:transform .2s; line-height:1; font-weight:300;
+}
+details.fq[open] summary::after { transform:rotate(45deg) }
+.fq-body {
+  padding-bottom:16px; font-size:.83rem;
+  line-height:1.8; color:var(--muted);
+}
+
+/* ── CONTACTS ── */
+.cc-g { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:20px }
+.cc {
+  background:var(--white); border-radius:var(--r);
+  padding:16px; box-shadow:var(--shadow);
+  border-top:3px solid var(--forest);
+}
+.cc-icon { font-size:1.2rem; margin-bottom:6px }
+.cc-l {
+  font-family:'Geologica', sans-serif;
+  font-size:.6rem; font-weight:700;
+  letter-spacing:1px; text-transform:uppercase;
+  color:var(--moss); margin-bottom:4px;
+}
+.cc-v { font-family:'Geologica', sans-serif; font-size:.82rem; font-weight:700; color:var(--dark) }
+.cc-s { font-size:.7rem; color:var(--muted); margin-top:2px }
+
+/* ── FOOTER ── */
+footer {
+  background:var(--dark);
+  padding:40px 22px 30px;
+}
+.foot-logo {
+  font-family:'Geologica', sans-serif;
+  font-size:1.5rem; font-weight:800; color:#fff;
+  display:flex; align-items:center; gap:10px;
+}
+.foot-logo-dot {
+  width:26px; height:26px;
+  background:var(--forest2);
+  border-radius:8px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:.85rem;
+}
+.foot-desc { font-size:.75rem; color:rgba(255,255,255,.4); line-height:1.7; margin-top:10px; max-width:260px }
+.foot-nav { display:flex; flex-wrap:wrap; gap:12px; margin-top:20px }
+.foot-nav a {
+  font-family:'Geologica', sans-serif;
+  font-size:.72rem; font-weight:600;
+  color:rgba(255,255,255,.4); text-decoration:none;
+  transition:color .2s;
+}
+.foot-nav a:hover { color:#fff }
+.foot-bot {
+  margin-top:24px; padding-top:16px;
+  border-top:1px solid rgba(255,255,255,.08);
+  display:flex; justify-content:space-between; flex-wrap:wrap;
+  gap:6px; font-size:.65rem; color:rgba(255,255,255,.25);
+}
+
+/* ── REVEAL ── */
+.rv { opacity:0; transform:translateY(20px); transition:.55s ease }
+.rv.on { opacity:1; transform:translateY(0) }
+
+/* ── DESKTOP ── */
+@media(min-width:640px) {
+  .s { padding:80px 40px }
+  nav { padding:0 40px }
+  .hero-content { padding:40px 40px 50px }
+  .svc-g { grid-template-columns:repeat(2,1fr) }
+  .svc-c { height:260px }
+  .nums { grid-template-columns:repeat(4,1fr) }
+  .price-g { flex-direction:row }
+  .pc { flex:1 }
+  .gal-c.big { height:280px }
+  .gal-c:not(.big) { height:160px }
+  .cc-g { grid-template-columns:repeat(4,1fr) }
+}
+@media(min-width:960px) {
+  .s { padding:96px 60px }
+  nav { padding:0 60px }
+  .hero-content { padding:48px 60px 56px }
+  .svc-g { grid-template-columns:repeat(3,1fr) }
+  .svc-c { height:300px }
+  .about-i { flex-direction:row; align-items:center; gap:60px }
+  .about-vis { flex:1; height:380px }
+  .about-tx { flex:1 }
+  .gal-g { grid-template-columns:repeat(3,1fr) }
+  .gal-c.big { grid-column:span 1; height:260px }
+}
+
+
+/* ── LOCATION CARDS ── */
+.loc-card {
+  background: var(--white); border-radius: var(--r2);
+  overflow: hidden; box-shadow: var(--shadow);
+  cursor: pointer; transition: transform .3s, box-shadow .3s;
+}
+.loc-card:hover { transform: translateY(-4px); box-shadow: var(--shadow2) }
+.loc-card-img {
+  height: 180px; background-size: cover;
+  background-position: center; filter: saturate(.9);
+}
+.loc-card-body { padding: 18px }
+.loc-card-tag {
+  font-family: 'Geologica', sans-serif;
+  font-size: .65rem; font-weight: 700; color: var(--moss);
+  letter-spacing: 1px; margin-bottom: 6px;
+}
+.loc-card-name {
+  font-family: 'Geologica', sans-serif;
+  font-size: 1.3rem; font-weight: 800; color: var(--dark);
+}
+.loc-card-desc {
+  font-size: .82rem; color: var(--muted);
+  line-height: 1.6; margin-top: 6px;
+}
+.loc-card-link {
+  font-family: 'Geologica', sans-serif;
+  font-size: .8rem; font-weight: 700; color: var(--forest);
+  margin-top: 12px;
+}
+@media(min-width: 640px) {
+  #locCards { grid-template-columns: repeat(2,1fr) !important }
+  .loc-card-img { height: 220px }
+}
+
+/* ── TELEGRAM BLOCK ── */
+.tg-sec { padding: 56px 22px }
+.tg-inner { display: flex; flex-direction: column; gap: 28px; align-items: flex-start }
+.tg-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.25);
+  border-radius: 100px; padding: 6px 14px;
+  font-family: 'Geologica', sans-serif;
+  font-size: .65rem; font-weight: 700; letter-spacing: 1.5px;
+  color: rgba(255,255,255,.9); text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.tg-h {
+  font-family: 'Geologica', sans-serif;
+  font-size: clamp(1.6rem, 6vw, 2.8rem);
+  font-weight: 800; line-height: 1.1; color: #fff;
+  max-width: 380px;
+}
+.tg-desc {
+  margin-top: 12px; font-size: .88rem;
+  line-height: 1.75; color: rgba(255,255,255,.65);
+  max-width: 360px;
+}
+.tg-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 20px;
+  background: #fff; color: var(--forest);
+  font-family: 'Geologica', sans-serif;
+  font-size: .85rem; font-weight: 700;
+  padding: 13px 24px; border-radius: 100px;
+  text-decoration: none;
+  transition: transform .15s, box-shadow .15s;
+}
+.tg-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.25) }
+.tg-qr { display: flex; justify-content: center; width: 100% }
+.tg-qr-box {
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 20px; padding: 20px 24px;
+  text-align: center;
+}
+.tg-qr-inner {
+  background: #fff; border-radius: 12px;
+  padding: 12px; display: inline-block;
+}
+.tg-qr-label {
+  margin-top: 10px; font-family: 'Geologica', sans-serif;
+  font-size: .68rem; font-weight: 600;
+  color: rgba(255,255,255,.6); letter-spacing: 1px;
+}
+
+/* ── LOCATION MODAL ── */
+.loc-overlay {
+  position: fixed; inset: 0; z-index: 900;
+  background: rgba(26,46,34,.6);
+  backdrop-filter: blur(4px);
+  opacity: 0; pointer-events: none;
+  transition: opacity .3s;
+}
+.loc-overlay.open { opacity: 1; pointer-events: all }
+.loc-modal {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 910;
+  background: var(--white);
+  border-radius: 24px 24px 0 0;
+  padding: 24px 22px 40px;
+  max-height: 85vh; overflow-y: auto;
+  transform: translateY(100%);
+  transition: transform .35s cubic-bezier(.4,0,.2,1);
+  box-shadow: 0 -8px 40px rgba(0,0,0,.2);
+}
+.loc-modal.open { transform: translateY(0) }
+.loc-close {
+  position: absolute; top: 16px; right: 16px;
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--bg2); border: none; cursor: pointer;
+  font-size: 1rem; color: var(--text);
+  display: flex; align-items: center; justify-content: center;
+}
+.loc-name {
+  font-family: 'Geologica', sans-serif;
+  font-size: 1.6rem; font-weight: 800; color: var(--dark);
+  margin-bottom: 6px; padding-right: 40px;
+}
+.loc-addr {
+  font-size: .8rem; color: var(--muted); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 6px;
+}
+.loc-desc {
+  font-size: .86rem; line-height: 1.8; color: var(--text);
+  margin-bottom: 20px;
+}
+.loc-features {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;
+}
+.loc-feat {
+  background: rgba(45,90,61,.08);
+  border: 1px solid rgba(45,90,61,.15);
+  color: var(--forest);
+  font-family: 'Geologica', sans-serif;
+  font-size: .72rem; font-weight: 600;
+  padding: 5px 12px; border-radius: 100px;
+}
+.loc-info {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+  margin-bottom: 20px;
+}
+.loc-info-c {
+  background: var(--bg2); border-radius: 14px;
+  padding: 12px 14px;
+}
+.loc-info-label {
+  font-size: .6rem; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; color: var(--moss); margin-bottom: 4px;
+}
+.loc-info-val {
+  font-family: 'Geologica', sans-serif;
+  font-size: .82rem; font-weight: 700; color: var(--dark);
+}
+.loc-btns { display: flex; gap: 10px; flex-wrap: wrap }
+.loc-map-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--forest); color: #fff;
+  font-family: 'Geologica', sans-serif;
+  font-size: .82rem; font-weight: 700;
+  padding: 12px 20px; border-radius: var(--r);
+  text-decoration: none; transition: background .2s;
+}
+.loc-map-btn:hover { background: var(--forest2) }
+.loc-book-btn {
+  display: inline-flex; align-items: center;
+  background: var(--terra); color: #fff;
+  font-family: 'Geologica', sans-serif;
+  font-size: .82rem; font-weight: 700;
+  padding: 12px 20px; border-radius: var(--r);
+  text-decoration: none; transition: background .2s;
+}
+.loc-book-btn:hover { background: var(--terra2) }
+
+/* Park switcher opens modal */
+.park-btn { cursor: pointer }
+
+/* Handle desktop TG block */
+@media(min-width: 768px) {
+  .tg-inner { flex-direction: row; align-items: center; gap: 60px }
+  .tg-text { flex: 1 }
+  .tg-qr { flex-shrink: 0; width: auto }
+}
+@media(min-width: 640px) {
+  .tg-sec { padding: 72px 40px }
+}
+@media(min-width: 960px) {
+  .tg-sec { padding: 88px 60px }
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">
+    <span class="logo-icon">🌿</span>
+    ПЭЙНТЛЭНД
+  </a>
+  <div class="nav-links">
+    <a href="#services">Услуги</a>
+    <a href="#prices">Цены</a>
+    <a href="#contacts">Контакты</a>
+    <a href="#booking" class="cta">Забронировать</a>
+  </div>
+  <button class="burger" id="burger"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="drawer" id="drawer">
+  <a href="#services">Услуги</a>
+  <a href="#prices">Цены</a>
+  <a href="#contacts">Контакты</a>
+  <a href="#booking" class="d-cta">Забронировать игру</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-img"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Москва · Подмосковье · с 2008</div>
+    <h1 class="hero-title">
+      <span class="big">ТЕРРИТОРИЯ<br><em>ВАШЕГО</em> ОТДЫХА</span>
+      <span class="sub-line">в Подмосковье</span>
+    </h1>
+    <p class="hero-desc">Пейнтбол, лазертаг, квадроциклы и уютные беседки. Для детей от 5 лет, компаний и корпоративов.</p>
+    <div class="park-switch">
+      <button class="park-btn active" onclick="switchPark(this)">📍 Бухта Радости</button>
+      <button class="park-btn" onclick="switchPark(this)">📍 Парк Софрино</button>
+    </div>
+    <div class="hero-btns">
+      <a href="#booking" class="btn-main">Забронировать</a>
+      <a href="#services" class="btn-sec">Наши услуги</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hs"><div class="hs-n">15+</div><div class="hs-l">ЛЕТ ОПЫТА</div></div>
+      <div class="hs"><div class="hs-n">2</div><div class="hs-l">ПАРКА</div></div>
+      <div class="hs"><div class="hs-n">50К+</div><div class="hs-l">ИГРОКОВ</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <span class="ticker-t">
+    <span>🌿</span> ПЕЙНТБОЛ &nbsp;&nbsp;
+    <span>🌿</span> ЛАЗЕРТАГ &nbsp;&nbsp;
+    <span>🌿</span> КВАДРОЦИКЛЫ &nbsp;&nbsp;
+    <span>🌿</span> ДЖИПИНГ &nbsp;&nbsp;
+    <span>🌿</span> ТИМБИЛДИНГ &nbsp;&nbsp;
+    <span>🌿</span> ВЕРЁВОЧНЫЙ ПАРК &nbsp;&nbsp;
+    <span>🌿</span> ДНИ РОЖДЕНИЯ &nbsp;&nbsp;
+    <span>🌿</span> КОРПОРАТИВЫ &nbsp;&nbsp;
+    <span>🌿</span> ПЕЙНТБОЛ &nbsp;&nbsp;
+    <span>🌿</span> ЛАЗЕРТАГ &nbsp;&nbsp;
+    <span>🌿</span> КВАДРОЦИКЛЫ &nbsp;&nbsp;
+    <span>🌿</span> ДЖИПИНГ &nbsp;&nbsp;
+    <span>🌿</span> ТИМБИЛДИНГ &nbsp;&nbsp;
+    <span>🌿</span> ВЕРЁВОЧНЫЙ ПАРК &nbsp;&nbsp;
+    <span>🌿</span> ДНИ РОЖДЕНИЯ &nbsp;&nbsp;
+    <span>🌿</span> КОРПОРАТИВЫ &nbsp;&nbsp;
+  </span>
+</div>
+
+<!-- SERVICES -->
+<section class="svc-bg s" id="services">
+  <div class="s-eyebrow rv">Что мы предлагаем</div>
+  <h2 class="s-h rv">Наши форматы<br>отдыха</h2>
+  <div class="svc-g">
+    <div class="svc-c rv">
+      <div class="svc-photo" style="background-image:url('photo_paintball.jpg')"></div>
+      <div class="svc-overlay"></div>
+      <div class="svc-bot"><div class="svc-n">Пейнтбол</div><div class="svc-p">от 1 600 ₽</div></div>
+    </div>
+    <div class="svc-c rv">
+      <div class="svc-photo" style="background:linear-gradient(135deg,#0a0f1a,#1a2850)"></div>
+      <div class="svc-overlay"></div>
+      <div class="svc-bot"><div class="svc-n">Лазертаг</div><div class="svc-p">от 600 ₽</div></div>
+    </div>
+    <div class="svc-c rv">
+      <div class="svc-photo" style="background-image:url('photo_atv.jpg')"></div>
+      <div class="svc-overlay"></div>
+      <div class="svc-bot"><div class="svc-n">Квадроциклы</div><div class="svc-p">от 15 000 ₽</div></div>
+    </div>
+    <div class="svc-c rv">
+      <div class="svc-photo" style="background-image:url('photo_uaz.jpg')"></div>
+      <div class="svc-overlay"></div>
+      <div class="svc-bot"><div class="svc-n">Джипинг / УАЗ</div><div class="svc-p">Уточнить</div></div>
+    </div>
+    <div class="svc-c rv">
+      <div class="svc-photo" style="background:linear-gradient(135deg,#0e1f0a,#2a5014)"></div>
+      <div class="svc-overlay"></div>
+      <div class="svc-bot"><div class="svc-n">Верёвочный парк</div><div class="svc-p">Уточнить</div></div>
+    </div>
+    <div class="svc-c rv">
+      <div class="svc-photo" style="background:linear-gradient(135deg,#1f0e0a,#501428)"></div>
+      <div class="svc-overlay"></div>
+      <div class="svc-badge">Скидка 50%</div>
+      <div class="svc-bot"><div class="svc-n">День рождения</div><div class="svc-p">Именинникам</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-bg s">
+  <div class="about-i">
+    <div class="about-vis rv">
+      <div class="about-photo"></div>
+      <div class="about-badge">🌿 С 2008 года</div>
+    </div>
+    <div class="about-tx">
+      <div class="s-eyebrow rv">О нас</div>
+      <h2 class="s-h rv">Пэйнтлэнд Парк — место, где отдыхают семьи</h2>
+      <p class="rv">Мы создаём безопасные и уютные пространства для активного отдыха на природе с 2008 года. Два парка в Подмосковье — каждый с собственным характером.</p>
+      <p class="rv">Подходит для детей от 5 лет, подростков, компаний и корпоративов. Выезжаем на ваш объект.</p>
+      <div class="feat-g rv">
+        <div class="feat"><div class="feat-icon">🏞️</div><div class="feat-n">Бухта Радости</div><div class="feat-v">Мытищи, у водохранилища</div></div>
+        <div class="feat"><div class="feat-icon">🌲</div><div class="feat-n">Парк Софрино</div><div class="feat-v">Пушкинский р-н</div></div>
+        <div class="feat"><div class="feat-icon">🚗</div><div class="feat-n">Выезд к вам</div><div class="feat-v">Дача, школа, офис</div></div>
+        <div class="feat"><div class="feat-icon">📅</div><div class="feat-n">Работаем</div><div class="feat-v">Ежедневно 09–21</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+<div class="nums">
+  <div class="num rv"><div class="num-n">15+</div><div class="num-l">лет опыта</div></div>
+  <div class="num rv"><div class="num-n">2</div><div class="num-l">парка</div></div>
+  <div class="num rv"><div class="num-n">50К+</div><div class="num-l">игроков</div></div>
+  <div class="num rv"><div class="num-n">100%</div><div class="num-l">безопасно</div></div>
+</div>
+
+<!-- PRICING -->
+<section class="price-bg s" id="prices">
+  <div class="s-eyebrow rv">Стоимость</div>
+  <h2 class="s-h rv">Цены и пакеты</h2>
+  <div class="price-g">
+    <div class="pc rv">
+      <div class="pc-name">Старт</div>
+      <div class="pc-price">600 <span>₽/чел</span></div>
+      <ul class="pc-ul"><li>Лазертаг 1 час</li><li>Базовая экипировка</li><li>Инструктор</li><li>От 5 лет</li></ul>
+      <a href="#booking" class="btn-main" style="display:block;text-align:center">Записаться</a>
+    </div>
+    <div class="pc hot rv">
+      <div class="pc-badge">ХИТ</div>
+      <div class="pc-name">Пейнтбол PRO</div>
+      <div class="pc-price">1 600 <span>₽/чел</span></div>
+      <ul class="pc-ul"><li>Пейнтбол 2 часа</li><li>Полная экипировка</li><li>200 шаров включено</li><li>Профи инструктор</li><li>Сценарная игра</li></ul>
+      <a href="#booking" class="btn-main" style="display:block;text-align:center">Записаться</a>
+    </div>
+    <div class="pc rv">
+      <div class="pc-name">Корпоратив</div>
+      <div class="pc-price">2 000 <span>₽/чел</span></div>
+      <ul class="pc-ul"><li>Тимбилдинг под ключ</li><li>Несколько активностей</li><li>Беседка с мангалом</li><li>Ведущий и аниматор</li></ul>
+      <a href="#booking" class="btn-main" style="display:block;text-align:center">Записаться</a>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="s" id="gallery" style="background:var(--bg2)">
+  <div class="s-eyebrow rv">Атмосфера</div>
+  <h2 class="s-h rv">Как это выглядит</h2>
+  <div class="gal-g">
+    <div class="gal-c big rv"><div class="gal-photo" style="background-image:url('photo_paintball.jpg')"></div><div class="gal-lbl">Пейнтбол</div></div>
+    <div class="gal-c rv"><div class="gal-photo" style="background-image:url('photo_atv.jpg')"></div><div class="gal-lbl">Квадроциклы</div></div>
+    <div class="gal-c rv"><div class="gal-photo" style="background-image:url('photo_uaz.jpg')"></div><div class="gal-lbl">Джипинг</div></div>
+    <div class="gal-c rv"><div class="gal-photo" style="background-image:url('photo_couple.jpg')"></div><div class="gal-lbl">Снаряжение</div></div>
+    <div class="gal-c rv"><div class="gal-photo" style="background-image:url('photo_husky.jpg')"></div><div class="gal-lbl">Хаски</div></div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="rev-bg s">
+  <div class="s-eyebrow rv">Отзывы</div>
+  <h2 class="s-h rv">Что говорят наши гости</h2>
+  <div class="rev-g">
+    <div class="rev rv"><div class="rev-q">"</div><div class="rev-stars">★ ★ ★ ★ ★</div><div class="rev-txt">Организовали день рождения — лазертаг для детей. Инструктор всё объяснил, дети в полном восторге!</div><div class="rev-who">— Наталья, мама троих детей</div></div>
+    <div class="rev rv"><div class="rev-q">"</div><div class="rev-stars">★ ★ ★ ★ ★</div><div class="rev-txt">Отличный корпоратив! Всё включено, персонал доброжелательный, атмосфера уютная. Вернёмся снова!</div><div class="rev-who">— Сергей, HR-директор</div></div>
+    <div class="rev rv"><div class="rev-q">"</div><div class="rev-stars">★ ★ ★ ★ ★</div><div class="rev-txt">Приехали большой компанией. Квадроциклы, пейнтбол, шашлыки — идеально провели день!</div><div class="rev-who">— Артур</div></div>
+  </div>
+</section>
+
+
+<!-- LOCATIONS -->
+<section class="s" id="locations" style="background:var(--bg2)">
+  <div class="s-eyebrow rv">Наши площадки</div>
+  <h2 class="s-h rv">Два парка<br>в Подмосковье</h2>
+  <div style="display:grid;grid-template-columns:1fr;gap:16px;margin-top:24px" id="locCards">
+    <div class="loc-card rv" onclick="openLoc('bukhta')">
+      <div class="loc-card-img" style="background-image:url('photo_uaz.jpg')"></div>
+      <div class="loc-card-body">
+        <div class="loc-card-tag">📍 Мытищи</div>
+        <div class="loc-card-name">Бухта Радости</div>
+        <div class="loc-card-desc">На берегу Пироговского водохранилища. Сосновый лес, чистый воздух.</div>
+        <div class="loc-card-link">Подробнее →</div>
+      </div>
+    </div>
+    <div class="loc-card rv" onclick="openLoc('sofrino')">
+      <div class="loc-card-img" style="background-image:url('photo_atv.jpg')"></div>
+      <div class="loc-card-body">
+        <div class="loc-card-tag">📍 Пушкинский р-н</div>
+        <div class="loc-card-name">Парк Софрино</div>
+        <div class="loc-card-desc">Просторные поля и трассы для квадроциклов в экологически чистом районе.</div>
+        <div class="loc-card-link">Подробнее →</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- TELEGRAM MINI APP -->
+<section class="s tg-sec" id="telegram" style="background:var(--forest)">
+  <div class="tg-inner rv">
+    <div class="tg-text">
+      <div class="tg-badge">✈️ Telegram Mini App</div>
+      <h2 class="tg-h">Бронируйте в один клик через Telegram</h2>
+      <p class="tg-desc">Наш бот позволяет выбрать дату, количество гостей и оплатить онлайн — всё не выходя из Telegram.</p>
+      <a href="https://t.me/paintballclub_bot" target="_blank" class="tg-btn">Открыть в Telegram →</a>
+    </div>
+    <div class="tg-qr rv">
+      <div class="tg-qr-box">
+        <div class="tg-qr-inner">
+          <svg viewBox="0 0 100 100" width="120" height="120" xmlns="http://www.w3.org/2000/svg">
+            <!-- QR code placeholder pattern -->
+            <rect width="100" height="100" fill="white" rx="8"/>
+            <!-- Position detection squares -->
+            <rect x="8" y="8" width="26" height="26" fill="none" stroke="#2d5a3d" stroke-width="3" rx="2"/>
+            <rect x="12" y="12" width="18" height="18" fill="#2d5a3d" rx="1"/>
+            <rect x="66" y="8" width="26" height="26" fill="none" stroke="#2d5a3d" stroke-width="3" rx="2"/>
+            <rect x="70" y="12" width="18" height="18" fill="#2d5a3d" rx="1"/>
+            <rect x="8" y="66" width="26" height="26" fill="none" stroke="#2d5a3d" stroke-width="3" rx="2"/>
+            <rect x="12" y="70" width="18" height="18" fill="#2d5a3d" rx="1"/>
+            <!-- Data dots -->
+            <rect x="40" y="8" width="6" height="6" fill="#2d5a3d" rx="1"/>
+            <rect x="50" y="8" width="6" height="6" fill="#2d5a3d" rx="1"/>
+            <rect x="40" y="18" width="6" height="6" fill="#2d5a3d" rx="1"/>
+            <rect x="54" y="20" width="4" height="4" fill="#2d5a3d" rx="1"/>
+            <rect x="40" y="28" width="6" height="6" fill="#2d5a3d" rx="1"/>
+            <rect x="50" y="30" width="4" height="4" fill="#2d5a3d" rx="1"/>
+            <rect x="8" y="40" width="6" height="6" fill="#2d5a3d" rx="1"/>
+            <rect x="18" y="40" width="4" height="4" fill="#2d5a3d" rx="1"/>
+            <rect x="28" y="40" width="6" height="6" fill="#2d5a3d" rx="1"/>
+            <rect x="40" y="40" width="6" height="6" fill="#2d5a3d" rx="1"/>
+            <rect x="50" y="40" width="4" height="4" fill="#2d5a3d" rx="1"/>
+            <rect x="60" y="40" width="6" height="6" fill="#2d5a3d" rx="1"/>
+            <rect x="70" y="40" width="6" height="6" fill="#2d5a3d" rx="1"/>
+            <rect x="82" y="40" width="6" height="6" fill="#2d5a3d" rx="1"/>
+            <rect x="8" y="50" width="4" height="4" fill="#2d5a3d" rx="1"/>
+            <rect x="16" y="50" width="6" height="6" fill="#2d5a3d" rx="1"/>
+            <rect x="26" y="52" width="4" height="4" fill="#2d5a3d" rx="1"/>
+            <rect x="40" y="50" width="6" height="6" fill="#2d5a3d" rx="1"/>
+            <rect x="54" y="50" width="6" height="6" fill="#2d5a3d" rx="1"/>
+            <rect x="64" y="52" width="4" height="4" fill="#2d5a3d" rx="1"/>
+            <rect x="72" y="50" width="6" height="6" fill="#2d5a3d" rx="1"/>
+            <rect x="82" y="52" width="4" height="4" fill="#2d5a3d" rx="1"/>
+            <rect x="40" y="62" width="4" height="4" fill="#2d5a3d" rx="1"/>
+            <rect x="48" y="60" width="6" height="6" fill="#2d5a3d" rx="1"/>
+            <rect x="58" y="62" width="4" height="4" fill="#2d5a3d" rx="1"/>
+            <rect x="66" y="60" width="6" height="6" fill="#2d5a3d" rx="1"/>
+            <rect x="76" y="62" width="6" height="6" fill="#2d5a3d" rx="1"/>
+            <rect x="86" y="60" width="6" height="6" fill="#2d5a3d" rx="1"/>
+            <rect x="40" y="72" width="6" height="6" fill="#2d5a3d" rx="1"/>
+            <rect x="50" y="70" width="4" height="4" fill="#2d5a3d" rx="1"/>
+            <rect x="58" y="72" width="6" height="6" fill="#2d5a3d" rx="1"/>
+            <rect x="68" y="70" width="4" height="4" fill="#2d5a3d" rx="1"/>
+            <rect x="76" y="72" width="6" height="6" fill="#2d5a3d" rx="1"/>
+            <rect x="86" y="70" width="4" height="4" fill="#2d5a3d" rx="1"/>
+            <rect x="40" y="82" width="4" height="4" fill="#2d5a3d" rx="1"/>
+            <rect x="48" y="80" width="6" height="6" fill="#2d5a3d" rx="1"/>
+            <rect x="58" y="82" width="4" height="4" fill="#2d5a3d" rx="1"/>
+            <rect x="66" y="80" width="6" height="6" fill="#2d5a3d" rx="1"/>
+            <rect x="76" y="80" width="4" height="4" fill="#2d5a3d" rx="1"/>
+            <rect x="84" y="82" width="6" height="6" fill="#2d5a3d" rx="1"/>
+          </svg>
+        </div>
+        <p class="tg-qr-label">Сканируй и бронируй</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="s" id="booking" style="background:var(--white)">
+  <div class="s-eyebrow rv">Бронирование</div>
+  <h2 class="s-h rv">Оставить заявку</h2>
+  <div class="book-vis rv">
+    <div class="book-photo"></div>
+    <div class="book-deco">БРОНЬ</div>
+    <div class="book-pill">⚡ Ответим за 15 минут</div>
+  </div>
+  <div class="rv">
+    <div class="form-g">
+      <div class="fi"><label>Имя</label><input type="text" placeholder="Иван Петров"></div>
+      <div class="fi"><label>Телефон</label><input type="tel" placeholder="+7 (999) 000-00-00"></div>
+      <div class="fi"><label>Дата</label><input type="date"></div>
+      <div class="fi"><label>Время</label><input type="time" value="14:00"></div>
+      <div class="fi"><label>Человек</label><input type="number" placeholder="10" min="2"></div>
+      <div class="fi"><label>Площадка</label>
+        <select><option>Бухта Радости</option><option>Парк Софрино</option><option>Выезд на объект</option></select>
+      </div>
+      <div class="fi full"><label>Активность</label>
+        <select><option>Пейнтбол</option><option>Лазертаг</option><option>Квадроциклы</option><option>Джипинг / УАЗ</option><option>Тимбилдинг</option><option>Верёвочный парк</option><option>День рождения</option></select>
+      </div>
+      <div class="fi full">
+        <a href="#" class="btn-main" style="display:block;text-align:center;font-size:.88rem;padding:14px" onclick="return false">Отправить заявку →</a>
+        <p style="font-size:.65rem;color:var(--muted);margin-top:8px;text-align:center">После подтверждения — ссылка на онлайн-оплату</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHAT -->
+<section class="chat-bg s">
+  <div class="s-eyebrow rv">Онлайн-поддержка</div>
+  <h2 class="s-h rv">Напишите нам</h2>
+  <p style="margin-top:12px;font-size:.85rem;color:var(--muted);line-height:1.75;max-width:340px" class="rv">Поможем выбрать программу и рассчитаем стоимость для вашей группы.</p>
+  <div class="chat-box rv">
+    <div class="chat-head">
+      <div class="chat-dot"></div>
+      <div><div class="chat-nm">Пэйнтлэнд Парк</div><div class="chat-st">онлайн · отвечаем быстро</div></div>
+    </div>
+    <div class="bubbles" id="bubbles">
+      <div class="bub in">Привет! Хочу организовать день рождения 🎉</div>
+      <div class="bub out">Привет! Сколько гостей и какой возраст детей?</div>
+      <div class="bub in">10 детей, 7–10 лет, суббота 3 мая</div>
+      <div class="bub out">Отлично! Для этого возраста идеально подойдёт лазертаг или кидбол. Забронируем? ✅</div>
+    </div>
+    <div class="chat-inp">
+      <input type="text" id="ci" placeholder="Напишите сообщение...">
+      <button class="chat-send" id="cs">→</button>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-s">
+  <div class="cta-photo"></div>
+  <div class="cta-in">
+    <div class="cta-badge">🎂 Специальное предложение</div>
+    <div class="cta-h rv">
+      Именинникам<br>
+      <span class="hl">скидка 50%</span><br>
+      <span class="dm">на пейнтбол</span>
+    </div>
+    <a href="#booking" class="btn-main" style="display:inline-block;margin-top:28px;padding:14px 40px">Хочу скидку →</a>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section class="s" style="background:var(--white)">
+  <div class="s-eyebrow rv">Вопросы</div>
+  <h2 class="s-h rv">Часто спрашивают</h2>
+  <div class="rv" style="margin-top:20px">
+    <details class="fq"><summary>Со скольки лет можно играть в пейнтбол?</summary><div class="fq-body">С 12 лет в присутствии родителей. Для младших — лазертаг (от 5 лет) и кидбол.</div></details>
+    <details class="fq"><summary>Нужно привозить своё снаряжение?</summary><div class="fq-body">Нет — всё необходимое предоставляется. Экипировка и инвентарь включены в стоимость пакета.</div></details>
+    <details class="fq"><summary>Можно организовать корпоратив с выездом?</summary><div class="fq-body">Да! Выезжаем на вашу территорию: дача, парк, офис, школа. Обсудим детали при бронировании.</div></details>
+    <details class="fq"><summary>Как оплатить? Есть онлайн-оплата?</summary><div class="fq-body">После подтверждения заявки присылаем ссылку на оплату. Принимаем карты, СБП и наличные на месте.</div></details>
+    <details class="fq"><summary>Как получить скидку 50% именинникам?</summary><div class="fq-body">Сообщите о дне рождения при бронировании — именинник получает скидку 50% на пейнтбол и лазертаг.</div></details>
+  </div>
+</section>
+
+<!-- CONTACTS -->
+<section class="s" id="contacts" style="background:var(--bg2)">
+  <div class="s-eyebrow rv">Контакты</div>
+  <h2 class="s-h rv">Как с нами связаться</h2>
+  <div class="cc-g">
+    <div class="cc rv"><div class="cc-icon">📞</div><div class="cc-l">Телефон 1</div><div class="cc-v">+7 (925) 010-85-35</div><div class="cc-s">Бухта Радости</div></div>
+    <div class="cc rv"><div class="cc-icon">📞</div><div class="cc-l">Телефон 2</div><div class="cc-v">+7 (985) 643-68-88</div><div class="cc-s">Парк Софрино</div></div>
+    <div class="cc rv"><div class="cc-icon">✉️</div><div class="cc-l">Email</div><div class="cc-v" style="font-size:.75rem">info888@plpark.ru</div><div class="cc-s">Пишите нам</div></div>
+    <div class="cc rv"><div class="cc-icon">🕐</div><div class="cc-l">Работаем</div><div class="cc-v">Ежедневно</div><div class="cc-s">09:00 – 21:00</div></div>
+  </div>
+  <a href="https://paintballclub.ru/contacts/" target="_blank" class="btn-sec" style="display:inline-block;margin-top:20px;border-color:var(--forest);color:var(--forest)">Смотреть на карте →</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-logo">
+    <span class="foot-logo-dot">🌿</span>
+    ПЭЙНТЛЭНД ПАРК
+  </div>
+  <p class="foot-desc">Активный отдых в Подмосковье. Пейнтбол, лазертаг, квадроциклы и тимбилдинг с 2008 года.</p>
+  <nav class="foot-nav">
+    <a href="#">Главная</a>
+    <a href="#services">Услуги</a>
+    <a href="#prices">Цены</a>
+    <a href="#booking">Бронирование</a>
+    <a href="#contacts">Контакты</a>
+  </nav>
+  <div class="foot-bot">
+    <span>© 2026 Пэйнтлэнд Парк</span>
+    <span>Актуально на апрель 2026</span>
+  </div>
+</footer>
+
+<script>
+// Burger
+const burger = document.getElementById('burger');
+const drawer = document.getElementById('drawer');
+burger.addEventListener('click', () => {
+  const o = drawer.classList.toggle('open');
+  burger.classList.toggle('open', o);
+});
+drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  drawer.classList.remove('open');
+  burger.classList.remove('open');
+}));
+document.addEventListener('click', e => {
+  if (!burger.contains(e.target) && !drawer.contains(e.target)) {
+    drawer.classList.remove('open');
+    burger.classList.remove('open');
+  }
+});
+
+// Park switcher
+function switchPark(btn) {
+  document.querySelectorAll('.park-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// Scroll reveal
+const io = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) setTimeout(() => e.target.classList.add('on'), i * 55);
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+// Chat
+const send = () => {
+  const inp = document.getElementById('ci');
+  const v = inp.value.trim();
+  if (!v) return;
+  const b = document.createElement('div');
+  b.className = 'bub in'; b.textContent = v;
+  document.getElementById('bubbles').appendChild(b);
+  inp.value = '';
+  b.scrollIntoView({ behavior:'smooth', block:'nearest' });
+  setTimeout(() => {
+    const r = document.createElement('div');
+    r.className = 'bub out';
+    const rep = ['Спасибо! Свяжемся в ближайшее время 😊', 'Хорошо, уточним детали!', 'Ждём вас в парке! 🌿'];
+    r.textContent = rep[Math.floor(Math.random() * rep.length)];
+    document.getElementById('bubbles').appendChild(r);
+    r.scrollIntoView({ behavior:'smooth', block:'nearest' });
+  }, 900);
+};
+document.getElementById('cs').onclick = send;
+document.getElementById('ci').onkeydown = e => { if (e.key === 'Enter') send() };
+
+// Location modal
+const locData = JSON.parse(document.getElementById('locData').textContent);
+
+function openLoc(key) {
+  const d = locData[key];
+  if (!d) return;
+  document.getElementById('locContent').innerHTML = `
+    <div class="loc-name">${d.name}</div>
+    <div class="loc-addr">📍 ${d.address}</div>
+    <p class="loc-desc">${d.desc}</p>
+    <div class="loc-features">${d.features.map(f => `<span class="loc-feat">${f}</span>`).join('')}</div>
+    <div class="loc-info">
+      <div class="loc-info-c"><div class="loc-info-label">Телефон</div><div class="loc-info-val">${d.phone}</div></div>
+      <div class="loc-info-c"><div class="loc-info-label">Режим работы</div><div class="loc-info-val">${d.hours}</div></div>
+    </div>
+    <div class="loc-btns">
+      <a href="${d.map}" target="_blank" class="loc-map-btn">🗺️ На карте</a>
+      <a href="#booking" class="loc-book-btn" onclick="closeLoc()">Забронировать</a>
+    </div>
+  `;
+  document.getElementById('locOverlay').classList.add('open');
+  document.getElementById('locModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLoc() {
+  document.getElementById('locOverlay').classList.remove('open');
+  document.getElementById('locModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Update park switcher to open modal
+function switchPark(btn) {
+  document.querySelectorAll('.park-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const key = btn.textContent.includes('Бухта') ? 'bukhta' : 'sofrino';
+  openLoc(key);
+}
+
+// Also open from contact cards
+document.querySelectorAll('.cc').forEach(cc => {
+  cc.style.cursor = 'pointer';
+  const name = cc.querySelector('.cc-v')?.textContent || '';
+  cc.addEventListener('click', () => {
+    if (name.includes('010')) openLoc('bukhta');
+    else if (name.includes('643')) openLoc('sofrino');
+  });
+});
+</script>
+
+<!-- LOCATION PAGES (overlay) -->
+<div class="loc-overlay" id="locOverlay" onclick="closeLoc()"></div>
+
+<div class="loc-modal" id="locModal">
+  <button class="loc-close" onclick="closeLoc()">✕</button>
+  <div id="locContent"></div>
+</div>
+
+<!-- Location data -->
+<script id="locData" type="application/json">
+{
+  "bukhta": {
+    "name": "Бухта Радости",
+    "address": "Московская область, Мытищинский р-н, пос. Пироговский",
+    "phone": "+7 (925) 010-85-35",
+    "coords": "55.9461, 37.7423",
+    "desc": "Живописный парк на берегу Пироговского водохранилища. Сосновый лес, чистый воздух и вода — идеальное место для семейного отдыха и корпоративов.",
+    "features": ["Пейнтбол", "Лазертаг", "Квадроциклы", "Верёвочный парк", "Беседки с мангалом", "Парковка"],
+    "hours": "09:00 – 21:00 ежедневно",
+    "map": "https://yandex.ru/maps/?pt=37.7423,55.9461&z=15"
+  },
+  "sofrino": {
+    "name": "Парк Софрино",
+    "address": "Московская область, Пушкинский р-н, пос. Софрино",
+    "phone": "+7 (985) 643-68-88",
+    "coords": "56.1832, 37.9254",
+    "desc": "Большой парк в экологически чистом Пушкинском районе. Просторные поля для пейнтбола, трассы для квадроциклов и уютные зоны отдыха.",
+    "features": ["Пейнтбол", "Лазертаг", "Квадроциклы", "Джипинг / УАЗ", "Тимбилдинг", "Беседки"],
+    "hours": "09:00 – 21:00 ежедневно",
+    "map": "https://yandex.ru/maps/?pt=37.9254,56.1832&z=15"
+  }
+}
+</script>
+
+</body>
+</html>
