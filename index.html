@@ -62,13 +62,17 @@ html, body {
   border-bottom: 1px solid rgba(255,255,255,.07);
 }
 #mainNav .hdr-logo {
-  text-decoration: none;
-  display: flex; align-items: center;
-  flex-shrink: 0;
+  font-family: 'Geologica', sans-serif;
+  font-size: 1.05rem; font-weight: 800;
+  color: #fff; text-decoration: none;
+  display: flex; align-items: center; gap: 10px;
+  line-height: 1; flex-shrink: 0;
 }
-#mainNav .hdr-logo img {
-  height: 44px; width: auto;
-  display: block;
+#mainNav .hdr-logo-icon {
+  width: 34px; height: 34px;
+  background: var(--forest2); border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .95rem; flex-shrink: 0;
 }
 #mainNav .hdr-links {
   display: none;
@@ -289,6 +293,7 @@ html, body {
   animation:tick 28s linear infinite;
 }
 .ticker-t span { color:#a8d8b0; margin:0 12px }
+.ticker-logo { height:22px; width:auto; vertical-align:middle; display:inline-block; margin:0 10px; border-radius:50%; }
 @keyframes tick { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 
 /* ── SECTION ── */
@@ -920,7 +925,8 @@ footer {
 <!-- HEADER -->
 <nav id="mainNav">
   <a href="#" class="hdr-logo">
-    <img src="logo.png" alt="Пэйнтлэнд Парк">
+    <span class="hdr-logo-icon">🌿</span>
+    ПЭЙНТЛЭНД ПАРК
   </a>
   <div class="hdr-links">
     <a href="#services">Услуги</a>
@@ -974,22 +980,22 @@ footer {
 <!-- TICKER -->
 <div class="ticker">
   <span class="ticker-t">
-    <span>🌿</span> ПЕЙНТБОЛ &nbsp;&nbsp;
-    <span>🌿</span> ЛАЗЕРТАГ &nbsp;&nbsp;
-    <span>🌿</span> КВАДРОЦИКЛЫ &nbsp;&nbsp;
-    <span>🌿</span> ДЖИПИНГ &nbsp;&nbsp;
-    <span>🌿</span> ТИМБИЛДИНГ &nbsp;&nbsp;
-    <span>🌿</span> ВЕРЁВОЧНЫЙ ПАРК &nbsp;&nbsp;
-    <span>🌿</span> ДНИ РОЖДЕНИЯ &nbsp;&nbsp;
-    <span>🌿</span> КОРПОРАТИВЫ &nbsp;&nbsp;
-    <span>🌿</span> ПЕЙНТБОЛ &nbsp;&nbsp;
-    <span>🌿</span> ЛАЗЕРТАГ &nbsp;&nbsp;
-    <span>🌿</span> КВАДРОЦИКЛЫ &nbsp;&nbsp;
-    <span>🌿</span> ДЖИПИНГ &nbsp;&nbsp;
-    <span>🌿</span> ТИМБИЛДИНГ &nbsp;&nbsp;
-    <span>🌿</span> ВЕРЁВОЧНЫЙ ПАРК &nbsp;&nbsp;
-    <span>🌿</span> ДНИ РОЖДЕНИЯ &nbsp;&nbsp;
-    <span>🌿</span> КОРПОРАТИВЫ &nbsp;&nbsp;
+    <img src="logo.png" alt="" class="ticker-logo"> ПЕЙНТБОЛ &nbsp;&nbsp;
+    <img src="logo.png" alt="" class="ticker-logo"> ЛАЗЕРТАГ &nbsp;&nbsp;
+    <img src="logo.png" alt="" class="ticker-logo"> КВАДРОЦИКЛЫ &nbsp;&nbsp;
+    <img src="logo.png" alt="" class="ticker-logo"> ДЖИПИНГ &nbsp;&nbsp;
+    <img src="logo.png" alt="" class="ticker-logo"> ТИМБИЛДИНГ &nbsp;&nbsp;
+    <img src="logo.png" alt="" class="ticker-logo"> ВЕРЁВОЧНЫЙ ПАРК &nbsp;&nbsp;
+    <img src="logo.png" alt="" class="ticker-logo"> ДНИ РОЖДЕНИЯ &nbsp;&nbsp;
+    <img src="logo.png" alt="" class="ticker-logo"> КОРПОРАТИВЫ &nbsp;&nbsp;
+    <img src="logo.png" alt="" class="ticker-logo"> ПЕЙНТБОЛ &nbsp;&nbsp;
+    <img src="logo.png" alt="" class="ticker-logo"> ЛАЗЕРТАГ &nbsp;&nbsp;
+    <img src="logo.png" alt="" class="ticker-logo"> КВАДРОЦИКЛЫ &nbsp;&nbsp;
+    <img src="logo.png" alt="" class="ticker-logo"> ДЖИПИНГ &nbsp;&nbsp;
+    <img src="logo.png" alt="" class="ticker-logo"> ТИМБИЛДИНГ &nbsp;&nbsp;
+    <img src="logo.png" alt="" class="ticker-logo"> ВЕРЁВОЧНЫЙ ПАРК &nbsp;&nbsp;
+    <img src="logo.png" alt="" class="ticker-logo"> ДНИ РОЖДЕНИЯ &nbsp;&nbsp;
+    <img src="logo.png" alt="" class="ticker-logo"> КОРПОРАТИВЫ &nbsp;&nbsp;
   </span>
 </div>
 
@@ -1308,7 +1314,8 @@ footer {
 <!-- FOOTER -->
 <footer>
   <div class="foot-logo">
-    <img src="logo.png" alt="Пэйнтлэнд Парк" style="height:56px;width:auto;display:block;">
+    <span class="foot-logo-dot">🌿</span>
+    ПЭЙНТЛЭНД ПАРК
   </div>
   <p class="foot-desc">Активный отдых в Подмосковье. Пейнтбол, лазертаг, квадроциклы и тимбилдинг с 2008 года.</p>
   <nav class="foot-nav">
