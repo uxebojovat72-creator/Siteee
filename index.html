@@ -62,17 +62,13 @@ html, body {
   border-bottom: 1px solid rgba(255,255,255,.07);
 }
 #mainNav .hdr-logo {
-  font-family: 'Geologica', sans-serif;
-  font-size: 1.1rem; font-weight: 800;
-  color: #fff; text-decoration: none;
-  display: flex; align-items: center; gap: 10px;
-  line-height: 1; flex-shrink: 0;
+  text-decoration: none;
+  display: flex; align-items: center;
+  flex-shrink: 0;
 }
-#mainNav .hdr-logo-icon {
-  width: 36px; height: 36px;
-  background: var(--forest2); border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1rem; flex-shrink: 0;
+#mainNav .hdr-logo img {
+  height: 44px; width: auto;
+  display: block;
 }
 #mainNav .hdr-links {
   display: none;
@@ -924,8 +920,7 @@ footer {
 <!-- HEADER -->
 <nav id="mainNav">
   <a href="#" class="hdr-logo">
-    <span class="hdr-logo-icon">🌿</span>
-    ПЭЙНТЛЭНД
+    <img src="logo.png" alt="Пэйнтлэнд Парк">
   </a>
   <div class="hdr-links">
     <a href="#services">Услуги</a>
@@ -1313,8 +1308,7 @@ footer {
 <!-- FOOTER -->
 <footer>
   <div class="foot-logo">
-    <span class="foot-logo-dot">🌿</span>
-    ПЭЙНТЛЭНД ПАРК
+    <img src="logo.png" alt="Пэйнтлэнд Парк" style="height:56px;width:auto;display:block;">
   </div>
   <p class="foot-desc">Активный отдых в Подмосковье. Пейнтбол, лазертаг, квадроциклы и тимбилдинг с 2008 года.</p>
   <nav class="foot-nav">
