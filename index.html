@@ -119,20 +119,7 @@ nav.scrolled {
   border:none;
 }
 
-.nav-links { display:none; align-items:center; gap:6px }
-.nav-links a {
-  font-family:'Geologica', sans-serif; font-size:.8rem; font-weight:600;
-  color:rgba(255,255,255,.7); text-decoration:none; padding:7px 14px;
-  border-radius:10px; transition:color .2s, background .2s;
-}
-.nav-links a:hover { color:#fff; background:rgba(255,255,255,.1) }
-.nav-links .cta {
-  background:var(--terra); color:#fff !important;
-  padding:9px 20px; border-radius:var(--r);
-}
-.nav-links .cta:hover { background:var(--terra2) }
-@media(min-width:768px) { .burger{display:none} .nav-links{display:flex} .nav-phone{display:none} }
-@media(max-width:767px) { .nav-phone{display:none} }
+@media(min-width:768px) { .nav-phone{display:none} }
 
 /* ── HERO ── */
 .hero {
@@ -914,13 +901,6 @@ footer {
     <span class="logo-icon">🌿</span>
     ПЭЙНТЛЭНД
   </a>
-  <div class="nav-links">
-    <a href="#services">Услуги</a>
-    <a href="#prices">Цены</a>
-    <a href="#locations">Парки</a>
-    <a href="#contacts">Контакты</a>
-    <a href="#booking" class="cta">Забронировать</a>
-  </div>
   <button class="burger" id="burger"><span></span><span></span><span></span></button>
 </nav>
 
