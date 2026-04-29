@@ -46,43 +46,39 @@ html, body {
   -webkit-font-smoothing:antialiased;
 }
 
-/* ── NAV ── */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 600;
+/* ═══ HEADER ═══ */
+#mainNav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 999;
   height: 64px;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 24px;
-  background: transparent;
-  transition: background .3s, box-shadow .3s;
-}
-nav.scrolled {
-  background: rgba(18, 34, 24, .95);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  background: rgba(16, 30, 20, .9);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
-  box-shadow: 0 2px 20px rgba(0,0,0,.3);
+  border-bottom: 1px solid rgba(255,255,255,.07);
 }
-.logo {
+#mainNav .hdr-logo {
   font-family: 'Geologica', sans-serif;
-  font-size: 1.05rem; font-weight: 800;
+  font-size: 1.1rem; font-weight: 800;
   color: #fff; text-decoration: none;
-  display: flex; align-items: center; gap: 10px; line-height: 1;
-  flex-shrink: 0;
+  display: flex; align-items: center; gap: 10px;
+  line-height: 1; flex-shrink: 0;
 }
-.logo-icon {
+#mainNav .hdr-logo-icon {
   width: 36px; height: 36px;
-  background: var(--forest2);
-  border-radius: 10px;
+  background: var(--forest2); border-radius: 10px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 1.05rem; flex-shrink: 0;
+  font-size: 1rem; flex-shrink: 0;
 }
-
-/* desktop links */
-.nav-links {
+#mainNav .hdr-links {
   display: none;
-  align-items: center;
-  gap: 4px;
+  align-items: center; gap: 4px;
 }
-.nav-links a {
+#mainNav .hdr-links a {
   font-family: 'Geologica', sans-serif;
   font-size: .82rem; font-weight: 600;
   color: rgba(255,255,255,.75);
@@ -90,79 +86,65 @@ nav.scrolled {
   padding: 8px 14px; border-radius: 10px;
   transition: color .2s, background .2s;
 }
-.nav-links a:hover { color: #fff; background: rgba(255,255,255,.1); }
-.nav-cta {
+#mainNav .hdr-links a:hover { color: #fff; background: rgba(255,255,255,.1); }
+#mainNav .hdr-cta {
+  display: none;
   font-family: 'Geologica', sans-serif;
   font-size: .82rem; font-weight: 700;
   background: var(--terra); color: #fff;
   padding: 9px 20px; border-radius: 20px;
-  text-decoration: none;
+  text-decoration: none; flex-shrink: 0;
   transition: background .2s, transform .15s;
-  flex-shrink: 0;
 }
-.nav-cta:hover { background: var(--terra2); transform: translateY(-1px); }
-
-/* burger — mobile only */
-.burger {
+#mainNav .hdr-cta:hover { background: var(--terra2); transform: translateY(-1px); }
+#mainNav .hdr-burger {
   width: 44px; height: 44px;
-  display: flex; flex-direction: column;
+  display: flex;
+  flex-direction: column;
   justify-content: center; align-items: center; gap: 6px;
   cursor: pointer; background: none; border: none;
   -webkit-tap-highlight-color: transparent;
-  border-radius: 12px;
-  transition: background .2s;
+  border-radius: 12px; transition: background .2s;
 }
-.burger:hover { background: rgba(255,255,255,.1); }
-.burger span {
+#mainNav .hdr-burger:hover { background: rgba(255,255,255,.1); }
+#mainNav .hdr-burger span {
   display: block; width: 22px; height: 2px;
   background: #fff; border-radius: 2px; transition: .25s;
 }
-.burger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-.burger.open span:nth-child(2) { opacity: 0; }
-.burger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-
-/* drawer */
-.drawer {
-  position: fixed; top: 64px; left: 0; right: 0; z-index: 590;
-  background: rgba(18, 34, 24, .98);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+#mainNav .hdr-burger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+#mainNav .hdr-burger.open span:nth-child(2) { opacity: 0; }
+#mainNav .hdr-burger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+.hdr-drawer {
+  position: fixed;
+  top: 64px; left: 0; right: 0; z-index: 998;
+  background: rgba(16, 30, 20, .98);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
   max-height: 0; overflow: hidden;
   transition: max-height .35s cubic-bezier(.4,0,.2,1);
 }
-.drawer.open { max-height: 440px; }
-.drawer a {
+.hdr-drawer.open { max-height: 440px; }
+.hdr-drawer a {
   display: block;
   font-family: 'Geologica', sans-serif;
   font-size: .95rem; font-weight: 600;
-  color: rgba(255,255,255,.72);
-  text-decoration: none;
-  padding: 17px 28px;
-  border-bottom: 1px solid rgba(255,255,255,.06);
+  color: rgba(255,255,255,.75); text-decoration: none;
+  padding: 17px 28px; border-bottom: 1px solid rgba(255,255,255,.07);
   transition: color .15s, background .15s;
 }
-.drawer a:hover { color: #fff; background: rgba(255,255,255,.05); }
-.drawer .d-cta {
+.hdr-drawer a:hover { color: #fff; background: rgba(255,255,255,.05); }
+.hdr-drawer .hdr-drawer-cta {
   display: block;
-  margin: 16px 24px 22px;
-  padding: 15px 24px;
-  background: var(--terra); color: #fff !important;
+  margin: 16px 24px 22px; padding: 15px 24px;
+  background: var(--terra); color: #fff;
   border-radius: var(--r); text-align: center;
   font-family: 'Geologica', sans-serif;
-  font-size: .9rem; font-weight: 700;
-  text-decoration: none;
+  font-size: .9rem; font-weight: 700; text-decoration: none;
 }
-
-/* mobile: hide desktop elements */
-.nav-links { display: none; }
-.nav-cta { display: none; }
-
-/* desktop */
 @media (min-width: 768px) {
-  .nav-links { display: flex; }
-  .nav-cta { display: inline-flex; align-items: center; }
-  .burger { display: none; }
-  nav { padding: 0 40px; }
+  #mainNav { padding: 0 48px; }
+  #mainNav .hdr-links { display: flex; }
+  #mainNav .hdr-cta { display: inline-flex; align-items: center; }
+  #mainNav .hdr-burger { display: none; }
 }
 
 /* ── HERO ── */
@@ -939,28 +921,28 @@ footer {
 </head>
 <body>
 
-<!-- NAV -->
+<!-- HEADER -->
 <nav id="mainNav">
-  <a href="#" class="logo">
-    <span class="logo-icon">🌿</span>
+  <a href="#" class="hdr-logo">
+    <span class="hdr-logo-icon">🌿</span>
     ПЭЙНТЛЭНД
   </a>
-  <div class="nav-links">
+  <div class="hdr-links">
     <a href="#services">Услуги</a>
     <a href="#prices">Цены</a>
     <a href="#locations">Парки</a>
     <a href="#contacts">Контакты</a>
   </div>
-  <a href="#booking" class="nav-cta" id="navCta">Забронировать</a>
-  <button class="burger" id="burger"><span></span><span></span><span></span></button>
+  <a href="#booking" class="hdr-cta">Забронировать</a>
+  <button class="hdr-burger" id="burger"><span></span><span></span><span></span></button>
 </nav>
 
-<div class="drawer" id="drawer">
-  <a href="#services" class="drawer-link">Услуги</a>
-  <a href="#prices" class="drawer-link">Цены</a>
-  <a href="#locations" class="drawer-link">Парки</a>
-  <a href="#contacts" class="drawer-link">Контакты</a>
-  <a href="#booking" class="d-cta">Забронировать игру</a>
+<div class="hdr-drawer" id="drawer">
+  <a href="#services">Услуги</a>
+  <a href="#prices">Цены</a>
+  <a href="#locations">Парки</a>
+  <a href="#contacts">Контакты</a>
+  <a href="#booking" class="hdr-drawer-cta">Забронировать игру</a>
 </div>
 
 <!-- HERO -->
@@ -1349,13 +1331,7 @@ footer {
 </footer>
 
 <script>
-// Nav scroll
-const mainNav = document.getElementById('mainNav');
-window.addEventListener('scroll', () => {
-  mainNav.classList.toggle('scrolled', window.scrollY > 40);
-}, { passive:true });
-
-// Burger
+// Burger menu
 const burger = document.getElementById('burger');
 const drawer = document.getElementById('drawer');
 burger.addEventListener('click', () => {
@@ -1365,7 +1341,6 @@ burger.addEventListener('click', () => {
 drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
   drawer.classList.remove('open');
   burger.classList.remove('open');
-  document.body.style.overflow = '';
 }));
 document.addEventListener('click', e => {
   if (!burger.contains(e.target) && !drawer.contains(e.target)) {
