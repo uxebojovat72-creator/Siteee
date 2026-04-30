@@ -46,7 +46,7 @@
         .sw-box { background: var(--bg2); padding: 4px; border-radius: 100px; display: inline-flex; width: 100%; max-width: 450px; margin-bottom: 15px; border: 1px solid var(--border); }
         .sw-btn { flex: 1; padding: 10px; border-radius: 100px; border: none; font-family: 'Geologica', sans-serif; font-size: 11px; font-weight: 700; color: var(--muted); background: none; cursor: pointer; transition: 0.2s; text-transform: uppercase; }
         .sw-btn.active { background: var(--forest); color: #fff; }
-        .sw-btn.active.wk { background: var(--terra); }
+        .sw-btn.active.we { background: var(--terra); }
 
         /* PRICE CARDS */
         .price-list { display: grid; grid-template-columns: 1fr; gap: 12px; }
@@ -96,13 +96,13 @@
 </div>
 
 <nav class="snav-bar">
-    <button class="snav active" onclick="jump('lasertag')">Лазертаг</button>
-    <button class="snav" onclick="jump('paintball')">Пейнтбол</button>
-    <button class="snav" onclick="jump('teambuilding')">Тимбилдинг</button>
-    <button class="snav" onclick="jump('quads')">Квадроциклы</button>
-    <button class="snav" onclick="jump('jeeping')">Джиппинг</button>
-    <button class="snav" onclick="jump('winter')">Зимние</button>
-    <button class="snav" onclick="jump('schools')">Школам</button>
+    <button class="snav active" data-target="lasertag" onclick="jump('lasertag')">Лазертаг</button>
+    <button class="snav" data-target="paintball" onclick="jump('paintball')">Пейнтбол</button>
+    <button class="snav" data-target="teambuilding" onclick="jump('teambuilding')">Тимбилдинг</button>
+    <button class="snav" data-target="quads" onclick="jump('quads')">Квадроциклы</button>
+    <button class="snav" data-target="jeeping" onclick="jump('jeeping')">Джиппинг</button>
+    <button class="snav" data-target="winter" onclick="jump('winter')">Зимние</button>
+    <button class="snav" data-target="schools" onclick="jump('schools')">Школам</button>
 </nav>
 
 <!-- ЛАЗЕРТАГ -->
@@ -292,8 +292,9 @@ function renderList(id, type = 'wk') {
 }
 
 function setDay(id, type, btn) {
-    btn.parentElement.querySelectorAll('.sw-btn').forEach(b => b.classList.remove('active'));
+    btn.parentElement.querySelectorAll('.sw-btn').forEach(b => b.classList.remove('active', 'we'));
     btn.classList.add('active');
+    if (type === 'we') btn.classList.add('we');
     renderList(id, type);
 }
 
@@ -332,6 +333,21 @@ window.onload = () => {
     renderList('winter', 'wk');
     setSchool(0, document.querySelector('#schools .sw-btn'));
 };
+
+// Scrollspy
+const snavBtns = document.querySelectorAll('.snav[data-target]');
+const spySections = ['lasertag','paintball','teambuilding','quads','jeeping','winter','schools'];
+const scrollObs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const id = entry.target.id;
+            snavBtns.forEach(b => b.classList.toggle('active', b.dataset.target === id));
+            const activeBtn = document.querySelector(`.snav[data-target="${id}"]`);
+            if (activeBtn) activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+    });
+}, { rootMargin: '-120px 0px -55% 0px', threshold: 0 });
+spySections.forEach(id => { const el = document.getElementById(id); if (el) scrollObs.observe(el); });
 </script>
 </body>
 </html>
