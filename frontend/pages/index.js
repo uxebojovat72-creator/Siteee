@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 
@@ -7,6 +7,16 @@ const TICKER_ITEMS = ['ПЕЙНТБОЛ','ЛАЗЕРТАГ','КВАДРОЦИК�
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [activePark, setActivePark] = useState('bukhta')
+  const [form, setForm] = useState({ name:'', phone:'', date:'', people:'', park:'Бухта Радости', activity:'Пейнтбол' })
+  const [formStatus, setFormStatus] = useState(null)
+  const [chatInput, setChatInput] = useState('')
+  const [bubbles, setBubbles] = useState([
+    { type:'in',  text:'Привет! Хочу организовать день рождения 🎉' },
+    { type:'out', text:'Привет! Сколько гостей и какой возраст детей?' },
+    { type:'in',  text:'10 детей, 7–10 лет, суббота 3 мая' },
+    { type:'out', text:'Отлично! Для этого возраста идеально подойдёт лазертаг или кидбол. Забронируем? ✅' },
+  ])
+  const bubblesRef = useRef(null)
 
   useEffect(() => {
     const io = new IntersectionObserver(
@@ -29,7 +39,26 @@ export default function Home() {
     return () => document.removeEventListener('click', close)
   }, [menuOpen])
 
+  useEffect(() => {
+    if (bubblesRef.current) bubblesRef.current.scrollTop = bubblesRef.current.scrollHeight
+  }, [bubbles])
+
   const closeMenu = () => setMenuOpen(false)
+
+  const sendChat = () => {
+    const v = chatInput.trim()
+    if (!v) return
+    setBubbles(prev => [...prev, { type:'in', text: v }])
+    setChatInput('')
+    const replies = ['Спасибо! Свяжемся в ближайшее время 😊','Хорошо, уточним детали!','Ждём вас в парке! 🌿']
+    setTimeout(() => setBubbles(prev => [...prev, { type:'out', text: replies[Math.floor(Math.random()*replies.length)] }]), 900)
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setFormStatus('loading')
+    setTimeout(() => setFormStatus('ok'), 1200)
+  }
 
   return (
     <>
@@ -329,6 +358,163 @@ export default function Home() {
           </div>
         </div>
       </section>
+      {/* ── BOOKING ── */}
+      <section className="s" id="booking" style={{ background:'var(--white)' }}>
+        <div className="s-eyebrow rv">Бронирование</div>
+        <h2 className="s-h rv">Оставить заявку</h2>
+        <div className="book-vis rv">
+          <div className="book-photo" />
+          <div className="book-deco">БРОНЬ</div>
+          <div className="book-pill">⚡ Ответим за 15 минут</div>
+        </div>
+        {formStatus === 'ok' ? (
+          <div className="rv" style={{ textAlign:'center', padding:'32px 0' }}>
+            <div style={{ fontSize:'2.5rem', marginBottom:12 }}>✅</div>
+            <div style={{ fontFamily:'Geologica,sans-serif', fontWeight:700, fontSize:'1.1rem', color:'var(--forest)' }}>Заявка принята!</div>
+            <p style={{ color:'var(--muted)', marginTop:8, fontSize:'.85rem' }}>Мы свяжемся с вами в ближайшее время.</p>
+          </div>
+        ) : (
+          <form className="rv" onSubmit={handleSubmit}>
+            <div className="form-g">
+              <div className="fi">
+                <label>Имя</label>
+                <input type="text" placeholder="Иван Петров" value={form.name} onChange={e => setForm(f=>({...f,name:e.target.value}))} required />
+              </div>
+              <div className="fi">
+                <label>Телефон</label>
+                <input type="tel" placeholder="+7 (999) 000-00-00" value={form.phone} onChange={e => setForm(f=>({...f,phone:e.target.value}))} required />
+              </div>
+              <div className="fi">
+                <label>Дата</label>
+                <input type="date" value={form.date} onChange={e => setForm(f=>({...f,date:e.target.value}))} />
+              </div>
+              <div className="fi">
+                <label>Человек</label>
+                <input type="number" placeholder="10" min="2" value={form.people} onChange={e => setForm(f=>({...f,people:e.target.value}))} />
+              </div>
+              <div className="fi">
+                <label>Площадка</label>
+                <select value={form.park} onChange={e => setForm(f=>({...f,park:e.target.value}))}>
+                  <option>Бухта Радости</option>
+                  <option>Парк Софрино</option>
+                  <option>Выезд на объект</option>
+                </select>
+              </div>
+              <div className="fi">
+                <label>Активность</label>
+                <select value={form.activity} onChange={e => setForm(f=>({...f,activity:e.target.value}))}>
+                  <option>Пейнтбол</option><option>Лазертаг</option><option>Квадроциклы</option>
+                  <option>Джипинг / УАЗ</option><option>Тимбилдинг</option><option>День рождения</option>
+                </select>
+              </div>
+              <div className="fi full">
+                <button type="submit" className="btn-main" style={{ width:'100%', textAlign:'center', fontSize:'.88rem', padding:14 }} disabled={formStatus==='loading'}>
+                  {formStatus==='loading' ? 'Отправляем...' : 'Отправить заявку →'}
+                </button>
+                <p style={{ fontSize:'.65rem', color:'var(--muted)', marginTop:8, textAlign:'center' }}>После подтверждения — ссылка на онлайн-оплату</p>
+              </div>
+            </div>
+          </form>
+        )}
+      </section>
+
+      {/* ── CHAT ── */}
+      <section className="chat-bg s">
+        <div className="s-eyebrow rv">Онлайн-поддержка</div>
+        <h2 className="s-h rv">Напишите нам</h2>
+        <p style={{ marginTop:12, fontSize:'.85rem', color:'var(--muted)', lineHeight:1.75, maxWidth:340 }} className="rv">Поможем выбрать программу и рассчитаем стоимость для вашей группы.</p>
+        <div className="chat-box rv">
+          <div className="chat-head">
+            <div className="chat-dot" />
+            <div><div className="chat-nm">Пэйнтлэнд Парк</div><div className="chat-st">онлайн · отвечаем быстро</div></div>
+          </div>
+          <div className="bubbles" ref={bubblesRef}>
+            {bubbles.map((b, i) => <div key={i} className={`bub ${b.type}`}>{b.text}</div>)}
+          </div>
+          <div className="chat-inp">
+            <input type="text" placeholder="Напишите сообщение..." value={chatInput} onChange={e => setChatInput(e.target.value)} onKeyDown={e => e.key==='Enter' && sendChat()} />
+            <button className="chat-send" onClick={sendChat}>→</button>
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA ── */}
+      <div className="cta-s">
+        <div className="cta-photo" />
+        <div className="cta-in">
+          <div className="cta-badge">🎂 Специальное предложение</div>
+          <div className="cta-h rv">
+            Именинникам<br />
+            <span className="hl">скидка 50%</span><br />
+            <span className="dm">на пейнтбол</span>
+          </div>
+          <a href="#booking" className="btn-main" style={{ display:'inline-block', marginTop:28, padding:'14px 40px' }}>Хочу скидку →</a>
+        </div>
+      </div>
+
+      {/* ── FAQ ── */}
+      <section className="s" style={{ background:'var(--white)' }}>
+        <div className="s-eyebrow rv">Вопросы</div>
+        <h2 className="s-h rv">Часто спрашивают</h2>
+        <div className="rv" style={{ marginTop:20 }}>
+          {[
+            ['Со скольки лет можно играть в пейнтбол?', 'С 12 лет в присутствии родителей. Для младших — лазертаг (от 5 лет) и кидбол.'],
+            ['Нужно привозить своё снаряжение?', 'Нет — всё необходимое предоставляется. Экипировка и инвентарь включены в стоимость пакета.'],
+            ['Можно организовать корпоратив с выездом?', 'Да! Выезжаем на вашу территорию: дача, парк, офис, школа. Обсудим детали при бронировании.'],
+            ['Как оплатить? Есть онлайн-оплата?', 'После подтверждения заявки присылаем ссылку на оплату. Принимаем карты, СБП и наличные на месте.'],
+            ['Как получить скидку 50% именинникам?', 'Сообщите о дне рождения при бронировании — именинник получает скидку 50% на пейнтбол и лазертаг.'],
+          ].map(([q, a]) => (
+            <details className="fq" key={q}>
+              <summary>{q}</summary>
+              <div className="fq-body">{a}</div>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      {/* ── CONTACTS ── */}
+      <section className="s" id="contacts" style={{ background:'var(--bg2)' }}>
+        <div className="s-eyebrow rv">Контакты</div>
+        <h2 className="s-h rv">Как с нами связаться</h2>
+        <div className="cc-g">
+          {[
+            { icon:'📞', label:'Телефон 1', val:'+7 (925) 010-85-35', sub:'Бухта Радости' },
+            { icon:'📞', label:'Телефон 2', val:'+7 (985) 643-68-88', sub:'Парк Софрино' },
+            { icon:'✉️', label:'Email',     val:'info888@plpark.ru',  sub:'Пишите нам', small:true },
+            { icon:'🕐', label:'Работаем', val:'Ежедневно',           sub:'09:00 – 21:00' },
+          ].map(({ icon, label, val, sub, small }) => (
+            <div className="cc rv" key={label}>
+              <div className="cc-icon">{icon}</div>
+              <div className="cc-l">{label}</div>
+              <div className="cc-v" style={small ? { fontSize:'.75rem' } : {}}>{val}</div>
+              <div className="cc-s">{sub}</div>
+            </div>
+          ))}
+        </div>
+        <a href="https://paintballclub.ru/contacts/" target="_blank" rel="noreferrer" className="btn-sec" style={{ display:'inline-block', marginTop:20, borderColor:'var(--forest)', color:'var(--forest)' }}>
+          Смотреть на карте →
+        </a>
+      </section>
+
+      {/* ── FOOTER ── */}
+      <footer>
+        <div className="foot-logo">
+          <img src="/logo.png" alt="Логотип" className="foot-logo-img" />
+          ПЭЙНТЛЭНД ПАРК
+        </div>
+        <p className="foot-desc">Активный отдых в Подмосковье. Пейнтбол, лазертаг, квадроциклы и тимбилдинг с 2008 года.</p>
+        <nav className="foot-nav">
+          <a href="#">Главная</a>
+          <a href="#services">Услуги</a>
+          <a href="#prices">Цены</a>
+          <a href="#booking">Бронирование</a>
+          <a href="#contacts">Контакты</a>
+        </nav>
+        <div className="foot-bot">
+          <span>© 2026 Пэйнтлэнд Парк</span>
+          <span>Актуально на апрель 2026</span>
+        </div>
+      </footer>
     </>
   )
 }
