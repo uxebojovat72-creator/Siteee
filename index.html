@@ -697,6 +697,33 @@ footer {
   gap:6px; font-size:.65rem; color:rgba(255,255,255,.25);
 }
 
+/* ── PRICES ALL LINK ── */
+.prices-all {
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:28px; padding:20px 24px; border-radius:var(--r2);
+  background:linear-gradient(135deg, var(--forest) 0%, var(--forest2) 100%);
+  text-decoration:none; color:#fff;
+  box-shadow:0 8px 32px rgba(45,90,61,.25);
+  transition:transform .2s, box-shadow .2s;
+}
+.prices-all:hover { transform:translateY(-3px); box-shadow:0 16px 48px rgba(45,90,61,.35) }
+.prices-all-tag {
+  font-size:.6rem; font-weight:700; letter-spacing:2px;
+  text-transform:uppercase; color:rgba(255,255,255,.6); margin-bottom:5px;
+}
+.prices-all-title {
+  font-family:'Geologica', sans-serif;
+  font-size:1.0rem; font-weight:800; color:#fff;
+}
+.prices-all-sub {
+  font-size:.74rem; color:rgba(255,255,255,.6); margin-top:3px; line-height:1.5;
+}
+.prices-all-arr {
+  font-size:1.6rem; color:rgba(255,255,255,.6); flex-shrink:0;
+  transition:transform .2s;
+}
+.prices-all:hover .prices-all-arr { transform:translateX(5px) }
+
 /* ── REVEAL ── */
 .rv { opacity:0; transform:translateY(20px); transition:.55s ease }
 .rv.on { opacity:1; transform:translateY(0) }
@@ -1093,6 +1120,14 @@ footer {
       <a href="#booking" class="btn-main" style="display:block;text-align:center">Записаться</a>
     </div>
   </div>
+  <a href="prices.html" class="prices-all rv">
+    <div>
+      <div class="prices-all-tag">Полный прайс-лист</div>
+      <div class="prices-all-title">Все программы и цены на услуги</div>
+      <div class="prices-all-sub">Лазертаг, пейнтбол, тимбилдинг, квадроциклы, джипинг, зимние активности и спецпредложения школам</div>
+    </div>
+    <div class="prices-all-arr">→</div>
+  </a>
 </section>
 
 <!-- GALLERY -->
