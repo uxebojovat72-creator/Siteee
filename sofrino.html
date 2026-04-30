@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Парк Софрино — Пэйнтлэнд Парк | Пейнтбол и активный отдых</title>
+<meta name="description" content="Пейнтбол, лазертаг, квадроциклы и активный отдых в Пушкинском районе Подмосковья. Лесные трассы, заброшенное здание для игр, хаски. Работаем круглый год.">
+<meta name="robots" content="index, follow">
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@300;400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      #f7f4ef;
+  --bg2:     #efeae1;
+  --white:   #ffffff;
+  --forest:  #2d5a3d;
+  --forest2: #3d7a52;
+  --moss:    #5a8a6a;
+  --terra:   #d4622a;
+  --terra2:  #e8824a;
+  --dark:    #1a2e22;
+  --text:    #2c3a2e;
+  --muted:   #7a8c7e;
+  --border:  rgba(45,90,61,0.12);
+  --shadow:  0 4px 24px rgba(45,90,61,0.10);
+  --shadow2: 0 12px 48px rgba(45,90,61,0.15);
+  --r:       16px;
+  --r2:      24px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html { scroll-behavior: smooth; }
+html, body {
+  overflow-x: hidden; width: 100%;
+  background: var(--bg); color: var(--text);
+  font-family: 'Manrope', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ═══ HEADER ═══ */
+#mainNav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+  height: 64px; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 20px;
+  background: rgba(16,30,20,.9);
+  backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+.hdr-logo {
+  font-family: 'Geologica', sans-serif; font-size: 1.05rem; font-weight: 800;
+  color: #fff; text-decoration: none;
+  display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+}
+.hdr-logo-img { height: 38px; width: auto; display: block; flex-shrink: 0; }
+.hdr-links { display: none; align-items: center; gap: 4px; }
+.hdr-links a {
+  font-family: 'Geologica', sans-serif; font-size: .82rem; font-weight: 600;
+  color: rgba(255,255,255,.75); text-decoration: none;
+  padding: 8px 14px; border-radius: 10px;
+  transition: color .2s, background .2s;
+}
+.hdr-links a:hover { color: #fff; background: rgba(255,255,255,.1); }
+.hdr-back {
+  display: none; font-family: 'Geologica', sans-serif;
+  font-size: .82rem; font-weight: 700;
+  color: rgba(255,255,255,.8); text-decoration: none;
+  padding: 8px 18px; border-radius: 100px;
+  border: 1.5px solid rgba(255,255,255,.25);
+  transition: color .2s, background .2s, border-color .2s; flex-shrink: 0;
+}
+.hdr-back:hover { color: #fff; background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.5); }
+.hdr-burger {
+  width: 44px; height: 44px; display: flex; flex-direction: column;
+  justify-content: center; align-items: center; gap: 6px;
+  cursor: pointer; background: none; border: none;
+  border-radius: 12px; transition: background .2s;
+}
+.hdr-burger:hover { background: rgba(255,255,255,.1); }
+.hdr-burger span { display: block; width: 22px; height: 2px; background: #fff; border-radius: 2px; transition: .25s; }
+.hdr-burger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.hdr-burger.open span:nth-child(2) { opacity: 0; }
+.hdr-burger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+.hdr-drawer {
+  position: fixed; top: 64px; left: 0; right: 0; z-index: 998;
+  background: rgba(16,30,20,.98); backdrop-filter: blur(20px);
+  max-height: 0; overflow: hidden;
+  transition: max-height .35s cubic-bezier(.4,0,.2,1);
+}
+.hdr-drawer.open { max-height: 480px; }
+.hdr-drawer a {
+  display: block; font-family: 'Geologica', sans-serif;
+  font-size: .9rem; font-weight: 600;
+  color: rgba(255,255,255,.8); text-decoration: none;
+  padding: 16px 24px; border-bottom: 1px solid rgba(255,255,255,.06);
+  transition: color .15s, background .15s;
+}
+.hdr-drawer a:hover { color: #fff; background: rgba(255,255,255,.05); }
+.hdr-drawer .drawer-back { color: rgba(255,255,255,.45); font-size: .82rem; }
+.hdr-drawer .drawer-cta {
+  display: block; margin: 16px 20px 20px;
+  background: var(--terra); color: #fff; border-radius: var(--r);
+  text-align: center; font-family: 'Geologica', sans-serif;
+  font-size: .88rem; font-weight: 700; padding: 14px; text-decoration: none;
+}
+@media(min-width: 768px) {
+  #mainNav { padding: 0 48px; }
+  .hdr-links { display: flex; }
+  .hdr-back { display: inline-flex; align-items: center; }
+  .hdr-burger { display: none; }
+}
+
+/* ═══ HERO ═══ */
+.hero {
+  min-height: 100svh; position: relative;
+  display: flex; flex-direction: column; overflow: hidden;
+}
+.hero-img {
+  position: absolute; inset: 0;
+  background: url('photo_uaz.jpg') center 45%/cover;
+  filter: brightness(.38) saturate(.85);
+  transform: scale(1.05);
+  animation: hzoom 14s ease-out forwards;
+}
+@keyframes hzoom { from { transform: scale(1.05) } to { transform: scale(1) } }
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0,0,0,.05) 0%,
+    rgba(10,22,15,.05) 20%,
+    rgba(10,22,15,.5) 60%,
+    rgba(10,22,15,.97) 100%
+  );
+}
+.hero-content {
+  position: relative; z-index: 2;
+  margin-top: auto; padding: 0 22px 52px; padding-top: 120px;
+}
+.hero-breadcrumb {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 18px; flex-wrap: wrap;
+}
+.hero-breadcrumb a {
+  font-family: 'Geologica', sans-serif; font-size: .65rem; font-weight: 600;
+  color: rgba(255,255,255,.45); text-decoration: none; letter-spacing: 1px; transition: color .2s;
+}
+.hero-breadcrumb a:hover { color: rgba(255,255,255,.75); }
+.hero-breadcrumb span { color: rgba(255,255,255,.25); font-size: .65rem; }
+.hero-breadcrumb .current { color: rgba(255,255,255,.6); font-size: .65rem; font-family: 'Geologica', sans-serif; font-weight: 600; letter-spacing: 1px; }
+.hero-tag { display: inline-flex; align-items: center; gap: 9px; margin-bottom: 16px; }
+.hero-tag-dot {
+  width: 7px; height: 7px; background: #a8d8b0; border-radius: 50%; flex-shrink: 0;
+  box-shadow: 0 0 10px rgba(168,216,176,.8); animation: pulse 2.2s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+.hero-tag-txt {
+  font-family: 'Geologica', sans-serif; font-size: .63rem; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,.65);
+}
+.hero-title {
+  font-family: 'Geologica', sans-serif; font-weight: 900; line-height: .92; color: #fff;
+  font-size: clamp(2.8rem, 12vw, 6.5rem);
+}
+.hero-title em { font-style: normal; color: #a8d8b0; display: block; }
+.hero-sub {
+  display: block; font-size: clamp(1rem, 4vw, 2rem);
+  font-weight: 400; color: rgba(255,255,255,.45); margin-top: 8px; letter-spacing: .01em;
+}
+.hero-desc {
+  margin-top: 16px; font-size: .86rem; line-height: 1.75;
+  color: rgba(255,255,255,.55); max-width: 400px;
+}
+.hero-btns { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 24px; }
+.btn-main {
+  font-family: 'Geologica', sans-serif; font-size: .86rem; font-weight: 700;
+  background: var(--terra); color: #fff; padding: 14px 28px; border-radius: var(--r);
+  text-decoration: none; display: inline-block;
+  transition: transform .15s, box-shadow .15s, background .2s;
+}
+.btn-main:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(212,98,42,.45); background: var(--terra2); }
+.btn-sec {
+  font-family: 'Geologica', sans-serif; font-size: .86rem; font-weight: 600;
+  border: 1.5px solid rgba(255,255,255,.28); color: #fff;
+  padding: 14px 24px; border-radius: var(--r); text-decoration: none; display: inline-block;
+  transition: background .2s, border-color .2s;
+}
+.btn-sec:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.45); }
+.hero-stats { display: flex; gap: 0; margin-top: 32px; border-top: 1px solid rgba(255,255,255,.1); padding-top: 24px; }
+.hs { flex: 1; text-align: center; position: relative; }
+.hs:not(:last-child)::after {
+  content: ''; position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+  width: 1px; height: 28px; background: rgba(255,255,255,.15);
+}
+.hs-n { font-family: 'Geologica', sans-serif; font-size: 1.9rem; font-weight: 800; color: #fff; line-height: 1; }
+.hs-l { font-size: .5rem; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,.4); margin-top: 5px; }
+
+@media(min-width: 640px) { .hero-content { padding: 40px 40px 56px; } }
+@media(min-width: 960px) { .hero-content { padding: 48px 60px 64px; } }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav id="mainNav">
+  <a href="index.html" class="hdr-logo">
+    <img src="logo.png" alt="Логотип" class="hdr-logo-img">
+    ПЭЙНТЛЭНД ПАРК
+  </a>
+  <div class="hdr-links">
+    <a href="index.html#services">Услуги</a>
+    <a href="prices.html">Цены</a>
+    <a href="index.html#locations">Парки</a>
+    <a href="index.html#contacts">Контакты</a>
+  </div>
+  <a href="index.html" class="hdr-back">← На главную</a>
+  <button class="hdr-burger" id="burger"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="hdr-drawer" id="drawer">
+  <a href="index.html" class="drawer-back">← На главную</a>
+  <a href="index.html#services">Услуги</a>
+  <a href="prices.html">Цены</a>
+  <a href="index.html#locations">Парки</a>
+  <a href="index.html#contacts">Контакты</a>
+  <a href="index.html#booking" class="drawer-cta">Забронировать игру</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-img"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-breadcrumb">
+      <a href="index.html">Главная</a>
+      <span>›</span>
+      <a href="index.html#locations">Наши парки</a>
+      <span>›</span>
+      <span class="current">Парк Софрино</span>
+    </div>
+    <div class="hero-tag">
+      <div class="hero-tag-dot"></div>
+      <span class="hero-tag-txt">Пушкинский район · Круглый год</span>
+    </div>
+    <h1 class="hero-title">
+      ПАРК
+      <em>СОФРИНО</em>
+      <span class="hero-sub">экстрим в лесных угодьях</span>
+    </h1>
+    <p class="hero-desc">Пейнтбол, лазертаг, квадроциклы и авторские трассы в Пушкинском районе. Уникальная площадка с заброшенным зданием и лесными полями — работаем круглый год.</p>
+    <div class="hero-btns">
+      <a href="index.html#booking" class="btn-main">Забронировать →</a>
+      <a href="#activities" class="btn-sec">Активности</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hs"><div class="hs-n">60</div><div class="hs-l">игроков макс.</div></div>
+      <div class="hs"><div class="hs-n">12+</div><div class="hs-l">сценариев</div></div>
+      <div class="hs"><div class="hs-n">365</div><div class="hs-l">дней в году</div></div>
+    </div>
+  </div>
+</section>
+
+<script>
+const burger = document.getElementById('burger');
+const drawer = document.getElementById('drawer');
+burger.addEventListener('click', () => {
+  const o = drawer.classList.toggle('open');
+  burger.classList.toggle('open', o);
+});
+drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  drawer.classList.remove('open');
+  burger.classList.remove('open');
+}));
+document.addEventListener('click', e => {
+  if (!burger.contains(e.target) && !drawer.contains(e.target)) {
+    drawer.classList.remove('open');
+    burger.classList.remove('open');
+  }
+});
+</script>
+
+</body>
+</html>
