@@ -213,6 +213,204 @@ html, body {
 @media(min-width: 960px) {
   .hero-content { padding: 48px 60px 64px; }
 }
+
+/* ═══ SECTIONS ═══ */
+.s { padding: 60px 22px; }
+.s-eyebrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: .65rem; font-weight: 700; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--moss); margin-bottom: 10px;
+}
+.s-eyebrow::before { content: ''; width: 16px; height: 2px; background: var(--forest); border-radius: 2px; }
+.s-h {
+  font-family: 'Geologica', sans-serif;
+  font-size: clamp(1.9rem, 7vw, 3.2rem);
+  font-weight: 900; line-height: 1.05; color: var(--dark);
+}
+.s-lead {
+  margin-top: 14px; font-size: .88rem; line-height: 1.85;
+  color: var(--muted); max-width: 600px;
+}
+
+/* ═══ TICKER ═══ */
+.ticker { background: var(--forest); overflow: hidden; padding: 11px 0; }
+.ticker-t {
+  display: inline-block; white-space: nowrap;
+  font-family: 'Geologica', sans-serif;
+  font-size: .72rem; font-weight: 600; letter-spacing: 4px;
+  color: rgba(255,255,255,.7);
+  animation: tick 28s linear infinite;
+}
+.ticker-t span { color: #a8d8b0; margin: 0 12px; }
+.ticker-logo { height: 20px; width: auto; vertical-align: middle; display: inline-block; margin: 0 10px; border-radius: 50%; }
+@keyframes tick { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+
+/* ═══ ACTIVITIES ═══ */
+.act-g {
+  display: grid; grid-template-columns: 1fr;
+  gap: 14px; margin-top: 28px;
+}
+.act-c {
+  position: relative; height: 210px; overflow: hidden;
+  border-radius: var(--r2); cursor: default;
+  box-shadow: var(--shadow); transition: transform .3s, box-shadow .3s;
+}
+.act-c:hover { transform: translateY(-4px); box-shadow: var(--shadow2); }
+.act-photo {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  transition: transform .6s; filter: brightness(.55) saturate(.95);
+}
+.act-c:hover .act-photo { transform: scale(1.05); }
+.act-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(26,46,34,.9) 0%, rgba(26,46,34,.1) 60%, transparent 100%);
+}
+.act-badge {
+  position: absolute; top: 14px; left: 14px;
+  background: var(--terra); color: #fff;
+  font-family: 'Geologica', sans-serif;
+  font-size: .6rem; font-weight: 700; letter-spacing: 1px;
+  padding: 4px 10px; border-radius: 100px;
+}
+.act-bot {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 18px 18px 16px;
+  display: flex; align-items: flex-end; justify-content: space-between;
+}
+.act-name { font-family: 'Geologica', sans-serif; font-size: 1.25rem; font-weight: 800; color: #fff; line-height: 1.1; }
+.act-age { font-family: 'Geologica', sans-serif; font-size: .75rem; font-weight: 600; color: #a8d8b0; white-space: nowrap; padding-left: 8px; }
+.act-desc {
+  position: absolute; bottom: 48px; left: 18px; right: 18px;
+  font-size: .75rem; color: rgba(255,255,255,.65); line-height: 1.5;
+}
+
+/* ═══ INFRA ═══ */
+.infra-g { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 28px; }
+.infra-c {
+  background: var(--white); border-radius: var(--r2);
+  padding: 20px 16px; box-shadow: var(--shadow);
+  border-top: 3px solid var(--forest);
+  transition: transform .2s, box-shadow .2s;
+}
+.infra-c:hover { transform: translateY(-3px); box-shadow: var(--shadow2); }
+.infra-icon { font-size: 1.6rem; margin-bottom: 8px; }
+.infra-name { font-family: 'Geologica', sans-serif; font-size: .88rem; font-weight: 800; color: var(--dark); line-height: 1.2; }
+.infra-desc { font-size: .73rem; color: var(--muted); margin-top: 4px; line-height: 1.5; }
+
+/* ═══ MAP ═══ */
+.map-wrap {
+  margin-top: 28px; border-radius: var(--r2); overflow: hidden;
+  box-shadow: var(--shadow2); position: relative;
+}
+.map-wrap img { width: 100%; display: block; }
+.map-caption {
+  padding: 14px 18px; background: var(--white);
+  font-size: .78rem; color: var(--muted); line-height: 1.6;
+  border-top: 1px solid var(--border);
+}
+.map-caption strong { color: var(--dark); }
+
+/* ═══ HOW TO GET THERE ═══ */
+.route-g { display: flex; flex-direction: column; gap: 14px; margin-top: 28px; }
+.route-c {
+  background: var(--white); border-radius: var(--r2);
+  padding: 22px 20px; box-shadow: var(--shadow);
+  display: flex; gap: 16px; align-items: flex-start;
+}
+.route-icon {
+  width: 48px; height: 48px; border-radius: 14px;
+  background: rgba(45,90,61,.1); display: flex;
+  align-items: center; justify-content: center;
+  font-size: 1.4rem; flex-shrink: 0;
+}
+.route-name { font-family: 'Geologica', sans-serif; font-size: .9rem; font-weight: 800; color: var(--dark); margin-bottom: 5px; }
+.route-text { font-size: .82rem; color: var(--muted); line-height: 1.7; }
+.route-text a { color: var(--forest); text-decoration: none; font-weight: 600; }
+.route-text a:hover { text-decoration: underline; }
+
+/* ═══ CONTACTS ═══ */
+.cc-g { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 28px; }
+.cc {
+  background: var(--white); border-radius: var(--r2);
+  padding: 20px 16px; box-shadow: var(--shadow);
+  border-top: 3px solid var(--forest);
+}
+.cc-icon { font-size: 1.4rem; margin-bottom: 8px; }
+.cc-l {
+  font-family: 'Geologica', sans-serif; font-size: .6rem; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase; color: var(--moss); margin-bottom: 4px;
+}
+.cc-v { font-family: 'Geologica', sans-serif; font-size: .85rem; font-weight: 700; color: var(--dark); }
+.cc-v a { color: var(--dark); text-decoration: none; transition: color .2s; }
+.cc-v a:hover { color: var(--forest); }
+.cc-s { font-size: .7rem; color: var(--muted); margin-top: 3px; }
+
+/* ═══ CTA BANNER ═══ */
+.cta-s {
+  padding: 64px 22px; text-align: center;
+  position: relative; overflow: hidden; background: var(--dark);
+}
+.cta-photo {
+  position: absolute; inset: 0;
+  background: url('photo_paintball.jpg') center/cover;
+  filter: brightness(.15) saturate(.7);
+}
+.cta-in { position: relative; z-index: 2; }
+.cta-badge {
+  display: inline-block;
+  background: rgba(168,216,176,.2); border: 1px solid rgba(168,216,176,.3);
+  color: #a8d8b0; font-family: 'Geologica', sans-serif;
+  font-size: .65rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  padding: 6px 16px; border-radius: 100px; margin-bottom: 16px;
+}
+.cta-h {
+  font-family: 'Geologica', sans-serif;
+  font-size: clamp(1.8rem, 8vw, 4rem);
+  font-weight: 900; line-height: 1.05; color: #fff;
+}
+.cta-h .hl { color: #a8d8b0; }
+.cta-sub { margin-top: 12px; font-size: .88rem; color: rgba(255,255,255,.5); }
+
+/* ═══ FOOTER ═══ */
+footer { background: var(--dark); padding: 52px 20px 36px; }
+.ft-inner { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+.ft-logo { font-family: 'Geologica', sans-serif; font-weight: 900; font-size: 1.1rem; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+.ft-logo-img { height: 42px; width: auto; display: block; flex-shrink: 0; }
+.ft-desc { font-size: 13px; color: rgba(255,255,255,.4); line-height: 1.7; max-width: 280px; margin-top: 10px; }
+.ft-contacts { display: flex; flex-direction: column; gap: 8px; }
+.ft-contacts a { font-family: 'Geologica', sans-serif; font-size: 13px; font-weight: 600; color: rgba(255,255,255,.65); text-decoration: none; transition: color .2s; }
+.ft-contacts a:hover { color: #fff; }
+.ft-nav-title { font-family: 'Geologica', sans-serif; font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 12px; }
+.ft-nav { display: flex; flex-direction: column; gap: 8px; }
+.ft-nav a { font-family: 'Geologica', sans-serif; font-size: 13px; font-weight: 600; color: rgba(255,255,255,.5); text-decoration: none; transition: color .2s; }
+.ft-nav a:hover { color: #fff; }
+.ft-bot { padding-top: 20px; border-top: 1px solid rgba(255,255,255,.08); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px; font-size: 11px; color: rgba(255,255,255,.25); }
+
+/* ═══ REVEAL ═══ */
+.rv { opacity: 0; transform: translateY(20px); transition: .55s ease; }
+.rv.on { opacity: 1; transform: translateY(0); }
+
+/* ═══ DESKTOP ═══ */
+@media(min-width: 640px) {
+  .s { padding: 80px 40px; }
+  .act-g { grid-template-columns: repeat(2, 1fr); }
+  .act-c { height: 260px; }
+  .infra-g { grid-template-columns: repeat(3, 1fr); }
+  .route-g { flex-direction: row; }
+  .route-c { flex: 1; flex-direction: column; }
+  .route-icon { width: 52px; height: 52px; }
+  .cc-g { grid-template-columns: repeat(4, 1fr); }
+}
+@media(min-width: 960px) {
+  .s { padding: 96px 60px; }
+  .act-g { grid-template-columns: repeat(3, 1fr); }
+  .act-c { height: 290px; }
+  .infra-g { grid-template-columns: repeat(4, 1fr); }
+  .ft-inner { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 48px; align-items: start; }
+  .ft-bot { grid-column: 1/-1; }
+  footer { padding: 64px 60px 40px; }
+}
 </style>
 </head>
 <body>
@@ -276,6 +474,291 @@ html, body {
   </div>
 </section>
 
+<!-- TICKER -->
+<div class="ticker">
+  <span class="ticker-t">
+    <img src="logo.png" alt="" class="ticker-logo"> ПЕЙНТБОЛ &nbsp;&nbsp;
+    <img src="logo.png" alt="" class="ticker-logo"> ЛАЗЕРТАГ &nbsp;&nbsp;
+    <img src="logo.png" alt="" class="ticker-logo"> АРЧЕРИТАГ &nbsp;&nbsp;
+    <img src="logo.png" alt="" class="ticker-logo"> КВАДРОЦИКЛЫ &nbsp;&nbsp;
+    <img src="logo.png" alt="" class="ticker-logo"> ХАСКИ &nbsp;&nbsp;
+    <img src="logo.png" alt="" class="ticker-logo"> ДНИ РОЖДЕНИЯ &nbsp;&nbsp;
+    <img src="logo.png" alt="" class="ticker-logo"> КОРПОРАТИВЫ &nbsp;&nbsp;
+    <img src="logo.png" alt="" class="ticker-logo"> ПЕЙНТБОЛ &nbsp;&nbsp;
+    <img src="logo.png" alt="" class="ticker-logo"> ЛАЗЕРТАГ &nbsp;&nbsp;
+    <img src="logo.png" alt="" class="ticker-logo"> АРЧЕРИТАГ &nbsp;&nbsp;
+    <img src="logo.png" alt="" class="ticker-logo"> КВАДРОЦИКЛЫ &nbsp;&nbsp;
+    <img src="logo.png" alt="" class="ticker-logo"> ХАСКИ &nbsp;&nbsp;
+    <img src="logo.png" alt="" class="ticker-logo"> ДНИ РОЖДЕНИЯ &nbsp;&nbsp;
+    <img src="logo.png" alt="" class="ticker-logo"> КОРПОРАТИВЫ &nbsp;&nbsp;
+  </span>
+</div>
+
+<!-- ABOUT -->
+<section class="s" style="background:var(--white)" id="about">
+  <div class="s-eyebrow rv">О парке</div>
+  <h2 class="s-h rv">Место, где лес<br>встречает водохранилище</h2>
+  <p class="s-lead rv">«Бухта Радости» — живописный парк активного отдыха на берегу Пироговского водохранилища в Мытищинском районе Подмосковья. Сосновый лес, чистый воздух и вода создают идеальную атмосферу для отдыха — от детского дня рождения до корпоратива.</p>
+  <p class="s-lead rv" style="margin-top:10px">На территории парка расположены специализированные игровые поля, беседки с мангалами, юрты, большой шатёр и площадка для животных. Работаем с 2008 года.</p>
+</section>
+
+<!-- ACTIVITIES -->
+<section class="s" id="activities" style="background:var(--bg2)">
+  <div class="s-eyebrow rv">Что попробовать</div>
+  <h2 class="s-h rv">Активности в парке</h2>
+  <div class="act-g">
+    <div class="act-c rv">
+      <div class="act-photo" style="background-image:url('photo_paintball.jpg')"></div>
+      <div class="act-overlay"></div>
+      <div class="act-badge">С 12 лет</div>
+      <div class="act-bot">
+        <div class="act-name">Пейнтбол</div>
+        <div class="act-age">от 1 800 ₽</div>
+      </div>
+    </div>
+    <div class="act-c rv">
+      <div class="act-photo" style="background:linear-gradient(135deg,#060d1a,#101e40)"></div>
+      <div class="act-overlay"></div>
+      <div class="act-badge">От 5 лет</div>
+      <div class="act-bot">
+        <div class="act-name">Лазертаг</div>
+        <div class="act-age">от 600 ₽</div>
+      </div>
+    </div>
+    <div class="act-c rv">
+      <div class="act-photo" style="background:linear-gradient(135deg,#1a0e06,#3d2010)"></div>
+      <div class="act-overlay"></div>
+      <div class="act-badge">От 8 лет</div>
+      <div class="act-bot">
+        <div class="act-name">Арчеритаг</div>
+        <div class="act-age">от 1 500 ₽</div>
+      </div>
+    </div>
+    <div class="act-c rv">
+      <div class="act-photo" style="background-image:url('photo_atv.jpg')"></div>
+      <div class="act-overlay"></div>
+      <div class="act-bot">
+        <div class="act-name">Квадроциклы</div>
+        <div class="act-age">от 15 000 ₽</div>
+      </div>
+    </div>
+    <div class="act-c rv">
+      <div class="act-photo" style="background-image:url('photo_husky.jpg')"></div>
+      <div class="act-overlay"></div>
+      <div class="act-bot">
+        <div class="act-name">Хаски</div>
+        <div class="act-age">Уточнить</div>
+      </div>
+    </div>
+    <div class="act-c rv">
+      <div class="act-photo" style="background:linear-gradient(135deg,#0e1f0a,#1e4012)"></div>
+      <div class="act-overlay"></div>
+      <div class="act-badge">Скидка 50%</div>
+      <div class="act-bot">
+        <div class="act-name">День рождения</div>
+        <div class="act-age">Именинникам</div>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:28px" class="rv">
+    <a href="prices.html" class="btn-main">Полный прайс-лист →</a>
+  </div>
+</section>
+
+<!-- INFRASTRUCTURE -->
+<section class="s" style="background:var(--white)">
+  <div class="s-eyebrow rv">Территория</div>
+  <h2 class="s-h rv">Инфраструктура парка</h2>
+  <p class="s-lead rv">На территории «Бухты Радости» 17 объектов — всё необходимое для комфортного отдыха любой компании.</p>
+  <div class="infra-g">
+    <div class="infra-c rv">
+      <div class="infra-icon">🎯</div>
+      <div class="infra-name">3 пейнтбольные площадки</div>
+      <div class="infra-desc">Натуральные и искусственные укрытия, сценарные поля</div>
+    </div>
+    <div class="infra-c rv">
+      <div class="infra-icon">⚡</div>
+      <div class="infra-name">Площадка лазертаг / арчеритаг</div>
+      <div class="infra-desc">Отдельное поле для безопасных игр от 5 лет</div>
+    </div>
+    <div class="infra-c rv">
+      <div class="infra-icon">🏕️</div>
+      <div class="infra-name">Большая юрта</div>
+      <div class="infra-desc">Электрифицированная, вместительная, для банкетов и отдыха</div>
+    </div>
+    <div class="infra-c rv">
+      <div class="infra-icon">⛺</div>
+      <div class="infra-name">Малая юрта</div>
+      <div class="infra-desc">Уютное пространство для небольших компаний</div>
+    </div>
+    <div class="infra-c rv">
+      <div class="infra-icon">🏟️</div>
+      <div class="infra-name">Большой шатёр</div>
+      <div class="infra-desc">Крытое пространство для мероприятий и праздников</div>
+    </div>
+    <div class="infra-c rv">
+      <div class="infra-icon">🍖</div>
+      <div class="infra-name">Беседки с мангалами</div>
+      <div class="infra-desc">3 беседки, оборудованные для барбекю и пикника</div>
+    </div>
+    <div class="infra-c rv">
+      <div class="infra-icon">🐕</div>
+      <div class="infra-name">Вольер с хаски</div>
+      <div class="infra-desc">Общение с ездовыми собаками, фотосессия, хаскитерапия</div>
+    </div>
+    <div class="infra-c rv">
+      <div class="infra-icon">⚽</div>
+      <div class="infra-name">Волейбол и мини-футбол</div>
+      <div class="infra-desc">Спортивные площадки для свободной игры</div>
+    </div>
+    <div class="infra-c rv">
+      <div class="infra-icon">🛝</div>
+      <div class="infra-name">Детская площадка</div>
+      <div class="infra-desc">Качели, горка, песочница, верёвочная сеть</div>
+    </div>
+    <div class="infra-c rv">
+      <div class="infra-icon">🔫</div>
+      <div class="infra-name">Оружейная комната</div>
+      <div class="infra-desc">Хранение и выдача снаряжения, инструктаж</div>
+    </div>
+    <div class="infra-c rv">
+      <div class="infra-icon">🅿️</div>
+      <div class="infra-name">Парковка</div>
+      <div class="infra-desc">Бесплатная парковка для гостей парка</div>
+    </div>
+    <div class="infra-c rv">
+      <div class="infra-icon">🌊</div>
+      <div class="infra-name">Пироговское водохранилище</div>
+      <div class="infra-desc">В 50 метрах — катамараны, лодки, SUP-доски</div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section class="s" style="background:var(--bg2)">
+  <div class="s-eyebrow rv">Территория</div>
+  <h2 class="s-h rv">Карта парка</h2>
+  <div class="map-wrap rv">
+    <img src="photo_paintball.jpg" alt="Карта парка Бухта Радости" id="parkMap">
+    <div class="map-caption">
+      <strong>На карте:</strong> 3 пейнтбольные площадки · Лазертаг/Арчеритаг · Волейбол и мини-футбол · Вольер с хаски · Большая и малая юрта · Шатёр · Беседки · Детская площадка · Оружейная · Пироговское водохранилище
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO GET THERE -->
+<section class="s" style="background:var(--white)" id="route">
+  <div class="s-eyebrow rv">Навигация</div>
+  <h2 class="s-h rv">Как добраться</h2>
+  <p class="s-lead rv">Мытищинский район, деревня Сорокино, зона отдыха «Бухта Радости» на берегу Пироговского водохранилища.</p>
+  <div class="route-g">
+    <div class="route-c rv">
+      <div class="route-icon">🚇</div>
+      <div>
+        <div class="route-name">На общественном транспорте</div>
+        <div class="route-text">Автобус <strong>№438</strong> от станции метро <strong>Медведково</strong> до остановки <strong>«Сорокино»</strong>, затем ~1,5 км пешком по указателям.</div>
+      </div>
+    </div>
+    <div class="route-c rv">
+      <div class="route-icon">🚗</div>
+      <div>
+        <div class="route-name">На автомобиле</div>
+        <div class="route-text">По <strong>Осташковскому шоссе</strong> в направлении Пирогово. Следуйте указателям «Бухта Радости». Бесплатная парковка на территории.</div>
+      </div>
+    </div>
+    <div class="route-c rv">
+      <div class="route-icon">🗺️</div>
+      <div>
+        <div class="route-name">На карте</div>
+        <div class="route-text">
+          <a href="https://yandex.ru/maps/?pt=37.7423,55.9461&z=15" target="_blank">Открыть в Яндекс Картах →</a><br>
+          <span style="font-size:.75rem;color:var(--muted);margin-top:4px;display:block">Координаты: 55.9461, 37.7423</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTS -->
+<section class="s" id="contacts" style="background:var(--bg2)">
+  <div class="s-eyebrow rv">Связаться</div>
+  <h2 class="s-h rv">Контакты парка</h2>
+  <div class="cc-g">
+    <div class="cc rv">
+      <div class="cc-icon">📞</div>
+      <div class="cc-l">Телефон</div>
+      <div class="cc-v"><a href="tel:+79250108535">+7 (925) 010-85-35</a></div>
+      <div class="cc-s">Звоните и пишите</div>
+    </div>
+    <div class="cc rv">
+      <div class="cc-icon">✉️</div>
+      <div class="cc-l">Email</div>
+      <div class="cc-v" style="font-size:.75rem"><a href="mailto:info888@plpark.ru">info888@plpark.ru</a></div>
+      <div class="cc-s">Пишите нам</div>
+    </div>
+    <div class="cc rv">
+      <div class="cc-icon">🕐</div>
+      <div class="cc-l">Режим работы</div>
+      <div class="cc-v">Ежедневно</div>
+      <div class="cc-s">10:00 – 22:00</div>
+    </div>
+    <div class="cc rv">
+      <div class="cc-icon">📍</div>
+      <div class="cc-l">Адрес</div>
+      <div class="cc-v" style="font-size:.72rem">Мытищинский р-н,<br>дер. Сорокино</div>
+      <div class="cc-s">Бухта Радости</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-s">
+  <div class="cta-photo"></div>
+  <div class="cta-in">
+    <div class="cta-badge">🎉 Забронируйте прямо сейчас</div>
+    <div class="cta-h rv">
+      Готовы к<br><span class="hl">незабываемому</span><br>отдыху?
+    </div>
+    <p class="cta-sub rv">Оставьте заявку — ответим за 15 минут</p>
+    <a href="index.html#booking" class="btn-main" style="display:inline-block;margin-top:24px;padding:15px 40px">Забронировать игру →</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-inner">
+    <div>
+      <a href="index.html" class="ft-logo">
+        <img src="logo.png" alt="Логотип" class="ft-logo-img">
+        ПЭЙНТЛЭНД ПАРК
+      </a>
+      <p class="ft-desc">Активный отдых в Подмосковье. Пейнтбол, лазертаг, квадроциклы и тимбилдинг с 2008 года.</p>
+    </div>
+    <div>
+      <div class="ft-nav-title">Контакты</div>
+      <div class="ft-contacts">
+        <a href="tel:+79250108535">📞 +7 (925) 010-85-35</a>
+        <a href="tel:+79856436888">📞 +7 (985) 643-68-88</a>
+        <a href="mailto:info888@plpark.ru">✉️ info888@plpark.ru</a>
+      </div>
+    </div>
+    <div>
+      <div class="ft-nav-title">Навигация</div>
+      <nav class="ft-nav">
+        <a href="index.html">← Главная</a>
+        <a href="prices.html">Цены</a>
+        <a href="index.html#booking">Бронирование</a>
+        <a href="index.html#locations">Наши парки</a>
+        <a href="index.html#contacts">Контакты</a>
+      </nav>
+    </div>
+    <div class="ft-bot">
+      <span>© 2026 Пэйнтлэнд Парк</span>
+      <span>Бухта Радости · Мытищинский район</span>
+    </div>
+  </div>
+</footer>
+
 <script>
 const burger = document.getElementById('burger');
 const drawer = document.getElementById('drawer');
@@ -293,6 +776,14 @@ document.addEventListener('click', e => {
     burger.classList.remove('open');
   }
 });
+
+// Scroll reveal
+const io = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) setTimeout(() => e.target.classList.add('on'), i * 55);
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
 </script>
 
 </body>
