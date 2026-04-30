@@ -227,6 +227,108 @@ export default function Home() {
           <div className="prices-all-arr">→</div>
         </Link>
       </section>
+      {/* ── GALLERY ── */}
+      <section className="s" id="gallery" style={{ background: 'var(--bg2)' }}>
+        <div className="s-eyebrow rv">Атмосфера</div>
+        <h2 className="s-h rv">Как это выглядит</h2>
+        <div className="gal-g">
+          {[
+            { img: '/photo_paintball.jpg', label: 'Пейнтбол', big: true },
+            { img: '/photo_atv.jpg',       label: 'Квадроциклы' },
+            { img: '/photo_uaz.jpg',       label: 'Джипинг' },
+            { img: '/photo_couple.jpg',    label: 'Снаряжение' },
+            { img: '/photo_husky.jpg',     label: 'Хаски' },
+          ].map(({ img, label, big }) => (
+            <div className={`gal-c rv${big ? ' big' : ''}`} key={label}>
+              <div className="gal-photo" style={{ backgroundImage: `url('${img}')` }} />
+              <div className="gal-lbl">{label}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── REVIEWS ── */}
+      <section className="rev-bg s">
+        <div className="s-eyebrow rv">Отзывы</div>
+        <h2 className="s-h rv">Что говорят наши гости</h2>
+        <div className="rev-g">
+          {[
+            { text: 'Организовали день рождения — лазертаг для детей. Инструктор всё объяснил, дети в полном восторге!', who: 'Наталья, мама троих детей' },
+            { text: 'Отличный корпоратив! Всё включено, персонал доброжелательный, атмосфера уютная. Вернёмся снова!', who: 'Сергей, HR-директор' },
+            { text: 'Приехали большой компанией. Квадроциклы, пейнтбол, шашлыки — идеально провели день!', who: 'Артур' },
+          ].map(({ text, who }) => (
+            <div className="rev rv" key={who}>
+              <div className="rev-q">"</div>
+              <div className="rev-stars">★ ★ ★ ★ ★</div>
+              <div className="rev-txt">{text}</div>
+              <div className="rev-who">— {who}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── LOCATIONS ── */}
+      <section className="s" id="locations" style={{ background: 'var(--bg2)' }}>
+        <div className="s-eyebrow rv">Наши площадки</div>
+        <h2 className="s-h rv">Два парка<br />в Подмосковье</h2>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 16, marginTop: 24 }} id="locCards">
+          <div className="loc-card rv" onClick={() => window.location.href = '/bukhta'}>
+            <div className="loc-card-img" style={{ backgroundImage: "url('/bukhta_banner.png')" }} />
+            <div className="loc-card-body">
+              <div className="loc-card-tag">📍 Мытищи</div>
+              <div className="loc-card-name">Бухта Радости</div>
+              <div className="loc-card-desc">На берегу Пироговского водохранилища. Сосновый лес, чистый воздух.</div>
+              <Link href="/bukhta" className="loc-card-link" onClick={e => e.stopPropagation()}>Подробнее о парке →</Link>
+            </div>
+          </div>
+          <div className="loc-card rv" onClick={() => window.location.href = '/sofrino'}>
+            <div className="loc-card-img" style={{ backgroundImage: "url('/sofrino_banner.png')" }} />
+            <div className="loc-card-body">
+              <div className="loc-card-tag">📍 Пушкинский р-н</div>
+              <div className="loc-card-name">Парк Софрино</div>
+              <div className="loc-card-desc">Просторные поля и трассы для квадроциклов в экологически чистом районе.</div>
+              <Link href="/sofrino" className="loc-card-link" onClick={e => e.stopPropagation()}>Подробнее о парке →</Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── TELEGRAM ── */}
+      <section className="s tg-sec" id="telegram" style={{ background: 'var(--forest)' }}>
+        <div className="tg-inner rv">
+          <div className="tg-text">
+            <div className="tg-badge">✈️ Telegram Mini App</div>
+            <h2 className="tg-h">Бронируйте в один клик через Telegram</h2>
+            <p className="tg-desc">Наш бот позволяет выбрать дату, количество гостей и оплатить онлайн — всё не выходя из Telegram.</p>
+            <a href="https://t.me/paintballclub_bot" target="_blank" rel="noreferrer" className="tg-btn">Открыть в Telegram →</a>
+          </div>
+          <div className="tg-qr rv">
+            <div className="tg-qr-box">
+              <div className="tg-qr-inner">
+                <svg viewBox="0 0 100 100" width="120" height="120" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="100" height="100" fill="white" rx="8"/>
+                  <rect x="8" y="8" width="26" height="26" fill="none" stroke="#2d5a3d" strokeWidth="3" rx="2"/>
+                  <rect x="12" y="12" width="18" height="18" fill="#2d5a3d" rx="1"/>
+                  <rect x="66" y="8" width="26" height="26" fill="none" stroke="#2d5a3d" strokeWidth="3" rx="2"/>
+                  <rect x="70" y="12" width="18" height="18" fill="#2d5a3d" rx="1"/>
+                  <rect x="8" y="66" width="26" height="26" fill="none" stroke="#2d5a3d" strokeWidth="3" rx="2"/>
+                  <rect x="12" y="70" width="18" height="18" fill="#2d5a3d" rx="1"/>
+                  <rect x="40" y="8" width="6" height="6" fill="#2d5a3d" rx="1"/>
+                  <rect x="50" y="8" width="6" height="6" fill="#2d5a3d" rx="1"/>
+                  <rect x="40" y="40" width="6" height="6" fill="#2d5a3d" rx="1"/>
+                  <rect x="54" y="50" width="6" height="6" fill="#2d5a3d" rx="1"/>
+                  <rect x="70" y="40" width="6" height="6" fill="#2d5a3d" rx="1"/>
+                  <rect x="82" y="40" width="6" height="6" fill="#2d5a3d" rx="1"/>
+                  <rect x="40" y="72" width="6" height="6" fill="#2d5a3d" rx="1"/>
+                  <rect x="66" y="80" width="6" height="6" fill="#2d5a3d" rx="1"/>
+                  <rect x="76" y="72" width="6" height="6" fill="#2d5a3d" rx="1"/>
+                </svg>
+              </div>
+              <p className="tg-qr-label">Сканируй и бронируй</p>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   )
 }
