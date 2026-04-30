@@ -46,6 +46,60 @@
         .hdr-drawer a:hover { color: #fff; background: rgba(255,255,255,.05); }
         .hdr-drawer .drawer-back { color: rgba(255,255,255,.45); font-size: .8rem; }
 
+        /* HERO BANNER */
+        .hero-banner {
+            padding-top: 64px;
+            background: linear-gradient(135deg, #0f1e14 0%, #1a3525 60%, #1f3c2c 100%);
+            position: relative; overflow: hidden;
+        }
+        .hero-banner::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: url('photo_paintball.jpg') center/cover;
+            opacity: .1; filter: saturate(.4);
+        }
+        .hero-banner-inner {
+            position: relative; z-index: 2;
+            padding: 40px 20px 36px;
+            max-width: 1200px; margin: 0 auto;
+        }
+        .hero-banner-tag {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.18);
+            border-radius: 100px; padding: 5px 14px;
+            font-family: 'Geologica', sans-serif; font-size: .62rem; font-weight: 700;
+            letter-spacing: 2px; color: rgba(255,255,255,.8); text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+        .hero-banner-tag::before {
+            content: ''; width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+            background: #a8d8b0; box-shadow: 0 0 8px #a8d8b0;
+        }
+        .hero-banner-h {
+            font-family: 'Geologica', sans-serif;
+            font-size: clamp(2rem, 8vw, 3.4rem);
+            font-weight: 900; color: #fff; line-height: 1.05;
+        }
+        .hero-banner-h em { font-style: normal; color: #a8d8b0; }
+        .hero-banner-sub {
+            margin-top: 10px; font-size: .88rem; line-height: 1.7;
+            color: rgba(255,255,255,.5); max-width: 480px;
+        }
+        .hero-sts {
+            display: flex; margin-top: 28px;
+            border-top: 1px solid rgba(255,255,255,.1); padding-top: 22px;
+            max-width: 360px;
+        }
+        .hst { flex: 1; text-align: center; position: relative; }
+        .hst:not(:last-child)::after {
+            content: ''; position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+            width: 1px; height: 26px; background: rgba(255,255,255,.15);
+        }
+        .hst-n { font-family: 'Geologica', sans-serif; font-size: 1.6rem; font-weight: 800; color: #fff; line-height: 1; }
+        .hst-l { font-size: .5rem; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,.4); margin-top: 4px; }
+        @media(min-width: 640px) { .hero-banner-inner { padding: 52px 40px 48px; } }
+        @media(min-width: 960px) { .hero-banner-inner { padding: 60px 60px 54px; } }
+
         /* STICKY NAV */
         .snav-bar { position: sticky; top: 64px; z-index: 900; background: #fff; border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; display: flex; }
         .snav-bar::-webkit-scrollbar { display: none; }
@@ -119,6 +173,19 @@
     <a href="#jeeping" onclick="jump('jeeping')">🚙 Джиппинг</a>
     <a href="#winter" onclick="jump('winter')">❄️ Зимние</a>
     <a href="#schools" onclick="jump('schools')">🎒 Школам</a>
+</div>
+
+<div class="hero-banner">
+    <div class="hero-banner-inner">
+        <div class="hero-banner-tag">Актуальные цены · 2026</div>
+        <h1 class="hero-banner-h">Цены и <em>программы</em></h1>
+        <p class="hero-banner-sub">Пейнтбол, лазертаг, квадроциклы, джипинг и тимбилдинг. Два парка в Подмосковье.</p>
+        <div class="hero-sts">
+            <div class="hst"><div class="hst-n">7</div><div class="hst-l">активностей</div></div>
+            <div class="hst"><div class="hst-n">2</div><div class="hst-l">парка</div></div>
+            <div class="hst"><div class="hst-n">50%</div><div class="hst-l">именинникам</div></div>
+        </div>
+    </div>
 </div>
 
 <nav class="snav-bar">
