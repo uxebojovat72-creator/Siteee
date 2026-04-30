@@ -1166,7 +1166,7 @@ footer {
         <div class="loc-card-tag">📍 Мытищи</div>
         <div class="loc-card-name">Бухта Радости</div>
         <div class="loc-card-desc">На берегу Пироговского водохранилища. Сосновый лес, чистый воздух.</div>
-        <div class="loc-card-link">Подробнее →</div>
+        <a href="bukhta.html" class="loc-card-link" onclick="event.stopPropagation()">Подробнее о парке →</a>
       </div>
     </div>
     <div class="loc-card rv" onclick="openLoc('sofrino')">
@@ -1438,6 +1438,7 @@ function openLoc(key) {
     </div>
     <div class="loc-btns">
       <a href="${d.map}" target="_blank" class="loc-map-btn">🗺️ На карте</a>
+      ${d.page ? `<a href="${d.page}" class="loc-map-btn" style="background:var(--forest2)">О парке →</a>` : ''}
       <a href="#booking" class="loc-book-btn" onclick="closeLoc()">Забронировать</a>
     </div>
   `;
@@ -1489,8 +1490,9 @@ document.querySelectorAll('.cc').forEach(cc => {
     "coords": "55.9461, 37.7423",
     "desc": "Живописный парк на берегу Пироговского водохранилища. Сосновый лес, чистый воздух и вода — идеальное место для семейного отдыха и корпоративов.",
     "features": ["Пейнтбол", "Лазертаг", "Квадроциклы", "Верёвочный парк", "Беседки с мангалом", "Парковка"],
-    "hours": "09:00 – 21:00 ежедневно",
-    "map": "https://yandex.ru/maps/?pt=37.7423,55.9461&z=15"
+    "hours": "10:00 – 22:00 ежедневно",
+    "map": "https://yandex.ru/maps/?pt=37.7423,55.9461&z=15",
+    "page": "bukhta.html"
   },
   "sofrino": {
     "name": "Парк Софрино",
