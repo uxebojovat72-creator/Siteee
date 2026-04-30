@@ -1,1 +1,337 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Прайс-лист — Пэйнтлэнд Парк</title>
+    <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;600;800;900&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f7f4ef; --bg2: #efeae1; --white: #fff;
+            --forest: #2d5a3d; --forest2: #3d7a52; --moss: #5a8a6a;
+            --terra: #d4622a; --terra2: #e8824a;
+            --dark: #1a2e22; --text: #2c3a2e; --muted: #7a8c7e;
+            --border: rgba(45,90,61,.12);
+            --r: 16px; --r2: 24px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--text); font-family: 'Manrope', sans-serif; overflow-x: hidden; }
 
+        /* HEADER */
+        #mainNav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; background: rgba(16,30,20,.95); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255,255,255,.1); }
+        .hdr-logo { font-family: 'Geologica', sans-serif; font-size: 1rem; font-weight: 800; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+        .hdr-burger { width: 44px; height: 44px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 6px; background: none; border: none; cursor: pointer; }
+        .hdr-burger span { display: block; width: 22px; height: 2px; background: #fff; border-radius: 2px; transition: .25s; }
+        .hdr-burger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+        .hdr-burger.open span:nth-child(2) { opacity: 0; }
+        .hdr-burger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+        .hdr-drawer { position: fixed; top: 64px; left: 0; right: 0; z-index: 999; background: rgba(16,30,20,.98); max-height: 0; overflow: hidden; transition: .3s ease; }
+        .hdr-drawer.open { max-height: 100vh; padding-bottom: 40px; }
+        .hdr-drawer a { display: block; padding: 18px 24px; color: #fff; text-decoration: none; font-family: 'Geologica', sans-serif; border-bottom: 1px solid rgba(255,255,255,.05); }
+
+        /* STICKY NAV */
+        .snav-bar { position: sticky; top: 64px; z-index: 900; background: #fff; border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; display: flex; }
+        .snav-bar::-webkit-scrollbar { display: none; }
+        .snav { padding: 14px 18px; font-family: 'Geologica', sans-serif; font-size: 12px; font-weight: 700; color: var(--muted); background: none; border: none; white-space: nowrap; border-bottom: 3px solid transparent; cursor: pointer; }
+        .snav.active { color: var(--forest); border-bottom-color: var(--forest); }
+
+        /* SECTIONS */
+        .sec { padding: 40px 20px; max-width: 1200px; margin: 0 auto; }
+        .sh { font-family: 'Geologica', sans-serif; font-size: 26px; font-weight: 900; margin-bottom: 20px; color: var(--dark); line-height: 1.1; }
+        .eyebrow { font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--moss); margin-bottom: 8px; display: block; }
+
+        /* SWITCHERS */
+        .sw-box { background: var(--bg2); padding: 4px; border-radius: 100px; display: inline-flex; width: 100%; max-width: 450px; margin-bottom: 15px; border: 1px solid var(--border); }
+        .sw-btn { flex: 1; padding: 10px; border-radius: 100px; border: none; font-family: 'Geologica', sans-serif; font-size: 11px; font-weight: 700; color: var(--muted); background: none; cursor: pointer; transition: 0.2s; text-transform: uppercase; }
+        .sw-btn.active { background: var(--forest); color: #fff; }
+        .sw-btn.active.wk { background: var(--terra); }
+
+        /* PRICE CARDS */
+        .price-list { display: grid; grid-template-columns: 1fr; gap: 12px; }
+        .p-card { background: #fff; padding: 16px; border-radius: var(--r); border: 1px solid var(--border); box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+        .p-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 6px; }
+        .p-title { font-family: 'Geologica', sans-serif; font-weight: 800; font-size: 15px; color: var(--dark); line-height: 1.3; }
+        .p-price { font-family: 'Geologica', sans-serif; font-weight: 900; font-size: 16px; color: var(--forest); white-space: nowrap; }
+        .p-price.alt { color: var(--terra); }
+        .p-desc { font-size: 13px; color: var(--muted); line-height: 1.4; }
+        .p-tag { display: inline-block; margin-top: 8px; font-size: 11px; font-weight: 700; color: var(--forest2); background: rgba(45,90,61,.08); padding: 3px 8px; border-radius: 4px; }
+        .p-category { padding: 20px 5px 10px; font-family: 'Geologica', sans-serif; font-size: 12px; font-weight: 900; color: var(--moss); text-transform: uppercase; letter-spacing: 1.5px; border-bottom: 2px solid var(--border); margin-bottom: 10px; }
+
+        /* JEEPING GRID (Anti-Scroll) */
+        .jeep-grid { display: flex; flex-direction: column; gap: 8px; }
+        .jeep-row { display: grid; grid-template-columns: 1fr 80px 100px; gap: 5px; align-items: center; background: #fff; padding: 12px; border-radius: 12px; border: 1px solid var(--border); font-size: 12px; }
+        .jeep-head { font-weight: 800; font-family: 'Geologica', sans-serif; font-size: 10px; color: var(--muted); text-transform: uppercase; background: none; border: none; padding: 5px 12px; }
+        .j-price { font-family: 'Geologica', sans-serif; font-weight: 800; text-align: right; }
+
+        .note { background: rgba(212,98,42,.08); border-left: 4px solid var(--terra); padding: 15px; border-radius: 0 12px 12px 0; font-size: 13px; margin-top: 15px; line-height: 1.5; }
+
+        /* FOOTER */
+        footer { background: var(--dark); padding: 40px 20px; color: rgba(255,255,255,.4); font-size: 13px; text-align: center; }
+        .ft-logo { color: #fff; font-family: 'Geologica', sans-serif; font-weight: 900; margin-bottom: 20px; display: block; font-size: 1.2rem; text-decoration: none; }
+
+        @media(min-width:768px) {
+            .price-list { grid-template-columns: 1fr 1fr; gap: 15px; }
+            .sh { font-size: 34px; }
+            .jeep-row { grid-template-columns: 1fr 150px 150px; font-size: 14px; padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav id="mainNav">
+    <a href="#" class="hdr-logo">ПЭЙНТЛЭНД ПАРК</a>
+    <button class="hdr-burger" id="burger"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="hdr-drawer" id="drawer">
+    <a href="#lasertag" onclick="jump('lasertag')">⚡ Лазертаг</a>
+    <a href="#paintball" onclick="jump('paintball')">🎯 Пейнтбол</a>
+    <a href="#teambuilding" onclick="jump('teambuilding')">🏆 Тимбилдинг</a>
+    <a href="#quads" onclick="jump('quads')">🏍️ Квадроциклы</a>
+    <a href="#jeeping" onclick="jump('jeeping')">🚙 Джиппинг</a>
+    <a href="#winter" onclick="jump('winter')">❄️ Зимние</a>
+    <a href="#schools" onclick="jump('schools')">🎒 Школам</a>
+</div>
+
+<nav class="snav-bar">
+    <button class="snav active" onclick="jump('lasertag')">Лазертаг</button>
+    <button class="snav" onclick="jump('paintball')">Пейнтбол</button>
+    <button class="snav" onclick="jump('teambuilding')">Тимбилдинг</button>
+    <button class="snav" onclick="jump('quads')">Квадроциклы</button>
+    <button class="snav" onclick="jump('jeeping')">Джиппинг</button>
+    <button class="snav" onclick="jump('winter')">Зимние</button>
+    <button class="snav" onclick="jump('schools')">Школам</button>
+</nav>
+
+<!-- ЛАЗЕРТАГ -->
+<section class="sec" id="lasertag">
+    <span class="eyebrow">Без боли · от 5 лет</span>
+    <h2 class="sh">Лазертаг и Квесты</h2>
+    
+    <div class="sw-box">
+        <button class="sw-btn active" onclick="setDay('lt', 'wk', this)">Будни (Пн–Чт)</button>
+        <button class="sw-btn" onclick="setDay('lt', 'we', this)">Выходные (Пт–Вс)</button>
+    </div>
+
+    <div class="price-list" id="list-lt"></div>
+</section>
+
+<!-- ПЕЙНТБОЛ -->
+<section class="sec" id="paintball" style="background:var(--bg2)">
+    <span class="eyebrow">С 12 лет · Экипировка включена</span>
+    <h2 class="sh">Пейнтбол</h2>
+
+    <div class="sw-box">
+        <button class="sw-btn active" onclick="setDay('pb', 'wk', this)">Будни (Пн–Чт)</button>
+        <button class="sw-btn" onclick="setDay('pb', 'we', this)">Выходные (Пт–Вс)</button>
+    </div>
+
+    <div class="price-list" id="list-pb"></div>
+    <div class="note">
+        <strong>Дополнительно:</strong> Шары 2000 шт. — 4 000 ₽ | Дымы/гранаты — 550 ₽/шт | Надувные укрытия (6 шт.) — 8 000 ₽ | Палатки (10 шт.) — 4 000 ₽ | Сапоги — 200 ₽
+    </div>
+</section>
+
+<!-- ТИМБИЛДИНГ -->
+<section class="sec" id="teambuilding">
+    <span class="eyebrow">Корпоративы · от 10 чел</span>
+    <h2 class="sh">Тимбилдинг и Квесты</h2>
+
+    <div class="sw-box">
+        <button class="sw-btn active" onclick="setDay('tb', 'wk', this)">Будни</button>
+        <button class="sw-btn" onclick="setDay('tb', 'we', this)">Выходные</button>
+    </div>
+
+    <div class="price-list" id="list-tb"></div>
+</section>
+
+<!-- КВАДРОЦИКЛЫ -->
+<section class="sec" id="quads" style="background:var(--bg2)">
+    <span class="eyebrow">Экстрим на колесах</span>
+    <h2 class="sh">Квадроциклы и Снегоходы</h2>
+    <div class="price-list">
+        <div class="p-card"><div class="p-header"><div class="p-title">Квадроцикл CF Moto 500</div><div class="p-price">от 15 000 ₽</div></div><div class="p-desc">Мин. 2 часа. Двухместный. Шлем и перчатки включены.</div><div class="p-tag">Инструктор на 5 машин обязателен</div></div>
+        <div class="p-card"><div class="p-header"><div class="p-title">Инструктор (Квадро)</div><div class="p-price">от 15 000 ₽</div></div><div class="p-desc">Оплачивается отдельно за 1 машину сопровождения.</div></div>
+        <div class="p-card"><div class="p-header"><div class="p-title">Снегоходы (Зима)</div><div class="p-price">7 500 ₽/час</div></div><div class="p-desc">Мин. 2 часа. Поля, спуски, драйв.</div></div>
+        <div class="p-card"><div class="p-header"><div class="p-title">Экипировка</div><div class="p-price">1 000 ₽</div></div><div class="p-desc">Непромокаемый костюм: штаны, куртка, бахилы УЗК.</div></div>
+    </div>
+</section>
+
+<!-- ДЖИППИНГ -->
+<section class="sec" id="jeeping">
+    <span class="eyebrow">UAZ OFF-ROAD</span>
+    <h2 class="sh">Джиппинг на УАЗ (до 3 чел)</h2>
+    <div class="jeep-grid">
+        <div class="jeep-row jeep-head"><div>Расстояние</div><div>База</div><div>С разведкой</div></div>
+        <div class="jeep-row"><div>До 40 км</div><div class="j-price">22 000 ₽</div><div class="j-price" style="color:var(--terra)">24 000 ₽</div></div>
+        <div class="jeep-row"><div>До 80 км</div><div class="j-price">24 000 ₽</div><div class="j-price" style="color:var(--terra)">27 000 ₽</div></div>
+        <div class="jeep-row"><div>До 100 км</div><div class="j-price">26 000 ₽</div><div class="j-price" style="color:var(--terra)">29 000 ₽</div></div>
+        <div class="jeep-row"><div>До 120 км</div><div class="j-price">28 000 ₽</div><div class="j-price" style="color:var(--terra)">30 000 ₽</div></div>
+        <div class="jeep-row"><div>До 140 км</div><div class="j-price">29 000 ₽</div><div class="j-price" style="color:var(--terra)">32 000 ₽</div></div>
+        <div class="jeep-row"><div>До 160 км</div><div class="j-price">31 000 ₽</div><div class="j-price" style="color:var(--terra)">33 000 ₽</div></div>
+        <div class="jeep-row"><div>До 180 км</div><div class="j-price">33 000 ₽</div><div class="j-price" style="color:var(--terra)">34 000 ₽</div></div>
+        <div class="jeep-row"><div>До 200 км</div><div class="j-price">35 000 ₽</div><div class="j-price" style="color:var(--terra)">36 000 ₽</div></div>
+    </div>
+    <div class="note"><strong>Разведка:</strong> Предварительное прокладывание маршрута, установка точек, карта. Оплачивается разово.</div>
+</section>
+
+<!-- ЗИМНИЕ -->
+<section class="sec" id="winter" style="background:var(--bg2)">
+    <span class="eyebrow">Активности 2026</span>
+    <h2 class="sh">Зимние развлечения</h2>
+    <div class="price-list" id="list-winter"></div>
+</section>
+
+<!-- ШКОЛАМ -->
+<section class="sec" id="schools">
+    <span class="eyebrow">Будни (Пн–Чт) · Выезд</span>
+    <h2 class="sh">Спецпредложения школам</h2>
+    <div class="sw-box">
+        <button class="sw-btn active" onclick="setSchool(0, this)">15-30 чел</button>
+        <button class="sw-btn" onclick="setSchool(1, this)">31-50 чел</button>
+        <button class="sw-btn" onclick="setSchool(2, this)">51-80 чел</button>
+        <button class="sw-btn" onclick="setSchool(3, this)">81-100 чел</button>
+    </div>
+    <div class="price-list" id="list-schools"></div>
+</section>
+
+<footer>
+    <a href="#" class="ft-logo">ПЭЙНТЛЭНД ПАРК</a>
+    <p>Бухта Радости: +7 (925) 010-85-35<br>Парк Софрино: +7 (985) 643-68-88</p>
+    <p style="margin-top:15px; font-size:11px">© 2026 Цены без НДС (УСН). Не оферта.</p>
+</footer>
+
+<script>
+const data = {
+    lt: [
+        {cat: "Базовый лазертаг"},
+        {t: "Лазертаг 1 час", d: "От 20 чел. Улица/помещение.", wk: "600 ₽", we: "700 ₽"},
+        {t: "Лазертаг 2 часа", d: "От 10 чел. Режимы игры.", wk: "1 200 ₽", we: "1 400 ₽"},
+        {t: "Лазертаг для всех (2ч)", d: "До 20 чел. Сборный сеанс.", wk: "25 000 ₽", we: "25 000 ₽"},
+        {cat: "Квесты и Шоу (2 часа)"},
+        {t: "Квест-Лазертаг", d: "Захват точки, бомба, задания.", wk: "1 600 ₽", we: "2 000 ₽"},
+        {t: "«Сталкер» / «Звездные войны»", d: "Актеры, костюмы, сюжет.", wk: "2 000 ₽", we: "2 200 ₽"},
+        {t: "«Остров сокровищ»", d: "Пиратское шоу с актерами.", wk: "2 200 ₽", we: "2 400 ₽"},
+        {t: "«НЛО» / «Зарница»", d: "Военно-патриотический сюжет.", wk: "2 000 ₽", we: "2 200 ₽"},
+        {cat: "Зимние квесты"},
+        {t: "«Анти-Новый год» / «Гринч»", d: "Иммерсивный квест с героями.", wk: "2 000 ₽", we: "2 200 ₽"},
+        {t: "«Освободите Умку»", d: "Спасательная операция в лесу.", wk: "2 000 ₽", we: "2 200 ₽"},
+        {cat: "Арчеритаг (Луки)"},
+        {t: "Арчеритаг 1 час", d: "Мягкие стрелы, маски, форма.", wk: "1 500 ₽", we: "1 700 ₽"},
+        {t: "Квест «Стрелы Робин Гуда»", d: "1.5-2 часа. Полная экипировка.", wk: "2 200 ₽", we: "2 400 ₽"},
+        {cat: "Анимация"},
+        {t: "Мишка Умка (30 мин / 3 ч)", d: "Танцы, фотосессия.", wk: "4 000 ₽", we: "12 000 ₽"},
+        {t: "Динозавр (30 мин / 3 ч)", d: "Ростовая кукла.", wk: "3 000 ₽", we: "10 000 ₽"},
+        {t: "Дед Мороз и Снегурочка", d: "Поздравление 30 мин / 3 ч.", wk: "8 000 ₽", we: "24 000 ₽"}
+    ],
+    pb: [
+        {t: "Пейнтбол 400 шаров", d: "1.5-2 часа. Полная экипировка.", wk: "1 800 ₽", we: "2 000 ₽", tag: "Детский 12-16 лет: 1600/1800 ₽"},
+        {t: "Пейнтбол 600 шаров", d: "Увеличенный боезапас.", wk: "2 200 ₽", we: "2 400 ₽", tag: "Детский: 2000/2200 ₽"},
+        {cat: "Пейнтбольные квесты (2 часа)"},
+        {t: "Квест «9-РОТА»", d: "Учебка + 200ш + дымы + гранаты.", wk: "3 000 ₽", we: "3 200 ₽"},
+        {t: "Квест «Аватар»", d: "400 шаров. Вычисли предателя.", wk: "3 000 ₽", we: "3 200 ₽"},
+        {t: "Квест «Сталкер» / «Противостояние»", d: "400 шаров. Тактическая игра.", wk: "2 800 ₽", we: "3 000 ₽"},
+        {t: "«Зарница без погон»", d: "400 шаров. Медики и штаб.", wk: "3 000 ₽", we: "3 200 ₽"},
+        {t: "«Голодные игры» (Микс)", d: "Пейнтбол + Луки + Гранаты.", wk: "3 200 ₽", we: "3 400 ₽"}
+    ],
+    tb: [
+        {t: "«Джуманджи» (1.5-2 ч)", d: "Логика, кубик, испытания.", wk: "2 500 ₽", we: "2 700 ₽"},
+        {t: "«Микс-Гейм» / «Крейзи-Гейм»", d: "Сумасшедшие наряды и забавы.", wk: "2 000 ₽", we: "2 200 ₽"},
+        {t: "LOST «Остаться в живых»", d: "Выживание, полоса препятствий.", wk: "2 200 ₽", we: "2 400 ₽"},
+        {t: "«Король и Шут» (Музыкальный)", d: "Квест по сюжетам песен КиШ.", wk: "2 500 ₽", we: "2 700 ₽"},
+        {t: "«Тропа с хаски»", d: "Командный поиск с собаками.", wk: "2 500 ₽", we: "2 700 ₽"},
+        {t: "«Искатели приключений»", d: "Детский LOST в лесу.", wk: "2 000 ₽", we: "2 200 ₽"},
+        {t: "«Город головоломок»", d: "Гигантские ребусы и фигуры.", wk: "2 000 ₽", we: "2 200 ₽"},
+        {t: "«Старорусские забавы»", d: "Перетягивание каната, бои на подушках.", wk: "2 000 ₽", we: "2 200 ₽"},
+        {t: "«По следу ЙЕТИ»", d: "Приключение-поиск в лесу.", wk: "2 200 ₽", we: "2 400 ₽"},
+        {t: "«Отцы и дети» / «Мастера игры»", d: "Викторины и состязания.", wk: "2 000 ₽", we: "2 200 ₽"}
+    ],
+    winter: [
+        {t: "Хаски-упряжка (5-8 собак)", d: "Круг 300м. До 20 чел/час.", wk: "55 000 ₽/ч", we: "85 000 ₽/2ч"},
+        {t: "Хаскитерапия (2 часа)", d: "3 хаски + тюбинги + прогулка.", wk: "35 000 ₽", we: "35 000 ₽"},
+        {t: "Фотозона «I love husky»", d: "Баннер, 2 хаски, каюр.", wk: "25 000 ₽", we: "до 3 часов"},
+        {t: "Катание на верблюде", d: "Кормление, фотосессия.", wk: "50 000 ₽/ч", we: "80 000 ₽/2ч"},
+        {t: "Упряжка с 2 оленями", d: "Северный каюр, упряжь.", wk: "70 000 ₽/ч", we: "105 000 ₽/2ч"},
+        {t: "Сани с 1 лошадью", d: "До 25 чел/ч. Выезд 10км вкл.", wk: "55 000 ₽/ч", we: "доп. час 27 000 ₽"},
+        {t: "Сани с 2 лошадьми (Двойка)", d: "Русская запряжка.", wk: "65 000 ₽/ч", we: "доп. час 35 000 ₽"},
+        {t: "Тройка белых коней", d: "VIP-статус. Очень нарядно.", wk: "110 000 ₽/ч", we: "доп. час 55 000 ₽"},
+        {t: "Аренда Чума (диам 4.5м)", d: "Шкуры, печка, ковры. 4 часа.", wk: "70 000 ₽", we: "70 000 ₽"},
+        {t: "Чукотский тимбилдинг", d: "Артист, танцы, обряды.", wk: "60 000 ₽/ч", we: "60 000 ₽/ч"}
+    ],
+    schools: [
+        {t: "Лазертаг (1 час)", p: [450, 400, 350, 300]},
+        {t: "Лазертаг (2 часа)", p: [700, 650, 600, 550]},
+        {t: "Лазертаг-Квест (2 ч)", p: [800, 750, 700, 650]},
+        {t: "Иммерсивный квест", p: [1200, 1100, 1000, 900]},
+        {t: "Пейнтбол (200 шаров)", p: [1800, 1750, 1700, 1650]},
+        {t: "Пейнтбол (400 шаров)", p: [2000, 1950, 1900, 1850]},
+        {t: "Пейнтбол-квест 9-РОТА", p: [2700, 2600, 2500, 2400]},
+        {t: "Арчеритаг (1.5 ч)", p: [1100, 1000, 900, 800]},
+        {t: "Тир (стрелковый ряд)", p: ["12000", "12000", "12000", "12000"]}
+    ]
+};
+
+function renderList(id, type = 'wk') {
+    const list = document.getElementById('list-' + id);
+    if (!list) return;
+    list.innerHTML = data[id].map(item => {
+        if (item.cat) return `<div class="p-category" style="grid-column: 1/-1">${item.cat}</div>`;
+        return `
+            <div class="p-card">
+                <div class="p-header">
+                    <div class="p-title">${item.t}</div>
+                    <div class="p-price ${type==='we'?'alt':''}">${item[type]}</div>
+                </div>
+                <div class="p-desc">${item.d}</div>
+                ${item.tag ? `<div class="p-tag">${item.tag}</div>` : ''}
+            </div>
+        `;
+    }).join('');
+}
+
+function setDay(id, type, btn) {
+    btn.parentElement.querySelectorAll('.sw-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderList(id, type);
+}
+
+function setSchool(idx, btn) {
+    btn.parentElement.querySelectorAll('.sw-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const container = document.getElementById('list-schools');
+    container.innerHTML = data.schools.map(item => `
+        <div class="p-card">
+            <div class="p-header">
+                <div class="p-title">${item.t}</div>
+                <div class="p-price ${idx === 3 ? 'alt' : ''}">${item.p[idx]} ₽${item.p[0]==="12000"?" за 2ч":"/чел"}</div>
+            </div>
+        </div>
+    `).join('');
+}
+
+function jump(id) {
+    const el = document.getElementById(id);
+    if(el) {
+        window.scrollTo({ top: el.offsetTop - 110, behavior: 'smooth' });
+        document.getElementById('drawer').classList.remove('open');
+        document.getElementById('burger').classList.remove('open');
+    }
+}
+
+document.getElementById('burger').onclick = function() {
+    this.classList.toggle('open');
+    document.getElementById('drawer').classList.toggle('open');
+};
+
+window.onload = () => {
+    renderList('lt', 'wk');
+    renderList('pb', 'wk');
+    renderList('tb', 'wk');
+    renderList('winter', 'wk');
+    setSchool(0, document.querySelector('#schools .sw-btn'));
+};
+</script>
+</body>
+</html>
