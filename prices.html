@@ -19,17 +19,32 @@
         body { background: var(--bg); color: var(--text); font-family: 'Manrope', sans-serif; overflow-x: hidden; }
 
         /* HEADER */
-        #mainNav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; background: rgba(16,30,20,.95); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255,255,255,.1); }
-        .hdr-logo { font-family: 'Geologica', sans-serif; font-size: 1rem; font-weight: 800; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 10px; }
-        .hdr-burger { width: 44px; height: 44px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 6px; background: none; border: none; cursor: pointer; }
+        #mainNav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; background: rgba(16,30,20,.95); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid rgba(255,255,255,.08); }
+        .hdr-logo { font-family: 'Geologica', sans-serif; font-size: 1rem; font-weight: 800; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+        .hdr-logo-img { height: 36px; width: auto; display: block; flex-shrink: 0; }
+        .hdr-links { display: none; align-items: center; gap: 4px; }
+        .hdr-links a { font-family: 'Geologica', sans-serif; font-size: .82rem; font-weight: 600; color: rgba(255,255,255,.75); text-decoration: none; padding: 8px 14px; border-radius: 10px; transition: color .2s, background .2s; }
+        .hdr-links a:hover { color: #fff; background: rgba(255,255,255,.1); }
+        .hdr-back { display: none; font-family: 'Geologica', sans-serif; font-size: .82rem; font-weight: 700; color: rgba(255,255,255,.8); text-decoration: none; padding: 8px 18px; border-radius: 100px; border: 1.5px solid rgba(255,255,255,.25); transition: color .2s, background .2s, border-color .2s; flex-shrink: 0; }
+        .hdr-back:hover { color: #fff; background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.5); }
+        .hdr-burger { width: 44px; height: 44px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 6px; background: none; border: none; cursor: pointer; border-radius: 12px; transition: background .2s; }
+        .hdr-burger:hover { background: rgba(255,255,255,.1); }
         .hdr-burger span { display: block; width: 22px; height: 2px; background: #fff; border-radius: 2px; transition: .25s; }
         .hdr-burger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
         .hdr-burger.open span:nth-child(2) { opacity: 0; }
         .hdr-burger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+        @media(min-width: 768px) {
+            #mainNav { padding: 0 48px; }
+            .hdr-links { display: flex; }
+            .hdr-back { display: inline-flex; align-items: center; }
+            .hdr-burger { display: none; }
+        }
 
-        .hdr-drawer { position: fixed; top: 64px; left: 0; right: 0; z-index: 999; background: rgba(16,30,20,.98); max-height: 0; overflow: hidden; transition: .3s ease; }
-        .hdr-drawer.open { max-height: 100vh; padding-bottom: 40px; }
-        .hdr-drawer a { display: block; padding: 18px 24px; color: #fff; text-decoration: none; font-family: 'Geologica', sans-serif; border-bottom: 1px solid rgba(255,255,255,.05); }
+        .hdr-drawer { position: fixed; top: 64px; left: 0; right: 0; z-index: 999; background: rgba(16,30,20,.98); backdrop-filter: blur(20px); max-height: 0; overflow: hidden; transition: max-height .35s cubic-bezier(.4,0,.2,1); }
+        .hdr-drawer.open { max-height: 100vh; padding-bottom: 24px; }
+        .hdr-drawer a { display: block; padding: 16px 24px; color: rgba(255,255,255,.8); text-decoration: none; font-family: 'Geologica', sans-serif; font-size: .9rem; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,.06); transition: color .15s, background .15s; }
+        .hdr-drawer a:hover { color: #fff; background: rgba(255,255,255,.05); }
+        .hdr-drawer .drawer-back { color: rgba(255,255,255,.45); font-size: .8rem; }
 
         /* STICKY NAV */
         .snav-bar { position: sticky; top: 64px; z-index: 900; background: #fff; border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; display: flex; }
@@ -81,11 +96,22 @@
 <body>
 
 <nav id="mainNav">
-    <a href="#" class="hdr-logo">ПЭЙНТЛЭНД ПАРК</a>
+    <a href="index.html" class="hdr-logo">
+        <img src="logo.png" alt="Логотип" class="hdr-logo-img">
+        ПЭЙНТЛЭНД ПАРК
+    </a>
+    <div class="hdr-links">
+        <a href="index.html#services">Услуги</a>
+        <a href="index.html#locations">Парки</a>
+        <a href="index.html#booking">Бронирование</a>
+        <a href="index.html#contacts">Контакты</a>
+    </div>
+    <a href="index.html" class="hdr-back">← На главную</a>
     <button class="hdr-burger" id="burger"><span></span><span></span><span></span></button>
 </nav>
 
 <div class="hdr-drawer" id="drawer">
+    <a href="index.html" class="drawer-back">← На главную</a>
     <a href="#lasertag" onclick="jump('lasertag')">⚡ Лазертаг</a>
     <a href="#paintball" onclick="jump('paintball')">🎯 Пейнтбол</a>
     <a href="#teambuilding" onclick="jump('teambuilding')">🏆 Тимбилдинг</a>
