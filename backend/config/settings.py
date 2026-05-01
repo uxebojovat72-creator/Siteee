@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'apps.parks',
     'apps.bookings',
+    'apps.prices',
 ]
 
 MIDDLEWARE = [

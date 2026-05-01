@@ -11,6 +11,7 @@ urlpatterns = [
     path('adminka/', admin.site.urls),
     path('api/parks/', include('apps.parks.urls')),
     path('api/bookings/', include('apps.bookings.urls')),
+    path('api/prices/', include('apps.prices.urls')),
 ]
 
 if settings.DEBUG:
