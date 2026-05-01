@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
-
+ 
 const TICKER_ITEMS = ['ПЕЙНТБОЛ','ЛАЗЕРТАГ','КВАДРОЦИКЛЫ','ДЖИПИНГ','ТИМБИЛДИНГ','ВЕРЁВОЧНЫЙ ПАРК','ДНИ РОЖДЕНИЯ','КОРПОРАТИВЫ']
 
 export default function Home() {
