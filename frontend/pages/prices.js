@@ -1,9 +1,89 @@
+import { useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import { PRICES_STATIC } from '../lib/api'
 import styles from './prices.module.css'
+
+function SchoolsSection({ cat }) {
+  const [activeGroup, setActiveGroup] = useState(0)
+  return (
+    <div>
+      <div className={styles.groupTabs}>
+        {cat.groupLabels.map((label, i) => (
+          <button
+            key={i}
+            className={`${styles.groupTab} ${i === activeGroup ? styles.groupTabActive : ''}`}
+            onClick={() => setActiveGroup(i)}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+      <table className={styles.schoolsTable}>
+        <thead>
+          <tr>
+            <th>Программа</th>
+            <th>Цена / чел</th>
+          </tr>
+        </thead>
+        <tbody>
+          {cat.plans.map((plan, i) => (
+            <tr key={i}>
+              <td>{plan.name}</td>
+              <td>
+                {plan.flat
+                  ? <>{plan.prices[0].toLocaleString('ru')} ₽ <span className={styles.schoolsFlat}>фиксированно</span></>
+                  : <>{plan.prices[activeGroup].toLocaleString('ru')} ₽</>
+                }
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
+function PlanCard({ plan }) {
+  return (
+    <div className={`${styles.plan} ${plan.hot ? styles.planHot : ''}`}>
+      {plan.hot && <div className={styles.planBadge}>ХИТ</div>}
+      <div className={styles.planName}>{plan.name}</div>
+
+      {plan.priceWk && plan.priceWe ? (
+        <div className={styles.planPrices}>
+          <div className={styles.priceWk}>
+            <small>Пн–Чт</small>
+            <strong>{plan.priceWk}</strong>
+          </div>
+          <div className={styles.priceWe}>
+            <small>Пт–Вс</small>
+            <strong>{plan.priceWe}</strong>
+          </div>
+        </div>
+      ) : (
+        <div className={styles.planPrice}>
+          {plan.price}
+          {plan.unit && <span> {plan.unit}</span>}
+        </div>
+      )}
+
+      {plan.duration && <div className={styles.planDuration}>⏱ {plan.duration}</div>}
+
+      {plan.bullets && plan.bullets.length > 0 && (
+        <ul className={styles.planList}>
+          {plan.bullets.map((b, j) => <li key={j}>{b}</li>)}
+        </ul>
+      )}
+
+      <Link href="/#booking" className={styles.planBtn}>
+        Записаться
+      </Link>
+    </div>
+  )
+}
 
 export default function Prices({ prices }) {
   const categories = Object.entries(prices)
@@ -59,7 +139,7 @@ export default function Prices({ prices }) {
       {/* NOTICE */}
       <div className={styles.notice}>
         <span className={styles.noticeIcon}>ℹ️</span>
-        <span>Цены указаны на будний день. В выходные и праздники возможна надбавка 10–20%. Уточняйте при бронировании.</span>
+        <span>Цены будних дней (Пн–Чт) выделены зелёным, выходных и праздников (Пт–Вс) — оранжевым. При бронировании уточняйте актуальный тариф.</span>
       </div>
 
       {/* PRICE BLOCKS */}
@@ -82,27 +162,21 @@ export default function Prices({ prices }) {
               </div>
             )}
 
-            <div className={styles.plans}>
-              {cat.plans.map((plan, i) => (
-                <div key={i} className={`${styles.plan} ${plan.hot ? styles.planHot : ''}`}>
-                  {plan.hot && <div className={styles.planBadge}>ХИТ</div>}
-                  <div className={styles.planName}>{plan.name}</div>
-                  <div className={styles.planPrice}>
-                    {plan.price}
-                    {plan.unit && <span> {plan.unit}</span>}
-                  </div>
-                  <div className={styles.planDuration}>⏱ {plan.duration}</div>
-                  <ul className={styles.planList}>
-                    {plan.bullets.map((b, j) => (
-                      <li key={j}>{b}</li>
-                    ))}
-                  </ul>
-                  <Link href="/#booking" className={styles.planBtn}>
-                    Записаться
-                  </Link>
-                </div>
-              ))}
-            </div>
+            {cat.type === 'schools' ? (
+              <SchoolsSection cat={cat} />
+            ) : (
+              <div className={styles.plans}>
+                {cat.plans.map((plan, i) => (
+                  <PlanCard key={i} plan={plan} />
+                ))}
+              </div>
+            )}
+
+            {cat.extraNote && (
+              <div className={styles.extraNote}>
+                {cat.extraNote}
+              </div>
+            )}
           </section>
         ))}
       </main>
@@ -134,6 +208,7 @@ export default function Prices({ prices }) {
             ['Как оплатить?', 'После подтверждения бронирования мы отправляем ссылку на онлайн-оплату. Принимаем карты, СБП и наличные на месте.'],
             ['Что включает экипировка?', 'Для пейнтбола: маска, комбинезон, перчатки, маркер, шары по тарифу. Для лазертага: жилет и бластер. Всё чистое и продезинфицированное.'],
             ['Можно ли приехать без подготовки?', 'Конечно! Перед каждой игрой инструктор проводит инструктаж и объясняет правила. Никакого опыта не нужно.'],
+            ['Почему цены в выходные выше?', 'В пятницу–воскресенье и праздники нагрузка на парк значительно возрастает. Повышенный тариф обеспечивает комфортный уровень сервиса и экипировки для всех гостей.'],
           ].map(([q, a], i) => (
             <details key={i} className={styles.faqItem}>
               <summary>{q}</summary>

@@ -176,6 +176,46 @@
   margin-bottom: 4px;
 }
 .planPrice span { font-size: .85rem; font-weight: 400; color: #7a8c7e; }
+
+/* Weekend / weekday split prices */
+.planPrices {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px;
+}
+.priceWk {
+  display: flex; flex-direction: column; align-items: flex-start;
+  background: rgba(45,90,61,.07); border: 1.5px solid rgba(45,90,61,.18);
+  border-radius: 12px; padding: 8px 14px;
+}
+.priceWk small {
+  font-size: .58rem; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; color: #5a8a6a; margin-bottom: 2px;
+}
+.priceWk strong {
+  font-family: 'Geologica', sans-serif;
+  font-size: 1.25rem; font-weight: 800; color: #1a2e22; line-height: 1.1;
+}
+.priceWe {
+  display: flex; flex-direction: column; align-items: flex-start;
+  background: rgba(212,98,42,.08); border: 1.5px solid rgba(212,98,42,.3);
+  border-radius: 12px; padding: 8px 14px;
+}
+.priceWe small {
+  font-size: .58rem; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; color: #c0501e; margin-bottom: 2px;
+}
+.priceWe strong {
+  font-family: 'Geologica', sans-serif;
+  font-size: 1.25rem; font-weight: 800; color: #d4622a; line-height: 1.1;
+}
+
+/* Extra note below plans */
+.extraNote {
+  margin-top: 18px; padding: 12px 16px;
+  background: rgba(45,90,61,.05); border-left: 3px solid #5a8a6a;
+  border-radius: 0 10px 10px 0;
+  font-size: .78rem; color: #4a6a52; line-height: 1.7;
+}
+
 .planDuration {
   font-size: .75rem; color: #7a8c7e; margin-bottom: 14px;
 }
@@ -200,6 +240,50 @@
   text-decoration: none; transition: background .2s, transform .15s;
 }
 .planBtn:hover { background: #e8824a; transform: translateY(-1px); }
+
+/* SCHOOLS TABLE */
+.groupTabs {
+  display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px;
+}
+.groupTab {
+  font-family: 'Geologica', sans-serif;
+  font-size: .75rem; font-weight: 600;
+  padding: 7px 16px; border-radius: 100px;
+  border: 1.5px solid rgba(45,90,61,.2);
+  background: transparent; color: #2d5a3d;
+  cursor: pointer; transition: background .15s, color .15s;
+}
+.groupTab:hover { background: rgba(45,90,61,.07); }
+.groupTabActive {
+  background: #2d5a3d !important; color: #fff !important;
+  border-color: #2d5a3d !important;
+}
+.schoolsTable {
+  width: 100%; border-collapse: collapse;
+  font-size: .82rem;
+}
+.schoolsTable th {
+  text-align: left; padding: 10px 14px;
+  font-family: 'Geologica', sans-serif;
+  font-size: .7rem; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; color: #5a8a6a;
+  border-bottom: 2px solid rgba(45,90,61,.12);
+}
+.schoolsTable th:last-child { text-align: right; }
+.schoolsTable td {
+  padding: 11px 14px; color: #2c3a2e;
+  border-bottom: 1px solid rgba(45,90,61,.07);
+}
+.schoolsTable td:last-child {
+  text-align: right;
+  font-family: 'Geologica', sans-serif;
+  font-weight: 700; color: #d4622a; font-size: .92rem;
+}
+.schoolsTable tr:last-child td { border-bottom: none; }
+.schoolsTable tr:hover td { background: rgba(45,90,61,.03); }
+.schoolsFlat {
+  font-size: .7rem; color: #7a8c7e; font-weight: 400; margin-left: 4px;
+}
 
 /* CTA */
 .cta {
