@@ -54,10 +54,28 @@ export default function Home() {
     setTimeout(() => setBubbles(prev => [...prev, { type:'out', text: replies[Math.floor(Math.random()*replies.length)] }]), 900)
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    setFormStatus('loading')
-    setTimeout(() => setFormStatus('ok'), 1200)
+  const handleSubmit = async (e) => {
+  e.preventDefault()
+  setFormStatus('loading')
+  try {
+    const apiUrl = process.env.NEXT_PUBLIC_CRM_API_URL || 'https://paintlandpark.ru'
+    const res = await fetch(`${apiUrl}/api/web/booking`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: form.name,
+        phone: form.phone,
+        date: form.date,
+        people: String(form.people),
+        park: form.park,
+        activity: form.activity,
+      }),
+    })
+    const data = await res.json()
+    setFormStatus(data.status === 'ok' ? 'ok' : 'error')
+  } catch {
+    setFormStatus('error')
+  }
   }
 
   return (
