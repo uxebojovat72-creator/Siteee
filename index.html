@@ -1263,25 +1263,76 @@ footer {
     <div class="book-pill">⚡ Ответим за 15 минут</div>
   </div>
   <div class="rv">
-    <div class="form-g">
-      <div class="fi"><label>Имя</label><input type="text" placeholder="Иван Петров"></div>
-      <div class="fi"><label>Телефон</label><input type="tel" placeholder="+7 (999) 000-00-00"></div>
-      <div class="fi"><label>Дата</label><input type="date"></div>
-      <div class="fi"><label>Время</label><input type="time" value="14:00"></div>
-      <div class="fi"><label>Человек</label><input type="number" placeholder="10" min="2"></div>
+    <div class="form-g" id="bookingForm">
+      <div class="fi"><label>Имя</label><input id="bName" type="text" placeholder="Иван Петров"></div>
+      <div class="fi"><label>Телефон</label><input id="bPhone" type="tel" placeholder="+7 (999) 000-00-00"></div>
+      <div class="fi"><label>Дата</label><input id="bDate" type="date"></div>
+      <div class="fi"><label>Время</label><input id="bTime" type="time" value="14:00"></div>
+      <div class="fi"><label>Человек</label><input id="bPeople" type="number" placeholder="10" min="2"></div>
       <div class="fi"><label>Площадка</label>
-        <select><option>Бухта Радости</option><option>Парк Софрино</option><option>Выезд на объект</option></select>
+        <select id="bPark"><option>Бухта Радости</option><option>Парк Софрино</option><option>Выезд на объект</option></select>
       </div>
       <div class="fi full"><label>Активность</label>
-        <select><option>Пейнтбол</option><option>Лазертаг</option><option>Квадроциклы</option><option>Джипинг / УАЗ</option><option>Тимбилдинг</option><option>Верёвочный парк</option><option>День рождения</option></select>
+        <select id="bActivity"><option>Пейнтбол</option><option>Лазертаг</option><option>Квадроциклы</option><option>Джипинг / УАЗ</option><option>Тимбилдинг</option><option>Верёвочный парк</option><option>День рождения</option></select>
       </div>
       <div class="fi full">
-        <a href="#" class="btn-main" style="display:block;text-align:center;font-size:.88rem;padding:14px" onclick="return false">Отправить заявку →</a>
-        <p style="font-size:.65rem;color:var(--muted);margin-top:8px;text-align:center">После подтверждения — ссылка на онлайн-оплату</p>
+        <button id="bSubmit" class="btn-main" style="display:block;width:100%;text-align:center;font-size:.88rem;padding:14px;border:none;cursor:pointer">Отправить заявку →</button>
+        <p id="bMsg" style="font-size:.75rem;margin-top:8px;text-align:center;min-height:1.2em"></p>
+        <p style="font-size:.65rem;color:var(--muted);margin-top:4px;text-align:center">После подтверждения — ссылка на онлайн-оплату</p>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+(function() {
+  var btn = document.getElementById('bSubmit');
+  if (!btn) return;
+  btn.addEventListener('click', async function() {
+    var name  = document.getElementById('bName').value.trim();
+    var phone = document.getElementById('bPhone').value.trim();
+    var msg   = document.getElementById('bMsg');
+    if (!name || !phone) {
+      msg.style.color = '#c0392b';
+      msg.textContent = 'Заполните Имя и Телефон';
+      return;
+    }
+    btn.textContent = 'Отправляем...';
+    btn.disabled = true;
+    msg.textContent = '';
+    try {
+      var r = await fetch('https://paintlandpark.ru/api/web/booking', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name:     name,
+          phone:    phone,
+          date:     document.getElementById('bDate').value,
+          people:   document.getElementById('bPeople').value,
+          park:     document.getElementById('bPark').value,
+          activity: document.getElementById('bActivity').value
+        })
+      });
+      var d = await r.json();
+      if (d.status === 'ok') {
+        document.getElementById('bookingForm').innerHTML =
+          '<div style="text-align:center;padding:40px 0">' +
+          '<div style="font-size:3rem">✅</div>' +
+          '<div style="font-weight:700;font-size:1.1rem;color:var(--forest);margin-top:12px">Заявка принята!</div>' +
+          '<p style="color:var(--muted);font-size:.85rem;margin-top:8px">Свяжемся в ближайшее время.</p>' +
+          '</div>';
+      } else {
+        throw new Error();
+      }
+    } catch(e) {
+      msg.style.color = '#c0392b';
+      msg.textContent = 'Ошибка. Позвоните: +7 (925) 010-85-35';
+      btn.textContent = 'Отправить заявку →';
+      btn.disabled = false;
+    }
+  });
+})();
+</script>
 
 <!-- CHAT -->
 <section class="chat-bg s">
