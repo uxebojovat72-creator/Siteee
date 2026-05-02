@@ -288,11 +288,11 @@ export default function Home() {
         <div className="svc-g">
           {[
             { bg: "url('/photo_paintball.jpg')", name: 'Пейнтбол', price: 'от 1 600 ₽' },
-            { bg: 'linear-gradient(135deg,#0a0f1a,#1a2850)', name: 'Лазертаг', price: 'от 600 ₽' },
+            { bg: "url('/photo_lasertag.jpg')", name: 'Лазертаг', price: 'от 600 ₽' },
             { bg: "url('/photo_atv.jpg')", name: 'Квадроциклы', price: 'от 15 000 ₽' },
-            { bg: "url('/photo_uaz.jpg')", name: 'Джипинг / УАЗ', price: 'Уточнить' },
-            { bg: 'linear-gradient(135deg,#0e1f0a,#2a5014)', name: 'Верёвочный парк', price: 'Уточнить' },
-            { bg: 'linear-gradient(135deg,#1f0e0a,#501428)', name: 'День рождения', price: 'Именинникам', badge: 'Скидка 50%' },
+            { bg: "url('/photo_uaz.jpg')", name: 'Джиппинг', price: 'Уточнить' },
+            { bg: "url('/photo_ropepark.jpg')", name: 'Верёвочный парк', price: 'Уточнить' },
+            { bg: "url('/photo_birthday.png')", name: 'День рождения', price: 'Именинникам', badge: 'Скидка 50%' },
           ].map(({ bg, name, price, badge }) => (
             <div className="svc-c rv" key={name}>
               <div className="svc-photo" style={{ backgroundImage: bg }} />
@@ -385,7 +385,7 @@ export default function Home() {
           {[
             { img: '/photo_paintball.jpg', label: 'Пейнтбол', big: true },
             { img: '/photo_atv.jpg',       label: 'Квадроциклы' },
-            { img: '/photo_uaz.jpg',       label: 'Джипинг' },
+            { img: '/photo_uaz.jpg',       label: 'Джиппинг' },
             { img: '/photo_couple.jpg',    label: 'Снаряжение' },
             { img: '/photo_husky.jpg',     label: 'Хаски' },
           ].map(({ img, label, big }) => (
@@ -538,7 +538,7 @@ export default function Home() {
                 <label>Активность</label>
                 <select value={form.activity} onChange={e => setForm(f=>({...f,activity:e.target.value}))}>
                   <option>Пейнтбол</option><option>Лазертаг</option><option>Квадроциклы</option>
-                  <option>Джипинг / УАЗ</option><option>Тимбилдинг</option><option>День рождения</option>
+                  <option>Джиппинг</option><option>Тимбилдинг</option><option>День рождения</option>
                 </select>
               </div>
               <div className="fi full">
