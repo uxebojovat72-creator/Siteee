@@ -5,5 +5,11 @@
   "vars": {
     "TELEGRAM_BOT_TOKEN": "8493905134:AAGHCfV8L47K74eoKVqZAWtROHCxPiLBOb8",
     "TELEGRAM_CHAT_ID": "-1003949236425"
-  }
+  },
+  "kv_namespaces": [
+    {
+      "binding": "CHAT_KV",
+      "id": "REPLACE_WITH_YOUR_KV_NAMESPACE_ID"
+    }
+  ]
 }

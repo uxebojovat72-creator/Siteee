@@ -15,6 +15,7 @@ export default function Home() {
   const [chatReady, setChatReady] = useState(false)
   const [chatSending, setChatSending] = useState(false)
   const [chatInteracted, setChatInteracted] = useState(false)
+  const [chatSessionId, setChatSessionId] = useState(null)
   const [bubbles, setBubbles] = useState([
     { type:'in',  text:'Привет! Хочу организовать день рождения 🎉' },
     { type:'out', text:'Привет! Сколько гостей и какой возраст детей?' },
@@ -22,6 +23,8 @@ export default function Home() {
     { type:'out', text:'Отлично! Для этого возраста идеально подойдёт лазертаг. Забронируем? ✅' },
   ])
   const bubblesRef = useRef(null)
+  const pollRef = useRef(null)
+  const lastSeenTsRef = useRef(0)
 
   useEffect(() => {
     const io = new IntersectionObserver(
@@ -48,6 +51,25 @@ export default function Home() {
     if (bubblesRef.current) bubblesRef.current.scrollTop = bubblesRef.current.scrollHeight
   }, [bubbles])
 
+  // Poll for manager replies once the session is active
+  useEffect(() => {
+    if (!chatReady || !chatSessionId) return
+    const poll = async () => {
+      try {
+        const res = await fetch(`/api/messages?session=${chatSessionId}`)
+        if (!res.ok) return
+        const { messages } = await res.json()
+        const newOuts = messages.filter(m => m.type === 'out' && m.ts > lastSeenTsRef.current)
+        if (newOuts.length > 0) {
+          newOuts.forEach(m => setBubbles(prev => [...prev, { type:'out', text: m.text }]))
+          lastSeenTsRef.current = Math.max(...newOuts.map(m => m.ts))
+        }
+      } catch {}
+    }
+    pollRef.current = setInterval(poll, 3000)
+    return () => clearInterval(pollRef.current)
+  }, [chatReady, chatSessionId])
+
   const closeMenu = () => setMenuOpen(false)
 
   const handleChatFocus = () => {
@@ -57,7 +79,7 @@ export default function Home() {
     }
   }
 
-  const doSendChat = async (name, phone, message) => {
+  const doSendChat = async (name, phone, message, existingSessionId) => {
     if (chatSending) return
     setChatSending(true)
     setBubbles(prev => [...prev, { type:'in', text: message }])
@@ -66,11 +88,19 @@ export default function Home() {
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, phone, message, hp: '' }),
+        body: JSON.stringify({ name, phone, message, hp: '', session_id: existingSessionId || undefined }),
       })
       if (res.ok || res.status === 201) {
+        const data = await res.json()
+        const sid = data.session_id
+        if (sid) {
+          setChatSessionId(sid)
+          try { localStorage.setItem('paintland_chat', sid) } catch {}
+        }
+        // Set timestamp baseline — only poll manager replies AFTER this moment
+        lastSeenTsRef.current = Date.now()
         setChatReady(true)
-        setBubbles(prev => [...prev, { type:'out', text: 'Спасибо! Менеджер ответит вам в ближайшее время 😊' }])
+        setBubbles(prev => [...prev, { type:'sys', text: 'Отправлено — менеджер ответит в чате ✓' }])
       } else {
         setBubbles(prev => [...prev, { type:'out', text: 'Что-то пошло не так. Позвоните нам: +7 (925) 010-85-35' }])
       }
@@ -85,13 +115,13 @@ export default function Home() {
     e.preventDefault()
     const v = chatInput.trim()
     if (!v || !chatName.trim() || !chatPhone.trim()) return
-    doSendChat(chatName.trim(), chatPhone.trim(), v)
+    doSendChat(chatName.trim(), chatPhone.trim(), v, null)
   }
 
   const handleReply = () => {
     const v = chatInput.trim()
     if (!v) return
-    doSendChat(chatName, chatPhone, v)
+    doSendChat(chatName, chatPhone, v, chatSessionId)
   }
 
   const handleSubmit = async (e) => {
@@ -487,7 +517,11 @@ export default function Home() {
             <div><div className="chat-nm">Пэйнтлэнд Парк</div><div className="chat-st">онлайн · отвечаем быстро</div></div>
           </div>
           <div className="bubbles" ref={bubblesRef}>
-            {bubbles.map((b, i) => <div key={i} className={`bub ${b.type}`}>{b.text}</div>)}
+            {bubbles.map((b, i) => (
+              b.type === 'sys'
+                ? <div key={i} className="bub-sys">{b.text}</div>
+                : <div key={i} className={`bub ${b.type}`}>{b.text}</div>
+            ))}
             {chatSending && <div className="bub out chat-typing"><span /><span /><span /></div>}
           </div>
           {!chatReady ? (
@@ -512,7 +546,7 @@ export default function Home() {
                 <input type="text" placeholder="Ваш вопрос..." value={chatInput} onChange={e => setChatInput(e.target.value)} onFocus={handleChatFocus} />
                 <button type="submit" className="chat-send" disabled={chatSending || !chatName.trim() || !chatPhone.trim() || !chatInput.trim()}>→</button>
               </div>
-              <p className="chat-pre-hint">Менеджер ответит вам по телефону</p>
+              <p className="chat-pre-hint">Менеджер ответит вам по телефону и в чате</p>
             </form>
           ) : (
             <div className="chat-inp">
