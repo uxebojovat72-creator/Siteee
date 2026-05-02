@@ -18,7 +18,8 @@ export default function Home() {
   const [chatSessionId, setChatSessionId] = useState(null)
   const [reviewsOpen, setReviewsOpen] = useState(false)
   const [bookingOpen, setBookingOpen] = useState(true)
-  const [chatOpen, setChatOpen]     = useState(false)
+  const [tgOpen, setTgOpen]           = useState(false)
+  const [chatOpen, setChatOpen]       = useState(false)
   const [bubbles, setBubbles] = useState([
     { type:'in',  text:'Привет! Хочу организовать день рождения 🎉' },
     { type:'out', text:'Привет! Сколько гостей и какой возраст детей?' },
@@ -462,12 +463,18 @@ export default function Home() {
 
       {/* ── TELEGRAM ── */}
       <section className="s tg-sec" id="telegram" style={{ background: 'var(--forest)' }}>
-        <div className="tg-inner rv">
-          <div className="tg-text">
-            <div className="tg-badge">✈️ Telegram Mini App</div>
+        <button className="acc-hdr tg-acc-hdr rv" onClick={() => setTgOpen(o => !o)} aria-expanded={tgOpen}>
+          <div>
+            <div className="tg-badge">✈️ Приложение</div>
             <h2 className="tg-h">Бронируйте в один клик через Telegram</h2>
-            <p className="tg-desc">Наш бот позволяет выбрать дату, количество гостей и оплатить онлайн — всё не выходя из Telegram.</p>
-            <a href="https://t.me/paintballclub_bot" target="_blank" rel="noreferrer" className="tg-btn">Открыть в Telegram →</a>
+          </div>
+          <span className={`acc-chev acc-chev-inv${tgOpen ? ' open' : ''}`}><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--forest)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </button>
+        <div className={`acc-body${tgOpen ? ' open' : ''}`}>
+        <div className="tg-inner">
+          <div className="tg-text">
+            <p className="tg-desc">Наше приложение позволяет выбрать дату, количество гостей и оплатить онлайн — всё не выходя из Telegram.</p>
+            <a href="https://t.me/PaintlandPark_bot" target="_blank" rel="noreferrer" className="tg-btn">Открыть в Telegram →</a>
           </div>
           <div className="tg-qr rv">
             <div className="tg-qr-box">
@@ -494,6 +501,7 @@ export default function Home() {
               <p className="tg-qr-label">Сканируй и бронируй</p>
             </div>
           </div>
+        </div>
         </div>
       </section>
       {/* ── BOOKING ── */}

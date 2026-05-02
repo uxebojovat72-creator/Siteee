@@ -241,8 +241,10 @@ html, body {
   background:var(--forest);
   transition:transform .35s ease;
 }
+.acc-chev-inv { background:rgba(255,255,255,.18); }
 .acc-chev svg { display:block; }
 .acc-chev.open { transform:rotate(180deg); }
+.tg-acc-hdr:hover .tg-h { opacity:.8; transition:opacity .2s; }
 .acc-body {
   overflow:hidden;
   max-height:0;
