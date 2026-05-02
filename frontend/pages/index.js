@@ -474,7 +474,7 @@ export default function Home() {
         <div className="tg-inner">
           <div className="tg-text">
             <p className="tg-desc">Наше приложение позволяет выбрать дату, количество гостей и оплатить онлайн — всё не выходя из Telegram.</p>
-            <a href="https://t.me/PaintlandPark_bot" target="_blank" rel="noreferrer" className="tg-btn">Открыть в Telegram →</a>
+            <a href="http://t.me/PaintlandPark_bot/apps" target="_blank" rel="noreferrer" className="tg-btn">Открыть в Telegram →</a>
           </div>
           <div className="tg-qr rv">
             <div className="tg-qr-box">
