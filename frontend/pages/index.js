@@ -69,6 +69,9 @@ export default function Home() {
         .then(({ messages }) => {
           if (messages && messages.length > 0) {
             setBubbles(messages.map(m => ({ type: m.type, text: m.text })))
+            // Poll only for messages newer than what we already loaded
+            const maxTs = Math.max(...messages.map(m => m.ts))
+            lastSeenTsRef.current = Math.max(lastSeenTsRef.current, maxTs)
           }
         })
         .catch(() => {})
@@ -125,8 +128,9 @@ export default function Home() {
             localStorage.setItem('paintland_chat_phone', phone)
           } catch {}
         }
-        // Set timestamp baseline — only poll manager replies AFTER this moment
-        lastSeenTsRef.current = Date.now()
+        // Set baseline only on first send — subsequent sends must NOT reset it
+        // (resetting would cause manager replies arriving simultaneously to be skipped)
+        if (!chatReady) lastSeenTsRef.current = Date.now()
         setChatReady(true)
         setBubbles(prev => [...prev, { type:'sys', text: 'Отправлено — менеджер ответит в чате ✓' }])
       } else {
