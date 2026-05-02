@@ -61,7 +61,9 @@ export async function onRequestPost({ request, env }) {
   const token = env.TELEGRAM_BOT_TOKEN
   const chatId = env.TELEGRAM_CHAT_ID
 
-  if (token && chatId) {
+  if (!token || !chatId) {
+    console.error('[chat] Missing env vars: TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID')
+  } else {
     let text = isFirst ? `💬 *Новый чат*\n` : `↩️ *Продолжение*\n`
     if (name) text += `👤 ${esc(name)}\n`
     if (phone) text += `📱 ${esc(phone)}\n`
@@ -74,6 +76,9 @@ export async function onRequestPost({ request, env }) {
         body: JSON.stringify({ chat_id: chatId, text, parse_mode: 'MarkdownV2' }),
       })
       const tgData = await tgRes.json()
+      if (!tgData.ok) {
+        console.error('[chat] Telegram error:', JSON.stringify(tgData))
+      }
 
       // Store TG message_id → session_id so webhook can route manager replies
       if (tgData.ok && env.CHAT_KV) {
@@ -81,8 +86,8 @@ export async function onRequestPost({ request, env }) {
           expirationTtl: 86400,
         })
       }
-    } catch {
-      // Telegram down — still return ok
+    } catch (e) {
+      console.error('[chat] Telegram fetch failed:', e.message)
     }
   }
 
