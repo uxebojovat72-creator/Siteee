@@ -51,6 +51,30 @@ export default function Home() {
     if (bubblesRef.current) bubblesRef.current.scrollTop = bubblesRef.current.scrollHeight
   }, [bubbles])
 
+  // Restore session from localStorage on page load / refresh
+  useEffect(() => {
+    try {
+      const savedSession = localStorage.getItem('paintland_chat')
+      if (!savedSession) return
+      lastSeenTsRef.current = Date.now()
+      setChatSessionId(savedSession)
+      setChatReady(true)
+      setChatInteracted(true)
+      const savedName = localStorage.getItem('paintland_chat_name')
+      const savedPhone = localStorage.getItem('paintland_chat_phone')
+      if (savedName) setChatName(savedName)
+      if (savedPhone) setChatPhone(savedPhone)
+      fetch(`/api/messages?session=${savedSession}`)
+        .then(r => r.ok ? r.json() : { messages: [] })
+        .then(({ messages }) => {
+          if (messages && messages.length > 0) {
+            setBubbles(messages.map(m => ({ type: m.type, text: m.text })))
+          }
+        })
+        .catch(() => {})
+    } catch {}
+  }, [])
+
   // Poll for manager replies once the session is active
   useEffect(() => {
     if (!chatReady || !chatSessionId) return
@@ -95,7 +119,11 @@ export default function Home() {
         const sid = data.session_id
         if (sid) {
           setChatSessionId(sid)
-          try { localStorage.setItem('paintland_chat', sid) } catch {}
+          try {
+            localStorage.setItem('paintland_chat', sid)
+            localStorage.setItem('paintland_chat_name', name)
+            localStorage.setItem('paintland_chat_phone', phone)
+          } catch {}
         }
         // Set timestamp baseline — only poll manager replies AFTER this moment
         lastSeenTsRef.current = Date.now()

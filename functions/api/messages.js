@@ -22,6 +22,9 @@ export async function onRequestGet({ request, env }) {
   if (!sessionId || !env.CHAT_KV) return json({ messages: [] })
 
   try {
+    // Heartbeat — update lastSeen on every poll so manager knows user is online
+    await env.CHAT_KV.put(`lastseen:${sessionId}`, String(Date.now()), { expirationTtl: 86400 })
+
     const raw = await env.CHAT_KV.get(`session:${sessionId}`)
     const messages = raw ? JSON.parse(raw) : []
     return json({ messages })
