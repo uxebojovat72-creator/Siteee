@@ -14,6 +14,7 @@ export default function Home() {
   const [chatPhone, setChatPhone] = useState('')
   const [chatReady, setChatReady] = useState(false)
   const [chatSending, setChatSending] = useState(false)
+  const [chatInteracted, setChatInteracted] = useState(false)
   const [bubbles, setBubbles] = useState([
     { type:'in',  text:'Привет! Хочу организовать день рождения 🎉' },
     { type:'out', text:'Привет! Сколько гостей и какой возраст детей?' },
@@ -49,14 +50,20 @@ export default function Home() {
 
   const closeMenu = () => setMenuOpen(false)
 
+  const handleChatFocus = () => {
+    if (!chatInteracted) {
+      setChatInteracted(true)
+      setBubbles([])
+    }
+  }
+
   const doSendChat = async (name, phone, message) => {
     if (chatSending) return
     setChatSending(true)
     setBubbles(prev => [...prev, { type:'in', text: message }])
     setChatInput('')
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://paintlandpark.ru'
-      const res = await fetch(`${apiUrl}/api/chat/`, {
+      const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, phone, message, hp: '' }),
@@ -489,18 +496,20 @@ export default function Home() {
                 <input
                   type="text" placeholder="Ваше имя *" required
                   value={chatName} onChange={e => setChatName(e.target.value)}
+                  onFocus={handleChatFocus}
                   className="chat-pre-inp"
                 />
                 <input
                   type="tel" placeholder="+7 (___) ___-__-__ *" required
                   value={chatPhone} onChange={e => setChatPhone(e.target.value)}
+                  onFocus={handleChatFocus}
                   className="chat-pre-inp"
                 />
               </div>
               {/* honeypot — hidden from real users */}
               <input type="text" name="website" value="" onChange={()=>{}} tabIndex={-1} aria-hidden="true" style={{ position:'absolute', left:'-9999px', opacity:0, pointerEvents:'none' }} />
               <div className="chat-inp">
-                <input type="text" placeholder="Ваш вопрос..." value={chatInput} onChange={e => setChatInput(e.target.value)} />
+                <input type="text" placeholder="Ваш вопрос..." value={chatInput} onChange={e => setChatInput(e.target.value)} onFocus={handleChatFocus} />
                 <button type="submit" className="chat-send" disabled={chatSending || !chatName.trim() || !chatPhone.trim() || !chatInput.trim()}>→</button>
               </div>
               <p className="chat-pre-hint">Менеджер ответит вам по телефону</p>
