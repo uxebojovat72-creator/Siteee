@@ -1,6 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import AllowAny
 from rest_framework.throttling import AnonRateThrottle
 from .serializers import ChatMessageCreateSerializer
 from .telegram import send_chat_notification
@@ -11,12 +12,16 @@ class ChatThrottle(AnonRateThrottle):
 
 
 class ChatMessageView(APIView):
+    permission_classes = [AllowAny]
     throttle_classes = [ChatThrottle]
 
     def post(self, request):
+        # Honeypot: silently succeed so bots think the message was sent
+        if request.data.get('hp'):
+            return Response({'status': 'ok'}, status=status.HTTP_201_CREATED)
+
         serializer = ChatMessageCreateSerializer(data=request.data)
         if not serializer.is_valid():
-            # Return generic error so bots get no useful feedback
             return Response({'status': 'error'}, status=status.HTTP_400_BAD_REQUEST)
 
         ip = (
