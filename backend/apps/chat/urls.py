@@ -1,6 +1,8 @@
 from django.urls import path
-from .views import ChatMessageView
+from .views import ChatView, MessagesView, WebhookView
 
 urlpatterns = [
-    path('', ChatMessageView.as_view()),
+    path('', ChatView.as_view()),
+    path('messages/', MessagesView.as_view()),
+    path('webhook/', WebhookView.as_view()),
 ]
