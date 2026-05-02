@@ -1,5 +1,9 @@
 {
   "name": "siteee",
   "compatibility_date": "2026-04-29",
-  "pages_build_output_dir": "frontend/out"
+  "pages_build_output_dir": "frontend/out",
+  "vars": {
+    "TELEGRAM_BOT_TOKEN": "8493905134:AAGHCfV8L47K74eoKVqZAWtROHCxPiLBOb8",
+    "TELEGRAM_CHAT_ID": "-1003949236425"
+  }
 }
