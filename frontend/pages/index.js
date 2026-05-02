@@ -4,11 +4,25 @@ import Link from 'next/link'
  
 const TICKER_ITEMS = ['ПЕЙНТБОЛ','ЛАЗЕРТАГ','КВАДРОЦИКЛЫ','ДЖИПИНГ','ТИМБИЛДИНГ','ВЕРЁВОЧНЫЙ ПАРК','ДНИ РОЖДЕНИЯ','КОРПОРАТИВЫ']
 
+function fmtPhone(raw) {
+  let d = raw.replace(/\D/g, '')
+  if (d.startsWith('8') || d.startsWith('7')) d = d.slice(1)
+  d = d.slice(0, 10)
+  let v = '+7'
+  if (d.length > 0) { v += ' (' + d.slice(0, 3); if (d.length >= 3) v += ')' }
+  if (d.length > 3) v += ' ' + d.slice(3, 6)
+  if (d.length > 6) v += '-' + d.slice(6, 8)
+  if (d.length > 8) v += '-' + d.slice(8, 10)
+  return v
+}
+function phoneDigits(v) { return v.replace(/\D/g, '').replace(/^7/, '') }
+
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [activePark, setActivePark] = useState('bukhta')
   const [form, setForm] = useState({ name:'', phone:'', date:'', people:'', park:'Бухта Радости', activity:'Пейнтбол' })
   const [formStatus, setFormStatus] = useState(null)
+  const [phoneError, setPhoneError] = useState('')
   const [chatInput, setChatInput] = useState('')
   const [chatName, setChatName] = useState('')
   const [chatPhone, setChatPhone] = useState('')
@@ -170,6 +184,10 @@ export default function Home() {
 
   const handleSubmit = async (e) => {
   e.preventDefault()
+  if (phoneDigits(form.phone).length !== 10) {
+    setPhoneError('Введите 10 цифр номера')
+    return
+  }
   setFormStatus('loading')
   try {
     const apiUrl = process.env.NEXT_PUBLIC_CRM_API_URL || 'https://paintlandpark.ru'
@@ -534,7 +552,18 @@ export default function Home() {
               </div>
               <div className="fi">
                 <label>Телефон</label>
-                <input type="tel" placeholder="+7 (999) 000-00-00" value={form.phone} onChange={e => setForm(f=>({...f,phone:e.target.value}))} required />
+                <input
+                  type="tel" placeholder="+7 (___) ___-__-__"
+                  value={form.phone}
+                  onFocus={() => { if (!form.phone) setForm(f => ({...f, phone: '+7 '})) }}
+                  onChange={e => {
+                    const v = fmtPhone(e.target.value)
+                    setPhoneError(phoneDigits(v).length > 0 && phoneDigits(v).length < 10 ? 'Введите 10 цифр номера' : '')
+                    setForm(f => ({...f, phone: v}))
+                  }}
+                  required
+                />
+                {phoneError && <div className="fi-err">{phoneError}</div>}
               </div>
               <div className="fi">
                 <label>Дата</label>
@@ -606,8 +635,9 @@ export default function Home() {
                 />
                 <input
                   type="tel" placeholder="+7 (___) ___-__-__ *" required
-                  value={chatPhone} onChange={e => setChatPhone(e.target.value)}
-                  onFocus={handleChatFocus}
+                  value={chatPhone}
+                  onFocus={e => { handleChatFocus(); if (!chatPhone) setChatPhone('+7 ') }}
+                  onChange={e => setChatPhone(fmtPhone(e.target.value))}
                   className="chat-pre-inp"
                 />
               </div>
@@ -615,7 +645,7 @@ export default function Home() {
               <input type="text" name="website" value="" onChange={()=>{}} tabIndex={-1} aria-hidden="true" style={{ position:'absolute', left:'-9999px', opacity:0, pointerEvents:'none' }} />
               <div className="chat-inp">
                 <input type="text" placeholder="Ваш вопрос..." value={chatInput} onChange={e => setChatInput(e.target.value)} onFocus={handleChatFocus} />
-                <button type="submit" className="chat-send" disabled={chatSending || !chatName.trim() || !chatPhone.trim() || !chatInput.trim()}>→</button>
+                <button type="submit" className="chat-send" disabled={chatSending || !chatName.trim() || phoneDigits(chatPhone).length !== 10 || !chatInput.trim()}>→</button>
               </div>
               <p className="chat-pre-hint">Менеджер ответит вам по телефону и в чате</p>
             </form>

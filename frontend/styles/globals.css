@@ -353,6 +353,7 @@ html, body {
 .fi input,.fi select { background:var(--bg); border:1.5px solid var(--border); padding:12px 14px; color:var(--text); font-family:'Manrope',sans-serif; font-size:.85rem; outline:none; transition:border-color .2s; -webkit-appearance:none; border-radius:14px; }
 .fi input:focus,.fi select:focus { border-color:var(--forest); }
 .fi input::placeholder { color:var(--muted); }
+.fi-err { font-size:.7rem; color:#e53e3e; margin-top:-2px; }
 .fi select option { background:var(--white); }
 
 /* ═══════════════════════════════════════
