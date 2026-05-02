@@ -1,12 +1,12 @@
 {
   "name": "siteee",
   "compatibility_date": "2026-04-29",
-  "pages_build_output_dir": "frontend/out",
-  "vars": {
-    "TELEGRAM_BOT_TOKEN": "8493905134:AAGHCfV8L47K74eoKVqZAWtROHCxPiLBOb8",
-    "TELEGRAM_CHAT_ID": "-1003949236425"
-  }
-  // Когда добавишь KV namespace — раскомментируй и вставь свой ID:
+  "pages_build_output_dir": "frontend/out"
+  // Secrets (TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID) задаются ТОЛЬКО
+  // в Cloudflare Pages → Settings → Environment variables
+  // НЕ хранить здесь — этот файл публичный в git!
+
+  // Когда добавишь KV namespace:
   // "kv_namespaces": [
   //   { "binding": "CHAT_KV", "id": "ВОТ_ТВОЙ_KV_NAMESPACE_ID" }
   // ]
