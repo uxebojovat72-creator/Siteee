@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'apps.parks',
     'apps.bookings',
     'apps.prices',
+    'apps.chat',
 ]
 
 MIDDLEWARE = [
@@ -100,8 +101,13 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_THROTTLE_RATES': {
         'anon': '60/minute',
+        'chat': '10/hour',
     },
 }
+
+# Telegram notifications (set via env)
+TELEGRAM_BOT_TOKEN = config('TELEGRAM_BOT_TOKEN', default='')
+TELEGRAM_CHAT_ID = config('TELEGRAM_CHAT_ID', default='')
 
 if not DEBUG:
     SECURE_BROWSER_XSS_FILTER = True

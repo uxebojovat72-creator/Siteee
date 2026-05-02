@@ -10,11 +10,15 @@ export default function Home() {
   const [form, setForm] = useState({ name:'', phone:'', date:'', people:'', park:'Бухта Радости', activity:'Пейнтбол' })
   const [formStatus, setFormStatus] = useState(null)
   const [chatInput, setChatInput] = useState('')
+  const [chatName, setChatName] = useState('')
+  const [chatPhone, setChatPhone] = useState('')
+  const [chatReady, setChatReady] = useState(false)
+  const [chatSending, setChatSending] = useState(false)
   const [bubbles, setBubbles] = useState([
     { type:'in',  text:'Привет! Хочу организовать день рождения 🎉' },
     { type:'out', text:'Привет! Сколько гостей и какой возраст детей?' },
     { type:'in',  text:'10 детей, 7–10 лет, суббота 3 мая' },
-    { type:'out', text:'Отлично! Для этого возраста идеально подойдёт лазертаг или кидбол. Забронируем? ✅' },
+    { type:'out', text:'Отлично! Для этого возраста идеально подойдёт лазертаг. Забронируем? ✅' },
   ])
   const bubblesRef = useRef(null)
 
@@ -45,13 +49,42 @@ export default function Home() {
 
   const closeMenu = () => setMenuOpen(false)
 
-  const sendChat = () => {
+  const doSendChat = async (name, phone, message) => {
+    if (chatSending) return
+    setChatSending(true)
+    setBubbles(prev => [...prev, { type:'in', text: message }])
+    setChatInput('')
+    try {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://paintlandpark.ru'
+      const res = await fetch(`${apiUrl}/api/chat/`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, phone, message, hp: '' }),
+      })
+      if (res.ok || res.status === 201) {
+        setChatReady(true)
+        setBubbles(prev => [...prev, { type:'out', text: 'Спасибо! Менеджер ответит вам в ближайшее время 😊' }])
+      } else {
+        setBubbles(prev => [...prev, { type:'out', text: 'Что-то пошло не так. Позвоните нам: +7 (925) 010-85-35' }])
+      }
+    } catch {
+      setBubbles(prev => [...prev, { type:'out', text: 'Нет соединения. Позвоните нам: +7 (925) 010-85-35' }])
+    } finally {
+      setChatSending(false)
+    }
+  }
+
+  const handleFirstSend = (e) => {
+    e.preventDefault()
+    const v = chatInput.trim()
+    if (!v || !chatName.trim() || !chatPhone.trim()) return
+    doSendChat(chatName.trim(), chatPhone.trim(), v)
+  }
+
+  const handleReply = () => {
     const v = chatInput.trim()
     if (!v) return
-    setBubbles(prev => [...prev, { type:'in', text: v }])
-    setChatInput('')
-    const replies = ['Спасибо! Свяжемся в ближайшее время 😊','Хорошо, уточним детали!','Ждём вас в парке! 🌿']
-    setTimeout(() => setBubbles(prev => [...prev, { type:'out', text: replies[Math.floor(Math.random()*replies.length)] }]), 900)
+    doSendChat(chatName, chatPhone, v)
   }
 
   const handleSubmit = async (e) => {
@@ -448,11 +481,36 @@ export default function Home() {
           </div>
           <div className="bubbles" ref={bubblesRef}>
             {bubbles.map((b, i) => <div key={i} className={`bub ${b.type}`}>{b.text}</div>)}
+            {chatSending && <div className="bub out chat-typing"><span /><span /><span /></div>}
           </div>
-          <div className="chat-inp">
-            <input type="text" placeholder="Напишите сообщение..." value={chatInput} onChange={e => setChatInput(e.target.value)} onKeyDown={e => e.key==='Enter' && sendChat()} />
-            <button className="chat-send" onClick={sendChat}>→</button>
-          </div>
+          {!chatReady ? (
+            <form className="chat-pre-form" onSubmit={handleFirstSend} noValidate>
+              <div className="chat-pre-fields">
+                <input
+                  type="text" placeholder="Ваше имя *" required
+                  value={chatName} onChange={e => setChatName(e.target.value)}
+                  className="chat-pre-inp"
+                />
+                <input
+                  type="tel" placeholder="+7 (___) ___-__-__ *" required
+                  value={chatPhone} onChange={e => setChatPhone(e.target.value)}
+                  className="chat-pre-inp"
+                />
+              </div>
+              {/* honeypot — hidden from real users */}
+              <input type="text" name="website" value="" onChange={()=>{}} tabIndex={-1} aria-hidden="true" style={{ position:'absolute', left:'-9999px', opacity:0, pointerEvents:'none' }} />
+              <div className="chat-inp">
+                <input type="text" placeholder="Ваш вопрос..." value={chatInput} onChange={e => setChatInput(e.target.value)} />
+                <button type="submit" className="chat-send" disabled={chatSending || !chatName.trim() || !chatPhone.trim() || !chatInput.trim()}>→</button>
+              </div>
+              <p className="chat-pre-hint">Менеджер ответит вам по телефону</p>
+            </form>
+          ) : (
+            <div className="chat-inp">
+              <input type="text" placeholder="Ваш вопрос..." value={chatInput} onChange={e => setChatInput(e.target.value)} onKeyDown={e => e.key==='Enter' && handleReply()} />
+              <button className="chat-send" onClick={handleReply} disabled={chatSending || !chatInput.trim()}>→</button>
+            </div>
+          )}
         </div>
       </section>
 
