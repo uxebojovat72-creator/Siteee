@@ -134,12 +134,21 @@ html, body {
 .hero { min-height:100svh; position:relative; display:flex; flex-direction:column; overflow:hidden; }
 .hero-img {
   position:absolute; inset:0;
-  background:url('/bukhta_action2.jpg') center 50%/cover;
+  background-size:cover;
+  background-position:center 50%;
   filter:brightness(.42) saturate(.85);
   transform:scale(1.05);
   animation:hzoom 14s ease-out forwards;
+  transition:opacity .7s ease;
 }
+.hero-img-bukhta { background-image:url('/bukhta_action2.jpg'); }
+.hero-img-sofrino { background-image:url('/photo_atv.jpg'); background-position:center 40%; }
 @keyframes hzoom { from{transform:scale(1.05)} to{transform:scale(1)} }
+.park-info { animation:parkFade .4s ease; margin:12px 0 4px; }
+@keyframes parkFade { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+.park-info-addr { font-size:.72rem; color:rgba(255,255,255,.6); letter-spacing:.07em; text-transform:uppercase; margin-bottom:8px; }
+.park-info-tags { display:flex; gap:6px; flex-wrap:wrap; }
+.pi-tag { font-size:.68rem; color:rgba(255,255,255,.88); background:rgba(255,255,255,.11); border:1px solid rgba(255,255,255,.18); padding:3px 10px; border-radius:20px; white-space:nowrap; }
 .hero-overlay {
   position:absolute; inset:0;
   background:linear-gradient(180deg,rgba(0,0,0,.1) 0%,rgba(10,22,15,.05) 25%,rgba(10,22,15,.55) 60%,rgba(10,22,15,.97) 100%);

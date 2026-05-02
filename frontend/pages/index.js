@@ -236,7 +236,8 @@ export default function Home() {
 
       {/* ── HERO ── */}
       <section className="hero">
-        <div className="hero-img" />
+        <div className="hero-img hero-img-bukhta" style={{ opacity: activePark === 'bukhta' ? 1 : 0 }} />
+        <div className="hero-img hero-img-sofrino" style={{ opacity: activePark === 'sofrino' ? 1 : 0 }} />
         <div className="hero-overlay" />
         <div className="hero-content">
           <div className="hero-tag">
@@ -258,6 +259,15 @@ export default function Home() {
               >{label}</button>
             ))}
           </div>
+          {(() => {
+            const pd = { bukhta: { addr: 'Мытищи · Пироговское водохранилище', tags: ['Пейнтбол','Лазертаг','Верёвочный парк','Беседки','Хаски'] }, sofrino: { addr: 'Пушкинский р-н · Сергиев Посад', tags: ['Пейнтбол','Лазертаг','Квадроциклы','Джиппинг','Стрельба'] } }[activePark]
+            return (
+              <div key={activePark} className="park-info">
+                <div className="park-info-addr">{pd.addr}</div>
+                <div className="park-info-tags">{pd.tags.map(t => <span key={t} className="pi-tag">{t}</span>)}</div>
+              </div>
+            )
+          })()}
           <div className="hero-btns">
             <a href="#booking" className="btn-main">Забронировать →</a>
             <a href="#services" className="btn-sec">Наши услуги</a>
