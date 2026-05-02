@@ -226,12 +226,13 @@ html, body {
 }
 .acc-hdr:hover .s-h { color:var(--forest); transition:color .2s; }
 .acc-chev {
-  flex-shrink:0; font-size:1.4rem; color:var(--forest);
+  flex-shrink:0;
   display:inline-flex; align-items:center; justify-content:center;
   width:40px; height:40px; border-radius:50%;
-  background:var(--forest); color:#fff;
+  background:var(--forest);
   transition:transform .35s ease;
 }
+.acc-chev svg { display:block; }
 .acc-chev.open { transform:rotate(180deg); }
 .acc-body {
   overflow:hidden;

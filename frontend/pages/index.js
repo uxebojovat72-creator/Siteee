@@ -337,16 +337,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── NUMBERS ── */}
-      <div className="nums">
-        {[['15+','лет опыта'],['2','парка'],['50К+','игроков'],['100%','безопасно']].map(([n, l]) => (
-          <div className="num rv" key={l}>
-            <div className="num-n">{n}</div>
-            <div className="num-l">{l}</div>
-          </div>
-        ))}
-      </div>
-
       {/* ── PRICING ── */}
       <section className="price-bg s" id="prices">
         <div className="s-eyebrow rv">Стоимость</div>
@@ -414,7 +404,7 @@ export default function Home() {
             <div className="s-eyebrow">Отзывы</div>
             <h2 className="s-h">Что говорят наши гости</h2>
           </div>
-          <span className={`acc-chev${reviewsOpen ? ' open' : ''}`}>↓</span>
+          <span className={`acc-chev${reviewsOpen ? ' open' : ''}`}><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
         </button>
         <div className={`acc-body${reviewsOpen ? ' open' : ''}`}>
           <div className="rev-g" style={{ paddingTop: 24 }}>
@@ -503,7 +493,7 @@ export default function Home() {
             <div className="s-eyebrow">Бронирование</div>
             <h2 className="s-h">Оставить заявку</h2>
           </div>
-          <span className={`acc-chev${bookingOpen ? ' open' : ''}`}>↓</span>
+          <span className={`acc-chev${bookingOpen ? ' open' : ''}`}><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
         </button>
         <div className={`acc-body${bookingOpen ? ' open' : ''}`}>
         <div className="book-vis rv">
@@ -571,7 +561,7 @@ export default function Home() {
             <h2 className="s-h">Напишите нам</h2>
             <p style={{ marginTop:6, fontSize:'.85rem', color:'var(--muted)', lineHeight:1.6, maxWidth:300 }}>Поможем выбрать программу и рассчитаем стоимость.</p>
           </div>
-          <span className={`acc-chev${chatOpen ? ' open' : ''}`}>↓</span>
+          <span className={`acc-chev${chatOpen ? ' open' : ''}`}><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
         </button>
         <div className={`acc-body${chatOpen ? ' open' : ''}`}>
         <div className="chat-box rv">
