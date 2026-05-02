@@ -414,10 +414,13 @@ details.fq[open] summary::after { transform:rotate(45deg); }
    CONTACTS
 ═══════════════════════════════════════ */
 .cc-g { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:20px; }
-.cc { background:var(--white); border-radius:var(--r); padding:16px; box-shadow:var(--shadow); border-top:3px solid var(--forest); }
+.cc { background:var(--white); border-radius:var(--r); padding:16px; box-shadow:var(--shadow); border-top:3px solid var(--forest); text-decoration:none; display:block; color:inherit; transition:box-shadow .2s,transform .2s; }
+.cc:hover { box-shadow:0 6px 24px rgba(0,0,0,.12); transform:translateY(-2px); }
+.cc-main { grid-column:1/-1; display:flex; flex-direction:column; border-top-color:var(--forest); border-top-width:3px; }
 .cc-icon { font-size:1.2rem; margin-bottom:6px; }
 .cc-l { font-family:'Geologica',sans-serif; font-size:.6rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--moss); margin-bottom:4px; }
 .cc-v { font-family:'Geologica',sans-serif; font-size:.82rem; font-weight:700; color:var(--dark); }
+.cc-v-lg { font-size:1.05rem !important; }
 .cc-s { font-size:.7rem; color:var(--muted); margin-top:2px; }
 
 /* ═══════════════════════════════════════
@@ -494,7 +497,8 @@ footer { background:var(--dark); padding:40px 22px 30px; }
   .pc { flex:1; }
   .gal-c.big { height:280px; }
   .gal-c:not(.big) { height:160px; }
-  .cc-g { grid-template-columns:repeat(4,1fr); }
+  .cc-g { grid-template-columns:repeat(3,1fr); }
+  .cc-main { grid-column:auto; }
   #locCards { grid-template-columns:repeat(2,1fr) !important; }
   .loc-card-img { height:220px; }
 }

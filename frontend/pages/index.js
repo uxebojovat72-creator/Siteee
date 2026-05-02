@@ -660,23 +660,25 @@ export default function Home() {
         <div className="s-eyebrow rv">Контакты</div>
         <h2 className="s-h rv">Как с нами связаться</h2>
         <div className="cc-g">
-          {[
-            { icon:'📞', label:'Телефон 1', val:'+7 (925) 010-85-35', sub:'Бухта Радости' },
-            { icon:'📞', label:'Телефон 2', val:'+7 (985) 643-68-88', sub:'Парк Софрино' },
-            { icon:'✉️', label:'Email',     val:'info888@plpark.ru',  sub:'Пишите нам', small:true },
-            { icon:'🕐', label:'Работаем', val:'Ежедневно',           sub:'09:00 – 21:00' },
-          ].map(({ icon, label, val, sub, small }) => (
-            <div className="cc rv" key={label}>
-              <div className="cc-icon">{icon}</div>
-              <div className="cc-l">{label}</div>
-              <div className="cc-v" style={small ? { fontSize:'.75rem' } : {}}>{val}</div>
-              <div className="cc-s">{sub}</div>
-            </div>
-          ))}
+          <a href="tel:+79250108535" className="cc cc-main rv">
+            <div className="cc-icon">📞</div>
+            <div className="cc-l">Телефон</div>
+            <div className="cc-v cc-v-lg">+7 (925) 010-85-35</div>
+            <div className="cc-s">Звоните ежедневно 09:00 – 21:00</div>
+          </a>
+          <a href="mailto:info888@plpark.ru" className="cc rv">
+            <div className="cc-icon">✉️</div>
+            <div className="cc-l">Email</div>
+            <div className="cc-v" style={{ fontSize:'.75rem' }}>info888@plpark.ru</div>
+            <div className="cc-s">Пишите нам</div>
+          </a>
+          <div className="cc rv">
+            <div className="cc-icon">🕐</div>
+            <div className="cc-l">Работаем</div>
+            <div className="cc-v">Ежедневно</div>
+            <div className="cc-s">09:00 – 21:00</div>
+          </div>
         </div>
-        <a href="https://paintballclub.ru/contacts/" target="_blank" rel="noreferrer" className="btn-sec" style={{ display:'inline-block', marginTop:20, borderColor:'var(--forest)', color:'var(--forest)' }}>
-          Смотреть на карте →
-        </a>
       </section>
 
       {/* ── FOOTER ── */}
