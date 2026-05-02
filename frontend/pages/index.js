@@ -16,6 +16,9 @@ export default function Home() {
   const [chatSending, setChatSending] = useState(false)
   const [chatInteracted, setChatInteracted] = useState(false)
   const [chatSessionId, setChatSessionId] = useState(null)
+  const [reviewsOpen, setReviewsOpen] = useState(false)
+  const [bookingOpen, setBookingOpen] = useState(true)
+  const [chatOpen, setChatOpen]     = useState(false)
   const [bubbles, setBubbles] = useState([
     { type:'in',  text:'Привет! Хочу организовать день рождения 🎉' },
     { type:'out', text:'Привет! Сколько гостей и какой возраст детей?' },
@@ -50,6 +53,14 @@ export default function Home() {
   useEffect(() => {
     if (bubblesRef.current) bubblesRef.current.scrollTop = bubblesRef.current.scrollHeight
   }, [bubbles])
+
+  // Open booking accordion when navigated via anchor link
+  useEffect(() => {
+    const onHash = () => { if (window.location.hash === '#booking') setBookingOpen(true) }
+    onHash()
+    window.addEventListener('hashchange', onHash)
+    return () => window.removeEventListener('hashchange', onHash)
+  }, [])
 
   // Restore session from localStorage on page load / refresh
   useEffect(() => {
@@ -398,21 +409,28 @@ export default function Home() {
 
       {/* ── REVIEWS ── */}
       <section className="rev-bg s">
-        <div className="s-eyebrow rv">Отзывы</div>
-        <h2 className="s-h rv">Что говорят наши гости</h2>
-        <div className="rev-g">
-          {[
-            { text: 'Организовали день рождения — лазертаг для детей. Инструктор всё объяснил, дети в полном восторге!', who: 'Наталья, мама троих детей' },
-            { text: 'Отличный корпоратив! Всё включено, персонал доброжелательный, атмосфера уютная. Вернёмся снова!', who: 'Сергей, HR-директор' },
-            { text: 'Приехали большой компанией. Квадроциклы, пейнтбол, шашлыки — идеально провели день!', who: 'Артур' },
-          ].map(({ text, who }) => (
-            <div className="rev rv" key={who}>
-              <div className="rev-q">"</div>
-              <div className="rev-stars">★ ★ ★ ★ ★</div>
-              <div className="rev-txt">{text}</div>
-              <div className="rev-who">— {who}</div>
-            </div>
-          ))}
+        <button className="acc-hdr rv" onClick={() => setReviewsOpen(o => !o)} aria-expanded={reviewsOpen}>
+          <div>
+            <div className="s-eyebrow">Отзывы</div>
+            <h2 className="s-h">Что говорят наши гости</h2>
+          </div>
+          <span className={`acc-chev${reviewsOpen ? ' open' : ''}`}>↓</span>
+        </button>
+        <div className={`acc-body${reviewsOpen ? ' open' : ''}`}>
+          <div className="rev-g" style={{ paddingTop: 24 }}>
+            {[
+              { text: 'Организовали день рождения — лазертаг для детей. Инструктор всё объяснил, дети в полном восторге!', who: 'Наталья, мама троих детей' },
+              { text: 'Отличный корпоратив! Всё включено, персонал доброжелательный, атмосфера уютная. Вернёмся снова!', who: 'Сергей, HR-директор' },
+              { text: 'Приехали большой компанией. Квадроциклы, пейнтбол, шашлыки — идеально провели день!', who: 'Артур' },
+            ].map(({ text, who }) => (
+              <div className="rev" key={who}>
+                <div className="rev-q">"</div>
+                <div className="rev-stars">★ ★ ★ ★ ★</div>
+                <div className="rev-txt">{text}</div>
+                <div className="rev-who">— {who}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -480,8 +498,14 @@ export default function Home() {
       </section>
       {/* ── BOOKING ── */}
       <section className="s" id="booking" style={{ background:'var(--white)' }}>
-        <div className="s-eyebrow rv">Бронирование</div>
-        <h2 className="s-h rv">Оставить заявку</h2>
+        <button className="acc-hdr rv" onClick={() => setBookingOpen(o => !o)} aria-expanded={bookingOpen}>
+          <div>
+            <div className="s-eyebrow">Бронирование</div>
+            <h2 className="s-h">Оставить заявку</h2>
+          </div>
+          <span className={`acc-chev${bookingOpen ? ' open' : ''}`}>↓</span>
+        </button>
+        <div className={`acc-body${bookingOpen ? ' open' : ''}`}>
         <div className="book-vis rv">
           <div className="book-photo" />
           <div className="book-deco">БРОНЬ</div>
@@ -536,13 +560,20 @@ export default function Home() {
             </div>
           </form>
         )}
+        </div>
       </section>
 
       {/* ── CHAT ── */}
       <section className="chat-bg s">
-        <div className="s-eyebrow rv">Онлайн-поддержка</div>
-        <h2 className="s-h rv">Напишите нам</h2>
-        <p style={{ marginTop:12, fontSize:'.85rem', color:'var(--muted)', lineHeight:1.75, maxWidth:340 }} className="rv">Поможем выбрать программу и рассчитаем стоимость для вашей группы.</p>
+        <button className="acc-hdr rv" onClick={() => setChatOpen(o => !o)} aria-expanded={chatOpen}>
+          <div>
+            <div className="s-eyebrow">Онлайн-поддержка</div>
+            <h2 className="s-h">Напишите нам</h2>
+            <p style={{ marginTop:6, fontSize:'.85rem', color:'var(--muted)', lineHeight:1.6, maxWidth:300 }}>Поможем выбрать программу и рассчитаем стоимость.</p>
+          </div>
+          <span className={`acc-chev${chatOpen ? ' open' : ''}`}>↓</span>
+        </button>
+        <div className={`acc-body${chatOpen ? ' open' : ''}`}>
         <div className="chat-box rv">
           <div className="chat-head">
             <div className="chat-dot" />
@@ -586,6 +617,7 @@ export default function Home() {
               <button className="chat-send" onClick={handleReply} disabled={chatSending || !chatInput.trim()}>→</button>
             </div>
           )}
+        </div>
         </div>
       </section>
 

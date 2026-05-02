@@ -217,6 +217,34 @@ html, body {
 .rv.on { opacity:1; transform:translateY(0); }
 
 /* ═══════════════════════════════════════
+   ACCORDION
+═══════════════════════════════════════ */
+.acc-hdr {
+  width:100%; background:none; border:none; padding:0;
+  text-align:left; cursor:pointer;
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+}
+.acc-hdr:hover .s-h { color:var(--forest); transition:color .2s; }
+.acc-chev {
+  flex-shrink:0; font-size:1.4rem; color:var(--forest);
+  display:inline-flex; align-items:center; justify-content:center;
+  width:40px; height:40px; border-radius:50%;
+  background:var(--forest); color:#fff;
+  transition:transform .35s ease;
+}
+.acc-chev.open { transform:rotate(180deg); }
+.acc-body {
+  overflow:hidden;
+  max-height:0;
+  opacity:0;
+  transition:max-height .45s ease, opacity .35s ease;
+}
+.acc-body.open {
+  max-height:3000px;
+  opacity:1;
+}
+
+/* ═══════════════════════════════════════
    SERVICES
 ═══════════════════════════════════════ */
 .svc-bg { background:var(--white); }
