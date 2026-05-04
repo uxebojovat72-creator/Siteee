@@ -424,8 +424,8 @@ export default function Home() {
         <div className="gal-g">
           {[
             { img: '/photo_paintball.jpg', label: 'Пейнтбол', big: true },
-            { img: '/photo_atv.jpg',       label: 'Квадроциклы' },
-            { img: '/photo_uaz.jpg',       label: 'Джиппинг' },
+            { img: '/gallery_atv.jpg',     label: 'Квадроциклы' },
+            { img: '/gallery_jeep.png',    label: 'Джиппинг' },
             { img: '/photo_couple.jpg',    label: 'Снаряжение' },
             { img: '/photo_husky.jpg',     label: 'Хаски' },
           ].map(({ img, label, big }) => (
