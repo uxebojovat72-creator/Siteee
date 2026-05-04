@@ -629,3 +629,9 @@ footer { background:var(--dark); padding:40px 22px 30px; }
 .priv-wrap ul { padding-left:20px; margin-bottom:12px; }
 .priv-wrap ul li { font-size:.88rem; color:var(--text); line-height:1.75; margin-bottom:4px; }
 .priv-wrap a { color:var(--forest); }
+
+/* gal-more */
+.gal-more { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-top:20px; padding:14px 18px; background:var(--white); border-radius:var(--r); box-shadow:var(--shadow); }
+.gal-more-txt { font-size:.8rem; color:var(--muted); }
+.gal-more-link { display:inline-flex; align-items:center; gap:6px; font-family:'Geologica',sans-serif; font-weight:700; font-size:.82rem; color:#229ED9; text-decoration:none; }
+.gal-more-link:hover { text-decoration:underline; }
