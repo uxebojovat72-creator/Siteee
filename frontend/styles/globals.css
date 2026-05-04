@@ -599,3 +599,33 @@ footer { background:var(--dark); padding:40px 22px 30px; }
 
 /* cta-sub */
 .cta-sub { margin-top:12px; font-size:.88rem; color:rgba(255,255,255,.5); }
+
+/* ── CONSENT CHECKBOX ── */
+.consent-label { display:flex; align-items:flex-start; gap:10px; cursor:pointer; margin-bottom:12px; }
+.consent-label input[type="checkbox"] { flex-shrink:0; width:18px; height:18px; margin-top:2px; accent-color:var(--forest); cursor:pointer; }
+.consent-label span { font-size:.72rem; color:var(--muted); line-height:1.55; }
+.consent-label-sm { margin:8px 0 6px; }
+.consent-link { color:var(--forest); text-decoration:underline; }
+
+/* ── COOKIE BANNER ── */
+.ck-banner { position:fixed; bottom:0; left:0; right:0; z-index:9999; background:#1a2a1e; color:#fff; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 20px; box-shadow:0 -4px 24px rgba(0,0,0,.25); }
+.ck-text { font-size:.78rem; color:rgba(255,255,255,.75); line-height:1.5; margin:0; }
+.ck-link { color:#a8d8b0; }
+.ck-btn { flex-shrink:0; background:var(--forest); color:#fff; border:none; padding:8px 20px; border-radius:20px; font-family:'Geologica',sans-serif; font-weight:700; font-size:.78rem; cursor:pointer; white-space:nowrap; }
+.ck-btn:hover { background:#2d6b3f; }
+
+/* ── FOOT PRIVACY LINK ── */
+.foot-privacy { color:rgba(255,255,255,.35); font-size:.72rem; text-decoration:underline; }
+.foot-privacy:hover { color:rgba(255,255,255,.65); }
+
+/* ── PRIVACY PAGE ── */
+.priv-wrap { max-width:760px; margin:0 auto; padding:40px 20px 80px; font-family:'Manrope',sans-serif; }
+.priv-back { display:inline-block; margin-bottom:28px; font-family:'Geologica',sans-serif; font-size:.8rem; font-weight:700; color:var(--forest); text-decoration:none; }
+.priv-back:hover { text-decoration:underline; }
+.priv-wrap h1 { font-family:'Geologica',sans-serif; font-size:clamp(1.5rem,5vw,2.2rem); font-weight:900; color:var(--dark); margin-bottom:6px; }
+.priv-date { font-size:.75rem; color:var(--muted); margin-bottom:32px; }
+.priv-wrap h2 { font-family:'Geologica',sans-serif; font-size:1rem; font-weight:800; color:var(--dark); margin:28px 0 10px; }
+.priv-wrap p { font-size:.88rem; color:var(--text); line-height:1.75; margin-bottom:10px; }
+.priv-wrap ul { padding-left:20px; margin-bottom:12px; }
+.priv-wrap ul li { font-size:.88rem; color:var(--text); line-height:1.75; margin-bottom:4px; }
+.priv-wrap a { color:var(--forest); }

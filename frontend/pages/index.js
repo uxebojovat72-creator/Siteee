@@ -34,6 +34,9 @@ export default function Home() {
   const [bookingOpen, setBookingOpen] = useState(true)
   const [tgOpen, setTgOpen]           = useState(false)
   const [chatOpen, setChatOpen]       = useState(false)
+  const [bookingConsent, setBookingConsent] = useState(false)
+  const [chatConsent, setChatConsent]       = useState(false)
+  const [cookieBanner, setCookieBanner]     = useState(false)
   const [bubbles, setBubbles] = useState([
     { type:'in',  text:'Привет! Хочу организовать день рождения 🎉' },
     { type:'out', text:'Привет! Сколько гостей и какой возраст детей?' },
@@ -54,6 +57,15 @@ export default function Home() {
     document.querySelectorAll('.rv').forEach(el => io.observe(el))
     return () => io.disconnect()
   }, [])
+
+  useEffect(() => {
+    if (!localStorage.getItem('ck_consent')) setCookieBanner(true)
+  }, [])
+
+  const acceptCookies = () => {
+    localStorage.setItem('ck_consent', '1')
+    setCookieBanner(false)
+  }
 
   useEffect(() => {
     const close = (e) => {
@@ -172,7 +184,7 @@ export default function Home() {
   const handleFirstSend = (e) => {
     e.preventDefault()
     const v = chatInput.trim()
-    if (!v || !chatName.trim() || !chatPhone.trim()) return
+    if (!v || !chatName.trim() || phoneDigits(chatPhone).length !== 10 || !chatConsent) return
     doSendChat(chatName.trim(), chatPhone.trim(), v, null)
   }
 
@@ -184,10 +196,8 @@ export default function Home() {
 
   const handleSubmit = async (e) => {
   e.preventDefault()
-  if (phoneDigits(form.phone).length !== 10) {
-    setPhoneError('Введите 10 цифр номера')
-    return
-  }
+  if (phoneDigits(form.phone).length !== 10) { setPhoneError('Введите 10 цифр номера'); return }
+  if (!bookingConsent) return
   setFormStatus('loading')
   try {
     const apiUrl = process.env.NEXT_PUBLIC_CRM_API_URL || 'https://paintlandpark.ru'
@@ -589,7 +599,13 @@ export default function Home() {
                 </select>
               </div>
               <div className="fi full">
-                <button type="submit" className="btn-main" style={{ width:'100%', textAlign:'center', fontSize:'.88rem', padding:14 }} disabled={formStatus==='loading'}>
+                <label className="consent-label">
+                  <input type="checkbox" checked={bookingConsent} onChange={e => setBookingConsent(e.target.checked)} />
+                  <span>Даю согласие Пэйнтлэнд Парк на обработку моих персональных данных (имя, телефон) в целях рассмотрения заявки.{' '}
+                    <Link href="/privacy" target="_blank" rel="noopener" className="consent-link">Политика конфиденциальности</Link>
+                  </span>
+                </label>
+                <button type="submit" className="btn-main" style={{ width:'100%', textAlign:'center', fontSize:'.88rem', padding:14 }} disabled={formStatus==='loading' || !bookingConsent}>
                   {formStatus==='loading' ? 'Отправляем...' : 'Отправить заявку →'}
                 </button>
                 <p style={{ fontSize:'.65rem', color:'var(--muted)', marginTop:8, textAlign:'center' }}>После подтверждения — ссылка на онлайн-оплату</p>
@@ -643,9 +659,15 @@ export default function Home() {
               </div>
               {/* honeypot — hidden from real users */}
               <input type="text" name="website" value="" onChange={()=>{}} tabIndex={-1} aria-hidden="true" style={{ position:'absolute', left:'-9999px', opacity:0, pointerEvents:'none' }} />
+              <label className="consent-label consent-label-sm">
+                <input type="checkbox" checked={chatConsent} onChange={e => setChatConsent(e.target.checked)} />
+                <span>Согласен(а) на обработку персональных данных.{' '}
+                  <Link href="/privacy" target="_blank" rel="noopener" className="consent-link">Политика</Link>
+                </span>
+              </label>
               <div className="chat-inp">
                 <input type="text" placeholder="Ваш вопрос..." value={chatInput} onChange={e => setChatInput(e.target.value)} onFocus={handleChatFocus} />
-                <button type="submit" className="chat-send" disabled={chatSending || !chatName.trim() || phoneDigits(chatPhone).length !== 10 || !chatInput.trim()}>→</button>
+                <button type="submit" className="chat-send" disabled={chatSending || !chatName.trim() || phoneDigits(chatPhone).length !== 10 || !chatInput.trim() || !chatConsent}>→</button>
               </div>
               <p className="chat-pre-hint">Менеджер ответит вам по телефону и в чате</p>
             </form>
@@ -735,9 +757,20 @@ export default function Home() {
         </nav>
         <div className="foot-bot">
           <span>© 2026 Пэйнтлэнд Парк</span>
-          <span>Актуально на апрель 2026</span>
+          <Link href="/privacy" className="foot-privacy">Политика конфиденциальности</Link>
         </div>
       </footer>
+
+      {/* ── COOKIE BANNER ── */}
+      {cookieBanner && (
+        <div className="ck-banner">
+          <p className="ck-text">
+            Сайт использует cookie и localStorage для работы чата поддержки.
+            {' '}<Link href="/privacy" className="ck-link">Подробнее</Link>
+          </p>
+          <button className="ck-btn" onClick={acceptCookies}>Принять</button>
+        </div>
+      )}
     </>
   )
 }
