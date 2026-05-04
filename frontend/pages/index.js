@@ -332,9 +332,11 @@ export default function Home() {
             { bg: "url('/photo_uaz.jpg')", name: 'Джиппинг', price: 'Уточнить' },
             { bg: "url('/photo_ropepark.jpg')", name: 'Верёвочный парк', price: 'Уточнить' },
             { bg: "url('/photo_birthday.png')", name: 'День рождения', price: 'Именинникам', badge: 'Скидка 50%' },
-          ].map(({ bg, name, price, badge }) => (
+            { bg: "url('/photo_team.png')", name: 'Тимбилдинг', price: 'Под ключ' },
+            { bg: "url('/photo_team.png')", name: 'Корпоратив', price: 'Уточнить', pos: 'center 60%' },
+          ].map(({ bg, name, price, badge, pos }) => (
             <div className="svc-c rv" key={name}>
-              <div className="svc-photo" style={{ backgroundImage: bg }} />
+              <div className="svc-photo" style={{ backgroundImage: bg, backgroundPosition: pos || 'center' }} />
               <div className="svc-overlay" />
               {badge && <div className="svc-badge">{badge}</div>}
               <div className="svc-bot">
