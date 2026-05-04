@@ -363,7 +363,7 @@ export default function Home() {
               {[
                 { icon: '🏞️', name: 'Бухта Радости', val: 'Мытищи, у водохранилища' },
                 { icon: '🌲', name: 'Парк Софрино', val: 'Пушкинский р-н' },
-                { icon: '🚗', name: 'Выезд к вам', val: 'Дача, школа, офис' },
+                { icon: '🚗', name: 'Выезд к вам', val: 'Отели, базы отдыха, усадьбы' },
                 { icon: '📅', name: 'Работаем', val: 'Ежедневно 09–21' },
               ].map(({ icon, name, val }) => (
                 <div className="feat" key={name}>
