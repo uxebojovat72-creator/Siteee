@@ -635,3 +635,16 @@ footer { background:var(--dark); padding:40px 22px 30px; }
 .gal-more-txt { font-size:.8rem; color:var(--muted); }
 .gal-more-link { display:inline-flex; align-items:center; gap:6px; font-family:'Geologica',sans-serif; font-weight:700; font-size:.82rem; color:#229ED9; text-decoration:none; }
 .gal-more-link:hover { text-decoration:underline; }
+
+/* ── MAP ── */
+.map-wrap { margin-top:24px; }
+.map-labels { display:flex; flex-direction:column; gap:10px; margin-bottom:14px; }
+.map-pin { display:flex; align-items:center; gap:12px; background:var(--white); border-radius:var(--r); padding:12px 16px; box-shadow:var(--shadow); }
+.map-dot { flex-shrink:0; width:12px; height:12px; border-radius:50%; }
+.map-dot-1 { background:#e53935; }
+.map-dot-2 { background:#1976d2; }
+.map-pin-name { font-family:'Geologica',sans-serif; font-weight:700; font-size:.82rem; color:var(--dark); }
+.map-pin-addr { font-size:.7rem; color:var(--muted); margin-top:2px; }
+.map-route { margin-left:auto; flex-shrink:0; font-family:'Geologica',sans-serif; font-size:.72rem; font-weight:700; color:var(--forest); text-decoration:none; white-space:nowrap; }
+.map-route:hover { text-decoration:underline; }
+@media(min-width:640px) { .map-labels { flex-direction:row; } .map-pin { flex:1; } }

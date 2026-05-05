@@ -745,9 +745,34 @@ export default function Home() {
             <div className="cc-s">09:00 – 21:00</div>
           </div>
         </div>
-      </section>
 
-      {/* ── FOOTER ── */}
+        <div className="map-wrap rv">
+          <div className="map-labels">
+            <div className="map-pin">
+              <span className="map-dot map-dot-1" />
+              <div>
+                <div className="map-pin-name">Бухта Радости</div>
+                <div className="map-pin-addr">Мытищи · Пироговское водохранилище</div>
+              </div>
+              <a href="https://yandex.ru/maps/?text=Бухта+Радости+пейнтбол+Мытищи" target="_blank" rel="noreferrer" className="map-route">Маршрут →</a>
+            </div>
+            <div className="map-pin">
+              <span className="map-dot map-dot-2" />
+              <div>
+                <div className="map-pin-name">Парк Софрино</div>
+                <div className="map-pin-addr">Пушкинский р-н · Софрино</div>
+              </div>
+              <a href="https://yandex.ru/maps/?text=Парк+Софрино+пейнтбол+Пушкинский" target="_blank" rel="noreferrer" className="map-route">Маршрут →</a>
+            </div>
+          </div>
+          <iframe
+            src="https://yandex.ru/map-widget/v1/?ll=37.82%2C56.07&z=10&pt=37.720%2C55.945%2Cpm2rdl~37.925%2C56.188%2Cpm2blm&theme=light"
+            width="100%" height="280" frameBorder="0" allowFullScreen
+            style={{ borderRadius: '16px', display:'block' }}
+            title="Карта парков Пэйнтлэнд"
+          />
+        </div>
+      </section>
       <footer>
         <div className="foot-logo">
           <img src="/logo.png" alt="Логотип" className="foot-logo-img" />
